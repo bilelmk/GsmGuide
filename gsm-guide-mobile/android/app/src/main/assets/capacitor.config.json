@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "gsm-guide-mobile",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

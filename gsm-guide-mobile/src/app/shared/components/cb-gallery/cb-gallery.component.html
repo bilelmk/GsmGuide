@@ -1,0 +1,5 @@
+<ion-slides [options]="slidersOptions">
+  <ion-slide *ngFor="let image of images">
+    <img [src]=" url + image.image" tappable (click)="openPreview(image.image)">
+  </ion-slide>
+</ion-slides>
