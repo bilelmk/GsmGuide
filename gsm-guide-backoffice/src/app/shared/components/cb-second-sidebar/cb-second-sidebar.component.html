@@ -1,0 +1,15 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <div class="sidenav">
+      <mat-list role="list">
+        <mat-list-item  *ngFor="let route of routes" role="listitem" routerLink="{{route.route}}" [routerLinkActive]="route.route ? 'active' : ''" >
+          {{route.name}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content >
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

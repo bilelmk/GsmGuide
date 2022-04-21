@@ -1,0 +1,24 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon color="primary" slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Market place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let category of categories">
+    {{category.name}}
+  </div>
+  <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>
+
+</ion-content>

@@ -5,7 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SpinnerComponent } from "./core/components/spinner/spinner.component";
-import { HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 import { AuthenticationInterceptor } from "./core/interceptors/authentication-interceptor";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -23,6 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   entryComponents: [],
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
     IonicModule.forRoot(),

@@ -1,9 +1,9 @@
 package com.easydev.gsmguide.config;
 
+import com.easydev.gsmguide.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,7 +16,7 @@ public class JwtConfig {
 
     private String SECRET_KEY = "@gsm-@guide-@secret-@code";
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -37,9 +37,12 @@ public class JwtConfig {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(Long id , String username ) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        claims.put("id", id);
+        claims.put("username", username);
+//        claims.put("group", user.getGroupId());
+        return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -48,9 +51,8 @@ public class JwtConfig {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public Boolean validateToken(String token) {
+        return !isTokenExpired(token);
     }
 
 }

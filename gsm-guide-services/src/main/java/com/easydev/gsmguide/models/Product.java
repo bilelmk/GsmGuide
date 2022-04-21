@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Data
@@ -20,13 +19,14 @@ public class Product {
   @Column(length = 3000)
   private String description;
   private double price;
-  private double promotionValue;
-  private boolean promotion;
   private boolean visible;
-  private String photoName;
+  private String image;
   private int quantity;
 
   @ManyToOne
   private Category category;
+
+  @ManyToOne
+  private User client;
 
 }

@@ -1,9 +1,7 @@
-//package com.easydev.easynote.repositories;
-//
-//import com.easydev.easynote.models.Article;
-//
-//import java.util.List;
-//
-//public interface ArticleRepository extends MongoRepository<Article,String> {
-//    List<Article> findBySubCategoryId(String id);
-//}
+package com.easydev.gsmguide.repositories;
+
+import com.easydev.gsmguide.models.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+}

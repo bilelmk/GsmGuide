@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../../environments/environment';
-import {AuthenticationService} from '../../../core/services/http/authentication.service';
-import {ClientService} from '../../../core/services/http/client.service';
-import {SpinnerService} from '../../../core/services/in-app/spinner.service';
-import {ToastService} from '../../../core/services/in-app/toast.service';
-import {AlertController, ModalController, Platform} from '@ionic/angular';
-import {Router} from '@angular/router';
+import { environment } from '../../../../environments/environment';
+import { AuthenticationService } from '../../../core/services/http/authentication.service';
+import { SpinnerService } from '../../../core/services/in-app/spinner.service';
+import { ToastService} from '../../../core/services/in-app/toast.service';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
+import {UserService} from "../../../core/services/http/user.service";
 
 @Component({
   selector: 'app-gsm-main-profile',
@@ -20,7 +20,7 @@ export class GsmMainProfilePage implements OnInit {
   url = environment.url;
 
   constructor(private authenticationService: AuthenticationService,
-              private clientService: ClientService,
+              private userService: UserService,
               private spinnerService: SpinnerService,
               private toastService: ToastService,
               private alertController: AlertController,
@@ -36,7 +36,7 @@ export class GsmMainProfilePage implements OnInit {
 
   ngOnInit() {
     this.spinnerService.activate();
-    this.clientService.getCurrent().subscribe(
+    this.userService.getById(Number(sessionStorage.getItem('id'))).subscribe(
         res => {
           this.client = res;
           this.spinnerService.deactivate();
@@ -169,7 +169,8 @@ export class GsmMainProfilePage implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/cb-login']);
+    sessionStorage.clear();
+    this.router.navigate(['/gsm-login']);
   }
 
   toReservations() {

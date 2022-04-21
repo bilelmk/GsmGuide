@@ -10,6 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationRequest implements Serializable {
-    private String email;
+    private String username;
     private String password;
 }

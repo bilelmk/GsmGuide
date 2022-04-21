@@ -1,0 +1,70 @@
+<div class="page" *ngIf="!loading" >
+
+  <div class="row mt-2 mb-2 justify-content-between align-items-center">
+    <p class="title">
+      <span class="material-icons title-icon">people</span>
+      Liste des clients
+    </p>
+    <div class="row align-items-center">
+      <input #key class="search" (input)="applyFilter(key.value)">
+<!--      <button class="square-btn ml-2"  (click)="openModal(false , null)">-->
+<!--        <i class="material-icons icon-blue" >-->
+<!--          add-->
+<!--        </i>-->
+<!--      </button>-->
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="clients?.length > 0">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="username" >
+        <mat-header-cell *matHeaderCellDef >Nom d'utilisateur</mat-header-cell>
+        <mat-cell *matCellDef="let client" >
+          <p class="cell-text"  > {{client.username}} </p>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstname" >
+        <mat-header-cell *matHeaderCellDef >Nom</mat-header-cell>
+        <mat-cell *matCellDef="let client" >
+          <p class="cell-text"  > {{client.firstname}} </p>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef >Prénom</mat-header-cell>
+        <mat-cell *matCellDef="let client" >
+          <p class="cell-text" > {{client.lastname}} </p>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef >Numéro du téléphone</mat-header-cell>
+        <mat-cell *matCellDef="let client" >
+          <p class="cell-text" > {{client.phone}} </p>
+        </mat-cell>
+      </ng-container>
+
+<!--      <ng-container matColumnDef="buttons">-->
+<!--        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>-->
+<!--        <mat-cell class="cell-text" *matCellDef="let client">-->
+<!--          <div class="cell-btn" (click)="openModal(true , client)" >-->
+<!--            <mat-icon>mode_edit</mat-icon>-->
+<!--          </div>-->
+<!--          <div class="cell-btn" (click)="openDeleteDialog(client)">-->
+<!--            <mat-icon>delete</mat-icon>-->
+<!--          </div>-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+
+      <mat-header-row class="text-center" *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row class="contact" *matRowDef="let type; columns: displayedColumns;" ></mat-row>
+    </table>
+    <mat-paginator class="full-width" [pageSizeOptions]="[10]"></mat-paginator>
+  </div>
+
+  <app-cb-errors [array]="clients" [error]="error"></app-cb-errors>
+
+</div>
+

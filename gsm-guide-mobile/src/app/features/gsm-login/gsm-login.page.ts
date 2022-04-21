@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../core/services/http/authentication.service';
 import { SpinnerService } from '../../core/services/in-app/spinner.service';
 import { ToastService } from '../../core/services/in-app/toast.service';
 import { LoginRequest } from '../../core/dtos/login-request';
+import { UserService } from "../../core/services/http/user.service";
 
 @Component({
   selector: 'app-gsm-login',
@@ -17,12 +17,12 @@ export class GsmLoginPage implements OnInit {
 
   constructor(private formBuilder: FormBuilder ,
               private router: Router ,
-              private authenticationService: AuthenticationService ,
+              private userService: UserService ,
               private spinnerService: SpinnerService ,
               private toastService: ToastService
   ) {
     this.loginForm = this.formBuilder.group({
-      email   : ['', [Validators.required]],
+      username   : ['', [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -30,32 +30,31 @@ export class GsmLoginPage implements OnInit {
   ngOnInit(): void {}
 
   onLogin() {
-    // this.spinnerService.activate() ;
+    this.spinnerService.activate() ;
     const request: LoginRequest = {
-      email: this.loginForm.value.email ,
+      username: this.loginForm.value.username ,
       password: this.loginForm.value.password
     };
-
-    this.router.navigate(['/gsm-main']);
-
-    // this.authenticationService.signin(request).subscribe(
-    //     res => {
-    //       sessionStorage.setItem('token' , res.token);
-    //       sessionStorage.setItem('expiresIn' , res.expiresIn);
-    //       this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
-    //       this.spinnerService.deactivate() ;
-    //       this.router.navigate(['/gsm-main']);
-    //     }, error => {
-    //       this.spinnerService.deactivate() ;
-    //       if (error.error.message === 'wrong phone number') {
-    //         this.toastService.show('Numéro de téléphone incorrect' , 'danger');
-    //       } else if (error.error.message === 'wrong password') {
-    //         this.toastService.show('Mot de passe incorrect' , 'danger');
-    //       } else if (error.error.message === 'phone not verified') {
-    //         this.toastService.show('Numéro de téléphone n\'est pas verifié' , 'danger');
-    //       } else {
-    //         this.toastService.show('Erreur du serveur' , 'danger');
-    //       }
-    //     });
+    this.userService.login(request).subscribe(
+        res => {
+          sessionStorage.setItem('token' , res.token);
+          sessionStorage.setItem('expiresIn' , res.expiresIn);
+          sessionStorage.setItem('id' , res.id);
+          sessionStorage.setItem('role' , res.role);
+          this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
+          this.spinnerService.deactivate() ;
+          this.router.navigate(['/gsm-main']);
+        }, error => {
+          this.spinnerService.deactivate() ;
+          if (error.error === 'wrong username') {
+            this.toastService.show('Nom d\'utilisateur incorrect' , 'danger');
+          } else if (error.error === 'wrong password') {
+            this.toastService.show('Mot de passe incorrect' , 'danger');
+          } else if (error.error === 'blocked') {
+            this.toastService.show('Votre compte est bloqué' , 'danger');
+          } else {
+            this.toastService.show('Erreur du serveur' , 'danger');
+          }
+        });
   }
 }

@@ -35,10 +35,6 @@ const routes: Routes = [
   {
     path: 'gsm-intro',
     loadChildren: () => import('./features/gsm-intro/gsm-intro.module').then(m => m.GsmIntroPageModule)
-  },
-  {
-    path: 'gsm-verify-email-code',
-    loadChildren: () => import('./features/gsm-verify-email-code/gsm-verify-email-code.module').then(m => m.GsmVerifyEmailCodePageModule)
   }
 ];
 

@@ -6,13 +6,13 @@ import { GsmLoginPageRoutingModule } from './gsm-login-routing.module';
 import { GsmLoginPage } from './gsm-login.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        GsmLoginPageRoutingModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+      CommonModule,
+      FormsModule,
+      IonicModule,
+      GsmLoginPageRoutingModule,
+      ReactiveFormsModule,
+  ],
   declarations: [
       GsmLoginPage
   ]

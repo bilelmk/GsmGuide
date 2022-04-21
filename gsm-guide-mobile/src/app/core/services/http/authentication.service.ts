@@ -13,8 +13,7 @@ export class AuthenticationService {
   private token = new BehaviorSubject(null);
 
   constructor(private http: HttpClient ,
-              private router: Router ,
-              private storage: Storage
+              private router: Router
   ) {}
 
   signin(request: LoginRequest): Observable<any> {
@@ -42,7 +41,7 @@ export class AuthenticationService {
     // this.isAuthenticated = false;
     // this.authStatusListener.next(false);
     // clearTimeout(this.tokenTimer);
-    this.storage.clear() ;
+    // this.storage.clear() ;
     this.router.navigate(['/']);
   }
 

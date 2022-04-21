@@ -38,12 +38,10 @@ public class ProductServiceImpl implements ProductService {
     Product product = new Product() ;
     product.setName(name);
     product.setDescription(description);
-    product.setPhotoName("images/" + newFileName);
+    product.setImage("images/" + newFileName);
     product.setPrice(price);
     product.setQuantity(quantity);
-    product.setPromotionValue(promotionValue);
     product.setCategory(category);
-    product.setPromotion(promotion);
     product.setVisible(true);
     return productRepository.save(product);
   }
@@ -77,12 +75,10 @@ public class ProductServiceImpl implements ProductService {
     product.setDescription(description);
     product.setPrice(price);
     product.setQuantity(quantity);
-    product.setPromotionValue(promotionValue);
     product.setCategory(category);
-    product.setPromotion(promotion);
     if(image != null) {
       String newFileName = uploadService.upload(image);
-      product.setPhotoName("images/" + newFileName);
+      product.setImage("images/" + newFileName);
     }
     return productRepository.save(product);
   }
