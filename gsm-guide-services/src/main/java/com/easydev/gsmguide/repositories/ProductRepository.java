@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-  void deleteProductsByCategoryId(long id);
-  List<Product> getByCategoryIdAndVisible(long id , boolean visible);
+//  void deleteProductsByCategoryId(long id);
+//  List<Product> getByCategoryIdAndVisible(long id , boolean visible);
 }

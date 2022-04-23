@@ -41,6 +41,7 @@ export class GsmLoginPage implements OnInit {
           sessionStorage.setItem('expiresIn' , res.expiresIn);
           sessionStorage.setItem('id' , res.id);
           sessionStorage.setItem('role' , res.role);
+          this.userService.token.next(true)
           this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
           this.router.navigate(['/gsm-main']);

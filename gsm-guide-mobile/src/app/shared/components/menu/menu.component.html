@@ -1,0 +1,45 @@
+<ion-split-pane contentId="main" >
+
+  <ion-menu side="start" menuId="profile" contentId="main"  type="overlay">
+    <ion-content>
+
+      <div class="menu-header">
+        <ion-row  class="no-margin ion-padding ion-justify-content-center ion-align-items-center" >
+          <ion-col  class="ion-margin-top" size="9">
+            <img src="assets/image/logo.png" alt="logo white" />
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-list lines="none" class="menu-container">
+
+        <ion-menu-toggle menu="profile" >
+          <ion-item (click)="navigate('/gsm-login')"  detail="false">
+            <ion-icon slot="start" name="log-in"></ion-icon>
+            <ion-label>Se Connecter</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle menu="profile" >
+          <ion-item (click)="navigate('/gsm-register')" detail="false">
+            <ion-icon slot="start" name="person-add"></ion-icon>
+            <ion-label>S'inscrire</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle menu="profile" >
+          <ion-item (click)="logout()" detail="false">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>Se Déconnecter</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div id="main" class="full-width">
+    <ng-content></ng-content>
+  </div>
+
+</ion-split-pane>

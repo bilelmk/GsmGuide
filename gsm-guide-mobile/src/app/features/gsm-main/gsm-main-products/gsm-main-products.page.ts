@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from "../../../core/services/in-app/spinner.service";
 import { ProductService } from "../../../core/services/http/product.service";
-import { CategoryService } from "../../../core/services/http/category.service";
 import { ModalController } from "@ionic/angular";
-import { forkJoin } from "rxjs";
 import { GsmMainProductsAddComponent } from "./gsm-main-products-add/gsm-main-products-add.component";
 
 @Component({
@@ -14,23 +12,16 @@ import { GsmMainProductsAddComponent } from "./gsm-main-products-add/gsm-main-pr
 export class GsmMainProductsPage implements OnInit {
 
   products ;
-  categories ;
 
   constructor(private spinnerService: SpinnerService,
               private productService: ProductService,
-              private categoryService: CategoryService,
               private modalController: ModalController) { }
 
   ngOnInit() {
     this.spinnerService.activate()
-    forkJoin([
-        this.productService.getAll(),
-        this.categoryService.getAll(),
-      ]
-    ).subscribe(
+    this.productService.getAll().subscribe(
       (res: any) => {
-        this.products = res[0];
-        this.categories = res[1];
+        this.products = res;
         this.spinnerService.deactivate();
       },
       error => {

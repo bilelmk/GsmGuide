@@ -5,7 +5,7 @@ import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ToastService} from '../../../core/services/in-app/toast.service';
 import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {UserService} from "../../../core/services/http/user.service";
+import { UserService } from "../../../core/services/http/user.service";
 
 @Component({
   selector: 'app-gsm-main-profile',
@@ -19,6 +19,8 @@ export class GsmMainProfilePage implements OnInit {
   image;
   url = environment.url;
 
+  isLoggedIn ;
+
   constructor(private authenticationService: AuthenticationService,
               private userService: UserService,
               private spinnerService: SpinnerService,
@@ -31,6 +33,11 @@ export class GsmMainProfilePage implements OnInit {
               // private crop: Crop ,
               // private file: File
   ) {
+    this.userService.token.subscribe(
+      res => {
+        this.isLoggedIn = res ;
+      }
+    )
   }
 
 

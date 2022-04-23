@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-button (click)="onToggleMenu('profile')">
         <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,12 +11,11 @@
         <ion-icon color="primary" slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center toolbar">MARKET PLACE</ion-title>
+    <ion-title class="ion-text-center toolbar">GSM GUIDE</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
-  <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>
+<ion-content>
 
 </ion-content>

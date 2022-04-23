@@ -24,9 +24,6 @@ public class Product {
   private int quantity;
 
   @ManyToOne
-  private Category category;
-
-  @ManyToOne
   private User client;
 
 }

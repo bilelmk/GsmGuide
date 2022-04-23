@@ -3,7 +3,6 @@ package com.easydev.gsmguide.controllers;
 import com.easydev.gsmguide.dtos.UpdateStatusRequest;
 import com.easydev.gsmguide.models.Product;
 import com.easydev.gsmguide.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,10 +28,10 @@ public class ProductController {
     return productService.getById(id);
   }
 
-  @GetMapping("/category/{id}")
-  public List<Product> getByCategoryId(@PathVariable("id") long id) {
-    return productService.getByCategoryId(id);
-  }
+//  @GetMapping("/category/{id}")
+//  public List<Product> getByCategoryId(@PathVariable("id") long id) {
+//    return productService.getByCategoryId(id);
+//  }
 
   @PostMapping()
   public Product add(@RequestParam("image") MultipartFile image ,
@@ -41,10 +40,9 @@ public class ProductController {
                      @RequestParam("price") double price,
                      @RequestParam("promotionValue") double promotionValue,
                      @RequestParam("promotion") boolean promotion,
-                     @RequestParam("quantity") int quantity,
-                     @RequestParam("category") long categoryId
+                     @RequestParam("quantity") int quantity
   ) {
-    return productService.save(image,name , description, price, promotionValue, promotion, quantity, categoryId);
+    return productService.save(image,name , description, price, promotionValue, promotion, quantity);
   }
 
   @PutMapping()
@@ -55,10 +53,9 @@ public class ProductController {
                         @RequestParam("price") double price,
                         @RequestParam("promotionValue") double promotionValue,
                         @RequestParam("promotion") boolean promotion,
-                        @RequestParam("quantity") int quantity,
-                        @RequestParam("category") long categoryId
+                        @RequestParam("quantity") int quantity
   ) {
-    return productService.update(id,image ,name , description, price, promotionValue, promotion, quantity, categoryId);
+    return productService.update(id,image ,name , description, price, promotionValue, promotion, quantity);
   }
 
   @DeleteMapping("{id}")

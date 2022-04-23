@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'gsm-main-products',
+        redirectTo: 'gsm-main-home',
       },
       {
         path: 'gsm-main-profile',
@@ -26,6 +26,10 @@ const routes: Routes = [
       {
         path: 'gsm-main-myproducts',
         loadChildren: () => import('./gsm-main-myproducts/gsm-main-myproducts.module').then( m => m.GsmMainMyproductsPageModule)
+      },
+      {
+        path: 'gsm-main-home',
+        loadChildren: () => import('./gsm-main-home/gsm-main-home.module').then(m => m.GsmMainHomePageModule)
       }
     ]
   }

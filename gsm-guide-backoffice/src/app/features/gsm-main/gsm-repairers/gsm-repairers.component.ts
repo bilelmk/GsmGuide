@@ -4,6 +4,8 @@ import { User } from "../../../core/models/user";
 import { MatPaginator } from "@angular/material/paginator";
 import { SpinnerService } from "../../../core/services/in-app/spinner.service";
 import { UserService } from "../../../core/services/http/user.service";
+import { MatDialog } from "@angular/material/dialog";
+import { GsmRepairersModalComponent } from "./gsm-repairers-modal/gsm-repairers-modal.component";
 
 @Component({
   selector: 'app-gsm-repairers',
@@ -24,7 +26,8 @@ export class GsmRepairersComponent implements OnInit {
   }
 
   constructor(private spinnerService: SpinnerService ,
-              private userService: UserService) { }
+              private userService: UserService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loading = true ;
@@ -55,6 +58,19 @@ export class GsmRepairersComponent implements OnInit {
       }
     )
     this.dataSource.data = toFilterList;
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open( GsmRepairersModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { array : this.repairers }
+    });
+    dialogRef.afterClosed().subscribe(
+      res => {
+        this.dataSource.data = this.repairers;
+      }
+    );
   }
 
 

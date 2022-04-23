@@ -1,9 +1,24 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
-    <ion-title>gsm-main-requests</ion-title>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Espace Réparation</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!isLoggedIn">
+  Lazem login
+  <ion-button (click)="openAddProductModal()">Demande de réparation</ion-button>
+</ion-content>
+
+<ion-content *ngIf="isLoggedIn">
 
 </ion-content>
