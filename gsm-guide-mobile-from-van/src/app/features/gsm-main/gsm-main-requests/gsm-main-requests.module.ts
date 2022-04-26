@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular' ;
+import { GsmMainRequestsPageRoutingModule } from './gsm-main-requests-routing.module';
+import { GsmMainRequestsPage } from './gsm-main-requests.page';
+import { GsmMainRequestsAddComponent } from './gsm-main-requests-add/gsm-main-requests-add.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    GsmMainRequestsPageRoutingModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatInputModule
+  ],
+  declarations: [
+    GsmMainRequestsPage,
+    GsmMainRequestsAddComponent
+  ]
+})
+export class GsmMainRequestsPageModule {}
