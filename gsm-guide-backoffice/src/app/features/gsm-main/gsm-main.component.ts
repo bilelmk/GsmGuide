@@ -29,14 +29,8 @@ export class GsmMainComponent implements OnInit {
     {
       type: "route",
       route : "requests" ,
-      name : "Demandes" ,
+      name : "Demandes de réparation" ,
       icon : "subject",
-    },
-    {
-      type: "route",
-      route : "categories" ,
-      name : "Catégories",
-      icon : "widgets",
     },
     {
       type: "route",
@@ -46,9 +40,9 @@ export class GsmMainComponent implements OnInit {
     },
     {
       type: "route",
-      route : "models" ,
-      name : "Modéles" ,
-      icon : "dialpad",
+      route : "parts" ,
+      name : "Listes des piéces" ,
+      icon : "phone_android",
     },
     {
       type: "button",

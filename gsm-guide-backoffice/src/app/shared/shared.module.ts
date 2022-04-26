@@ -6,12 +6,12 @@ import { CbNavbarComponent } from './components/cb-navbar/cb-navbar.component';
 import { RouterModule } from '@angular/router';
 import { CbErrorsComponent } from './components/cb-errors/cb-errors.component';
 import { CbSecondSidebarComponent } from './components/cb-second-sidebar/cb-second-sidebar.component';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { ActionSheetComponent } from "./components/action-sheet/action-sheet.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { MatListModule } from '@angular/material/list';
     CbSidebarComponent,
     CbNavbarComponent,
     CbErrorsComponent,
-    CbSecondSidebarComponent
+    CbSecondSidebarComponent,
+    ActionSheetComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import { MatListModule } from '@angular/material/list';
     CbSidebarComponent,
     CbNavbarComponent,
     CbErrorsComponent,
-    CbSecondSidebarComponent
+    CbSecondSidebarComponent,
+    ActionSheetComponent
   ],
 })
 export class SharedModule { }

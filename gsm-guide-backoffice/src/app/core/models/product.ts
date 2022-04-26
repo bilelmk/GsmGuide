@@ -1,4 +1,3 @@
-import { Category } from "./category";
 import { User } from "./user";
 
 export class Product {
@@ -9,7 +8,6 @@ export class Product {
   visible: boolean ;
   image: string ;
   quantity: number ;
-  category: Category ;
   client: User ;
 }
 

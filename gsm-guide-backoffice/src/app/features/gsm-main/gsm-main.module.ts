@@ -31,17 +31,13 @@ const routes: Routes = [
         loadChildren: () => import('./gsm-requests/gsm-requests.module').then(m => m.GsmRequestsModule)
       },
       {
-        path: 'categories',
-        loadChildren: () => import('./gsm-categories/gsm-categories.module').then(m => m.GsmCategoriesModule)
-      },
-      {
         path: 'marks',
         loadChildren: () => import('./gsm-marks/gsm-marks.module').then(m => m.GsmMarksModule)
       },
       {
-        path: 'models',
-        loadChildren: () => import('./gsm-models/gsm-models.module').then(m => m.GsmModelsModule)
-      }
+        path: 'parts',
+        loadChildren: () => import('./gsm-parts/gsm-parts.module').then(m => m.GsmPartsModule)
+      },
     ]
   }
 ];

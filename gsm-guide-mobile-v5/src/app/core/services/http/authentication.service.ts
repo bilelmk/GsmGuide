@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/Storage';
 import { LoginRequest } from '../../dtos/login-request';
 import { environment } from '../../../../environments/environment';
-import { RegisterRequest } from '../../dtos/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +13,7 @@ export class AuthenticationService {
   private token = new BehaviorSubject(null);
 
   constructor(private http: HttpClient ,
-              private router: Router ,
-              private storage: Storage
+              private router: Router
   ) {}
 
   signin(request: LoginRequest): Observable<any> {
@@ -44,7 +41,7 @@ export class AuthenticationService {
     // this.isAuthenticated = false;
     // this.authStatusListener.next(false);
     // clearTimeout(this.tokenTimer);
-    this.storage.clear() ;
+    // this.storage.clear() ;
     this.router.navigate(['/']);
   }
 

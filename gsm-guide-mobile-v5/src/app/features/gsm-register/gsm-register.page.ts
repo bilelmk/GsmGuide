@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from '../../core/services/in-app/spinner.service';
 import { ToastService } from '../../core/services/in-app/toast.service';
 import { RegisterRequest } from '../../core/dtos/register-request';
-import { ClientService } from '../../core/services/http/client.service';
+import { UserService } from "../../core/services/http/user.service";
 
 @Component({
   selector: 'app-gsm-register',
@@ -17,14 +17,14 @@ export class GsmRegisterPage implements OnInit {
 
   constructor(private formBuilder: FormBuilder ,
               private router: Router ,
-              private clientService: ClientService ,
+              private userService: UserService ,
               private spinnerService: SpinnerService ,
               private toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
       firstname   : ['', [Validators.required]],
       lastname: ['', Validators.required],
-      email   : ['', [Validators.required , Validators.email]],
+      username   : ['', [Validators.required]],
       password: ['', Validators.required],
       phone   : ['', [Validators.required]],
     });
@@ -34,16 +34,16 @@ export class GsmRegisterPage implements OnInit {
 
   onRegister() {
     this.spinnerService.activate() ;
-    const request: RegisterRequest = { ...this.form.value };
-    this.clientService.register(request).subscribe(
+    const request: RegisterRequest = { ...this.form.value , role : 'CLIENT' };
+    this.userService.register(request).subscribe(
         res => {
-          this.router.navigate(['/gsm-verify-mail-code']);
+          this.router.navigate(['/gsm-login']);
           this.toastService.show('Votre compte à été créé avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
         }, error => {
           this.spinnerService.deactivate() ;
-          if (error.error.message === 'existing user') {
-            this.toastService.show('Ce numéro de téléphone existe déjà' , 'danger');
+          if (error.error === 'username exist') {
+            this.toastService.show('Ce nom d\'utilisateur existe déjà' , 'danger');
             // } else if (error.error.message === 'wrong password') {
             //   this.toastService.show('Mot de passe incorrect' ,'danger');
             // } else if (error.error.message === 'phone not verified') {
