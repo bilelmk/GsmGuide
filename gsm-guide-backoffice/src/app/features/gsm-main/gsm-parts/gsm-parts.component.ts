@@ -87,8 +87,7 @@ export class GsmPartsComponent implements OnInit {
     let toFilterList = [...this.parts]
     toFilterList = toFilterList.filter(
       part => {
-        return part.name.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1
-          || part.description.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1 ;
+        return part.name.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1;
       }
     )
     this.dataSource.data = toFilterList;

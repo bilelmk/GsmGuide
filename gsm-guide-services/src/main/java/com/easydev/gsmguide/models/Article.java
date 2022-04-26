@@ -18,5 +18,6 @@ public class Article {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "modelId" )
     private Model model ;
 }

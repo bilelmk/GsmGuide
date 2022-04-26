@@ -1,24 +1,25 @@
 .dashboard {
-  padding: 10px;
+  padding-top: 20px;
   display: flex;
   overflow: scroll
 }
 
 .marks {
   background: #f3bcbc;
-  padding-top: 30px;
   text-align: center;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 20px 15px 15px;
 }
 
 .model {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
 }
 
 .article {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  p {
+    font-size : 12px ;
+    margin-bottom: 5px !important;
+  }
 }

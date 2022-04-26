@@ -5,6 +5,6 @@ import com.easydev.gsmguide.models.Mark;
 import java.util.List;
 
 public interface MarkService {
-    public List<Mark> getAll();
-    public Mark add(Mark mark) ;
+    List<Mark> getAll();
+    Mark add(Mark mark) ;
 }

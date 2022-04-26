@@ -1,9 +1,22 @@
 package com.easydev.gsmguide.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.easydev.gsmguide.models.Article;
+import com.easydev.gsmguide.services.ArticleService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/articles")
 public class ArticleController {
+
+    private final ArticleService articleService;
+
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService ;
+    }
+
+    @PostMapping()
+    public Article add(@RequestBody Article article) {
+        return articleService.add(article);
+    }
+
 }

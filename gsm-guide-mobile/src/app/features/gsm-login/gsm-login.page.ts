@@ -46,6 +46,7 @@ export class GsmLoginPage implements OnInit {
           this.spinnerService.deactivate() ;
           this.router.navigate(['/gsm-main']);
         }, error => {
+            alert(JSON.stringify(error)) ;
           this.spinnerService.deactivate() ;
           if (error.error === 'wrong username') {
             this.toastService.show('Nom d\'utilisateur incorrect' , 'danger');

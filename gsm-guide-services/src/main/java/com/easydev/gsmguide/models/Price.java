@@ -16,7 +16,9 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String level ;
+    private String quality ;
+
+    private String price ;
 
     @OneToOne
     private Article article ;

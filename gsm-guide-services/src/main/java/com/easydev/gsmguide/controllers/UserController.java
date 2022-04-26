@@ -39,13 +39,6 @@ public class UserController {
         return userService.login(request) ;
     }
 
-
-//    @PutMapping
-//    public Category update(@RequestPart(value = "image", required = false) MultipartFile image ,
-//                           @RequestPart("category") Category category) throws IOException {
-//        return categoryService.update(image, category) ;
-//    }
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         userService.delete(id) ;

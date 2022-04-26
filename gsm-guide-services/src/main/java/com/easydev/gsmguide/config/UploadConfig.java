@@ -1,11 +1,11 @@
 package com.easydev.gsmguide.config;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.UUID;
 
 @Service
 public class UploadConfig {
@@ -20,8 +20,7 @@ public class UploadConfig {
                 System.out.println("Failed to create directory!");
             }
         }
-        String filename = file.getOriginalFilename();
-        String newFileName = FilenameUtils.getBaseName(filename) + "." + "jpeg";
+        String newFileName = UUID.randomUUID() + "." + "jpeg";
         File serverFile = new File (path + File.separator + newFileName);
         try {
             FileUtils.writeByteArrayToFile(serverFile,file.getBytes());

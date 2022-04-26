@@ -42,7 +42,7 @@ export class GsmMainComponent implements OnInit {
       type: "route",
       route : "parts" ,
       name : "Listes des piéces" ,
-      icon : "phone_android",
+      icon : "settings_input_composite",
     },
     {
       type: "button",

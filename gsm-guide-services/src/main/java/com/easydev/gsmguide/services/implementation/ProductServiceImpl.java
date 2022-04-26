@@ -1,12 +1,16 @@
 package com.easydev.gsmguide.services.implementation;
 
 import com.easydev.gsmguide.config.UploadConfig;
+import com.easydev.gsmguide.dtos.SearchRequest;
 import com.easydev.gsmguide.models.Product;
 import com.easydev.gsmguide.repositories.ProductRepository;
 import com.easydev.gsmguide.services.ProductService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,27 +23,22 @@ public class ProductServiceImpl implements ProductService {
     this.productRepository = productRepository ;
     this.uploadService = uploadService ;
   }
-  public List<Product> getAll() {
-    return productRepository.findAll();
+  public List<Product> search(SearchRequest searchRequest) {
+    Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
+    return productRepository.findAllByNameContainingOrDescriptionContaining(searchRequest.getKey() , searchRequest.getKey() , page);
   }
 
-  public Product getById(Long id) {
-    return productRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+  @Override
+  public List<Product> getByClientId(SearchRequest searchRequest) {
+    Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
+    return productRepository.findByClientId(searchRequest.getId() , page);
   }
 
-  public Product save(MultipartFile file, String name, String description, double price, double promotionValue, boolean promotion, int quantity) {
-    String newFileName = uploadService.upload(file);
-    Product product = new Product() ;
-    product.setName(name);
-    product.setDescription(description);
+  public Product save(MultipartFile image, Product product) {
+    String newFileName = uploadService.upload(image);
     product.setImage("images/" + newFileName);
-    product.setPrice(price);
-    product.setQuantity(quantity);
     product.setVisible(true);
-    return productRepository.save(product);
-  }
-
-  public Product update(Product product) {
+    product.setCreationDate(LocalDateTime.now());
     return productRepository.save(product);
   }
 
@@ -47,19 +46,11 @@ public class ProductServiceImpl implements ProductService {
     productRepository.deleteById(id);
   }
 
-//  public void deleteByCategoryId(long id) {
-//    productRepository.deleteProductsByCategoryId(id);
-//  }
-
   public Product updateStatus(boolean visible, long id) {
     Product product = productRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     product.setVisible(visible);
     return productRepository.save(product);
   }
-
-//  public List<Product> getByCategoryId(long id) {
-//    return productRepository.getByCategoryIdAndVisible(id , true) ;
-//  }
 
   public Product update(long id, MultipartFile image, String name, String description, double price, double promotionValue, boolean promotion, int quantity) {
     Product product = productRepository.findById(id).orElseThrow(IllegalArgumentException::new);

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "GSM GUIDE",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

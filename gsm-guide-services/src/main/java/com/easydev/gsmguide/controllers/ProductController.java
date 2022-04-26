@@ -1,5 +1,6 @@
 package com.easydev.gsmguide.controllers;
 
+import com.easydev.gsmguide.dtos.SearchRequest;
 import com.easydev.gsmguide.dtos.UpdateStatusRequest;
 import com.easydev.gsmguide.models.Product;
 import com.easydev.gsmguide.services.ProductService;
@@ -18,45 +19,27 @@ public class ProductController {
     this.productService = productService ;
   }
 
-//  @GetMapping("/load-list")
-//  public List<Product> getAll() {
-//    return productService.getAll();
+  @PostMapping("search")
+  public List<Product> getAll(@RequestBody SearchRequest searchRequest) {
+    return productService.search(searchRequest);
+  }
+
+//  @PostMapping("client")
+//  public Product getByClientId(@RequestBody SearchRequest searchRequest) {
+//    return productService.getByClientId(searchRequest);
 //  }
 
-  @GetMapping("{id}")
-  public Product getById(@PathVariable("id") long id) {
-    return productService.getById(id);
+  @PostMapping
+  public Product add(@RequestPart("image") MultipartFile image ,
+                     @RequestPart("product") Product product) {
+    return productService.save(image ,product);
   }
 
-//  @GetMapping("/category/{id}")
-//  public List<Product> getByCategoryId(@PathVariable("id") long id) {
-//    return productService.getByCategoryId(id);
+//  @PutMapping()
+//  public Product update(@RequestPart(value = "image", required = false) MultipartFile image ,
+//                        @RequestPart("category") Product product ) {
+//    return productService.update(image ,product);
 //  }
-
-  @PostMapping()
-  public Product add(@RequestParam("image") MultipartFile image ,
-                     @RequestParam("name") String name ,
-                     @RequestParam("description") String description,
-                     @RequestParam("price") double price,
-                     @RequestParam("promotionValue") double promotionValue,
-                     @RequestParam("promotion") boolean promotion,
-                     @RequestParam("quantity") int quantity
-  ) {
-    return productService.save(image,name , description, price, promotionValue, promotion, quantity);
-  }
-
-  @PutMapping()
-  public Product update(@RequestParam("id") long id ,
-                        @RequestParam("image") MultipartFile image ,
-                        @RequestParam("name") String name ,
-                        @RequestParam("description") String description,
-                        @RequestParam("price") double price,
-                        @RequestParam("promotionValue") double promotionValue,
-                        @RequestParam("promotion") boolean promotion,
-                        @RequestParam("quantity") int quantity
-  ) {
-    return productService.update(id,image ,name , description, price, promotionValue, promotion, quantity);
-  }
 
   @DeleteMapping("{id}")
   public void delete(@PathVariable("id") long id) {

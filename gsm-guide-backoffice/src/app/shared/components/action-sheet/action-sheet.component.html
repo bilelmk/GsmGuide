@@ -1,5 +1,5 @@
 <mat-list role="list">
-  <mat-list-item class="pointer" *ngFor="let item of data" (click)="item.action(item.id)" role="listitem">
+  <mat-list-item class="pointer" *ngFor="let item of data" (click)="item.action(item.id, item.item, item.isEditMode)" role="listitem">
     {{item.title}}
   </mat-list-item>
 </mat-list>

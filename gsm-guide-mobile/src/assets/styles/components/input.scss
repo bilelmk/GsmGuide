@@ -4,3 +4,21 @@
     --background: lightgray;
   }
 }
+
+.input{
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  height: 45px;
+  border-radius: 4px;
+  background: var(--ion-color-light);
+  border : 1px solid var(--ion-color-primary);
+  color: var(--ion-color-dark);
+  font-size: 95% ;
+  outline : none ;
+  transition: 0.3s;
+  &:focus {
+    border : 2px solid var(--ion-color-primary);
+  }
+}

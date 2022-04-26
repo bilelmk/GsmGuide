@@ -1,7 +1,10 @@
 {
-  "name": "gsm-guide-mobile",
+  "name": "vanity-mobile",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

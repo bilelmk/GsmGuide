@@ -1,21 +1,55 @@
 <ion-header >
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!isSearching">
       <ion-button>
         <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <ion-buttons slot="end">
-      <ion-button>
+    <ion-buttons slot="end" *ngIf="!isSearching">
+      <ion-button (click)="enableSearch()">
         <ion-icon color="primary" slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center toolbar">MARKET PLACE</ion-title>
+    <ion-title *ngIf="!isSearching" class="ion-text-center toolbar">Market Place</ion-title>
+
+    <ion-searchbar *ngIf="isSearching"
+                   showCancelButton="always"
+                   searchIcon="search"
+                   placeholder="Recherche"
+                   (ionCancel)="cancelSearch()"
+                   (ionChange)="getProducts($event.target.value)">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-grid  class="ion-no-padding">
+    <ion-segment value="products" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="products">
+        <ion-label>Market Place</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="myProducts">
+        <ion-label>Mes Produits</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll" *ngIf="segment == 'products'">
+      <ion-col size="11" *ngFor="let product of products">
+        <p>{{product.name}}</p>
+        <img [src]="URL + product.image">
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll"  *ngIf="segment == 'myProducts'">
+      <ion-col *ngFor="let product of products">
+        <p>test</p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
 
   <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>
 

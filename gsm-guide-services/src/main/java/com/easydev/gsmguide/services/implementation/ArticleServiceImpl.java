@@ -1,4 +1,21 @@
 package com.easydev.gsmguide.services.implementation;
 
-public class ArticleServiceImpl {
+import com.easydev.gsmguide.models.Article;
+import com.easydev.gsmguide.repositories.ArticleRepository;
+import com.easydev.gsmguide.services.ArticleService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ArticleServiceImpl implements ArticleService{
+
+    private final ArticleRepository articleRepository ;
+
+    public ArticleServiceImpl(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository ;
+    }
+
+    @Override
+    public Article add(Article article) {
+        return articleRepository.save(article);
+    }
 }
