@@ -7,7 +7,7 @@
     </p>
     <div class="row align-items-center">
       <input #key class="search" (input)="applyFilter(key.value)">
-      <button class="square-btn ml-2"  (click)="openModal()">
+      <button class="square-btn ml-2"  (click)="openModal(null , false)">
         <i class="material-icons icon-blue" >
           add
         </i>
@@ -37,6 +37,9 @@
         <mat-cell class="cell-text" *matCellDef="let part">
           <div class="cell-btn" (click)="delete(part)">
             <mat-icon>delete</mat-icon>
+          </div>
+          <div class="cell-btn" (click)="openModal(part , true)">
+            <mat-icon>edit</mat-icon>
           </div>
         </mat-cell>
       </ng-container>

@@ -21,27 +21,50 @@ export class GsmPartsModalComponent implements OnInit {
               private snackbarService: SnackbarService ,
               private partService: PartService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
-      description:  new FormControl(""),
-    });
+    if(data.isEditMode) {
+      this.form = new FormGroup({
+        name: new FormControl(data?.item?.name, Validators.required),
+        description:  new FormControl(data?.item?.description ),
+      });
+    } else {
+      this.form = new FormGroup({
+        name: new FormControl("", Validators.required),
+        description:  new FormControl(""),
+      });
+    }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   add() {
+    let part ;
+    if(this.data.isEditMode) {
+      part = {
+        ...this.form.value ,
+        id: this.data.item.id
+      }
+    }
+    else {
+      part = this.form.value
+    }
     this.spinnerService.activate();
-    this.partService.add(this.form.value).subscribe(
+    this.partService.add(part).subscribe(
       (res) => {
-        Helpers.addToArray(res , this.data.array)
-        this.snackbarService.openSnackBar('Piéce ajouté avec succès', 'success');
+        if(this.data.isEditMode) {
+          Helpers.updateFields(res , this.data.item)
+          this.snackbarService.openSnackBar('Piéce modifié avec succès', 'success');
+        }
+        else {
+          Helpers.addToArray(res , this.data.array)
+          this.snackbarService.openSnackBar('Piéce ajouté avec succès', 'success');
+        }
         this.spinnerService.deactivate();
         this.matDialogRef.close();
       },
       err => {
         console.log(err)
-        this.snackbarService.openSnackBar('Erreur lors de l\'ajout', 'fail');
+        if(this.data.isEditMode) { this.snackbarService.openSnackBar('Erreur lors de la modification', 'fail');}
+        else {this.snackbarService.openSnackBar('Erreur lors de l\'ajout', 'fail');}
         this.spinnerService.deactivate();
       }
     );

@@ -53,11 +53,11 @@ export class GsmPartsComponent implements OnInit {
     )
   }
 
-  openModal() {
+  openModal(item, isEditMode) {
     const dialogRef = this.dialog.open(GsmPartsModalComponent, {
       panelClass: 'custom-dialog-container',
       width: '600px',
-      data: {array: this.parts}
+      data: { item: item, array: this.parts, isEditMode: isEditMode }
     });
     dialogRef.afterClosed().subscribe(
       res => {
