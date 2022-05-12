@@ -6,4 +6,5 @@ import com.easydev.gsmguide.models.Article;
 
 public interface ArticleService {
     Article add(Article article) ;
+    Article update(Article article) ;
 }

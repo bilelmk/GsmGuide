@@ -9,43 +9,44 @@
 </ion-header>
 
 <ion-content fullscreen="true" class="auth">
-  <ion-grid style="padding-top: calc((100vh - 700px) / 2)">
+  <ion-grid >
 
-    <ion-row class="ion-justify">
+    <ion-row >
       <ion-col class="ion-text-center" size="12">
         <img class="auth-image" src="../../../assets/image/logo.png" alt="logo">
       </ion-col>
     </ion-row>
 
     <form [formGroup]="form" >
-      <ion-row>
+      <ion-row class="ion-justify-content-center">
 
-        <ion-col size="10" size-sm="6" offset="1" offset-sm="3">
-          <input formControlName="lastname" class="login-input" type="text" placeholder="Nom" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding">
+          <label class="auth-label">Nom</label>
+          <input formControlName="lastname" class="auth-input" type="text" />
         </ion-col>
 
-        <ion-col  class="mt-10" size="10" size-sm="6" offset="1" offset-sm="3">
-          <input formControlName="firstname" class="login-input" type="text" placeholder="Prénom"/>
+        <ion-col  size="10" size-sm="7" class="ion-no-padding mt-10" >
+          <label class="auth-label">Prénom</label>
+          <input formControlName="firstname" class="auth-input" type="text" />
         </ion-col>
 
-        <ion-col class="mt-10"  size="10" size-sm="6" offset="1" offset-sm="3">
-          <input formControlName="phone" class="login-input" type="text" placeholder="Numéro de téléphone" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Numéro de téléphone</label>
+          <input formControlName="phone" class="auth-input" type="text"  />
         </ion-col>
 
-        <ion-col class="mt-10" size="10" size-sm="6" offset="1" offset-sm="3">
-          <input formControlName="username" class="login-input" type="text" placeholder="Nom d'utilisateur" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Nom d'utilisateur</label>
+          <input formControlName="username" class="auth-input" type="text" />
         </ion-col>
 
-        <ion-col class="mt-10" size="10" size-sm="6" offset="1" offset-sm="3">
-          <input formControlName="password" class="login-input" type="password" placeholder="Mot de passe"  />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Mot de passe</label>
+          <input formControlName="password" class="auth-input" type="password" />
         </ion-col>
 
-        <ion-col class="mt-15"  size="10" size-sm="6" offset="1" offset-sm="3">
-          <ion-button (click)="onRegister()" color="primary" expand="full" [disabled]="!form.valid">Créer le compte</ion-button>
-        </ion-col>
-
-        <ion-col  size="10" size-sm="6" offset="1" offset-sm="3">
-          <ion-button  routerLink="/gsm-login" color="light" expand="full" >Se Connecter</ion-button>
+        <ion-col class="mt-15" size="10" size-sm="7" >
+          <ion-button (click)="onRegister()" class="btn-primary" expand="block" [disabled]="!form.valid">Créer un compte</ion-button>
         </ion-col>
 
       </ion-row>

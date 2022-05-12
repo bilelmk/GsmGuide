@@ -9,6 +9,7 @@ import { GsmArticleModalComponent } from "./gsm-article-modal/gsm-article-modal.
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
 import { PartService } from "../../../core/services/http/part.service";
 import { forkJoin } from "rxjs";
+import {GsmMarkModalComponent} from "./gsm-mark-modal/gsm-mark-modal.component";
 
 @Component({
   selector: 'app-gsm-marks',
@@ -24,7 +25,7 @@ export class GsmMarksComponent implements OnInit {
               private SpinnerService: SpinnerService,
               private bottomSheet: MatBottomSheet,
               private dialog: MatDialog,
-              private partService: PartService) { }
+              private partService: PartService) {}
 
   ngOnInit(): void {
     this.getAll()
@@ -32,108 +33,120 @@ export class GsmMarksComponent implements OnInit {
 
   getAll(){
     this.SpinnerService.activate()
-    forkJoin([
-      this.markService.getAll() ,
-      this.partService.getAll()
-    ]).subscribe(
-      res => {
-        this.marks = res[0]
-        this.parts = res[1]
+    this.markService.getAll().subscribe(
+    res => {
+        this.marks = res
         this.SpinnerService.deactivate()
       },
-      error => {
+    error => {
         this.SpinnerService.deactivate()
-      }
-    )
+     })
   }
 
   // marks
-  addMark(id , item , isEditMode) {
-    console.log("addMark" )
+  addMark() {
+    const dialogRef = this.dialog.open( GsmMarkModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { }
+    });
+    dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  updateMark(id , item , isEditMode) {
-    console.log("updateMark" + id )
+  updateMark(id , item ) {
+    const dialogRef = this.dialog.open( GsmMarkModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { item : item , isEditMode: true}
+    });
+    dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  deleteMark(id , item , isEditMode) {
+  deleteMark(id , item) {
     console.log("deleteMark")
   }
 
   //models
-  addModel(id , item , isEditMode) {
-    console.log(id )
-    console.log(item )
-    console.log(isEditMode )
+  addModel(id , item ) {
     const dialogRef = this.dialog.open( GsmModelModalComponent, {
       panelClass: 'custom-dialog-container' ,
       width: '600px' ,
-      data : { id : id }
+      data : { id : id ,  item : null , isEditMode: false}
     });
     dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  updateModel(id , item , isEditMode) {
-    console.log("updateModel")
+  updateModel(id , item ) {
+    const dialogRef = this.dialog.open( GsmModelModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { id : null , item : item , isEditMode: true}
+    });
+    dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  deleteModel(id , item , isEditMode) {
+  deleteModel(id , item) {
     console.log("deleteModel")
   }
 
   //articles
-  addArticle(id , item , isEditMode) {
+  addArticle(id , item ) {
     const dialogRef = this.dialog.open( GsmArticleModalComponent, {
       panelClass: 'custom-dialog-container' ,
       width: '600px' ,
-      data : { id : id }
+      data : { id : id , item : null , isEditMode: false}
     });
     dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  updateArticle(id , item , isEditMode) {
-    console.log("updateArticle")
+  updateArticle(id , item ) {
+    const dialogRef = this.dialog.open( GsmArticleModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { id : null , item : item , isEditMode: true}
+    });
+    dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  deleteArticle(id , item , isEditMode) {
+  deleteArticle(id , item ) {
     console.log("deleteArticle")
   }
 
-  openPriceModal(id , item , isEditMode) {
+  openPriceModal(id , item) {
     const dialogRef = this.dialog.open( GsmPriceModalComponent, {
       panelClass: 'custom-dialog-container' ,
       width: '600px' ,
-      data : { id : id }
+      data : { id : id , item : null , isEditMode: false}
     });
     // dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
-  openMarkActionSheet(id: number) {
+  openMarkActionSheet(id: number, item) {
     this.bottomSheet.open(ActionSheetComponent , {
       data: [
-        { title : "Ajouter un modele" , action : this.addModel.bind(this) , id: id , item: null , isEditMode: false },
-        { title : "Modifier le nom de la marque" , action : this.updateMark.bind(this) , id: id , item: null , isEditMode: false},
-        { title : "Supprimer cette marque" , action : this.deleteMark.bind(this) , id: id, item: null , isEditMode: false },
+        { title : "Ajouter un modele" , action : this.addModel.bind(this) , id: id , item: item },
+        { title : "Modifier le nom de la marque" , action : this.updateMark.bind(this) , id: id , item: item },
+        { title : "Supprimer cette marque" , action : this.deleteMark.bind(this) , id: id, item: item  },
       ],
     });
   }
 
-  openModelActionSheet(id: number) {
+  openModelActionSheet(id: number, item) {
     this.bottomSheet.open(ActionSheetComponent , {
       data: [
-        { title : "Ajouter un article" , action : this.addArticle.bind(this) , id: id, item: null , isEditMode: false },
-        { title : "Modifier le nom de modéle" , action : this.updateModel.bind(this) , id: id, item: null , isEditMode: false },
-        { title : "Supprimer ce modéle" , action : this.deleteModel.bind(this) , id: id, item: null , isEditMode: false },
+        { title : "Ajouter un article" , action : this.addArticle.bind(this) , id: id, item: item  },
+        { title : "Modifier le nom de modéle" , action : this.updateModel.bind(this) , id: id, item: item },
+        { title : "Supprimer ce modéle" , action : this.deleteModel.bind(this) , id: id, item: item  },
       ],
     });
   }
 
-  openArticleActionSheet(id: number) {
+  openArticleActionSheet(id: number , item) {
     this.bottomSheet.open(ActionSheetComponent , {
       data: [
-        { title : "Modifier le nom de l'article" , action : this.updateArticle.bind(this) , id: id, item: null , isEditMode: false },
-        { title : "Supprimer cette article" , action : this.deleteArticle.bind(this) , id: id, item: null , isEditMode: false },
-        { title : "Liste des prix" , action : this.openPriceModal.bind(this) , id: id, item: this.parts , isEditMode: false },
+        { title : "Modifier le nom de l'article" , action : this.updateArticle.bind(this) , id: id, item: item },
+        { title : "Supprimer cette article" , action : this.deleteArticle.bind(this) , id: id, item: item },
+        { title : "Liste des prix" , action : this.openPriceModal.bind(this) , id: id, item: item },
       ],
     });
   }

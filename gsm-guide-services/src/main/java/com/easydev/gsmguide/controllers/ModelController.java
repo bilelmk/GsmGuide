@@ -17,14 +17,13 @@ public class ModelController {
         this.modelService = modelService ;
     }
 
-    @GetMapping()
-    public List<Model> getAll() {
-        return modelService.getAll();
-    }
-
     @PostMapping()
     public Model add(@RequestBody Model model) {
         return modelService.add(model);
     }
 
+    @PutMapping()
+    public Model update(@RequestBody Model model) {
+        return modelService.update(model);
+    }
 }

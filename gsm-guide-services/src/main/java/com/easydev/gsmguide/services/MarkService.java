@@ -7,4 +7,5 @@ import java.util.List;
 public interface MarkService {
     List<Mark> getAll();
     Mark add(Mark mark) ;
+    Mark update(Mark mark) ;
 }

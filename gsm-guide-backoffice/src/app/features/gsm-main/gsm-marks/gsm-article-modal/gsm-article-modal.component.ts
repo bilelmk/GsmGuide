@@ -20,9 +20,15 @@ export class GsmArticleModalComponent implements OnInit {
               private snackbarService: SnackbarService ,
               private articleService: ArticleService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
-    });
+    if(!data.isEditMode) {
+      this.form = new FormGroup({
+        name: new FormControl("", Validators.required),
+      });
+    } else {
+      this.form = new FormGroup({
+        name: new FormControl(data.item.name, Validators.required),
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -49,4 +55,22 @@ export class GsmArticleModalComponent implements OnInit {
     );
   }
 
+  update() {
+    let article = {
+      ...this.form.value ,
+      id : this.data.item.id
+    }
+    this.spinnerService.activate();
+    this.articleService.update(article).subscribe(
+      (res) => {
+        this.snackbarService.openSnackBar('Article modifié avec succès', 'success');
+        this.spinnerService.deactivate();
+        this.matDialogRef.close();
+      },
+      err => {
+        this.snackbarService.openSnackBar('Erreur lors de la modification', 'fail');
+        this.spinnerService.deactivate();
+      }
+    );
+  }
 }

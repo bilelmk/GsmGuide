@@ -1,1 +1,26 @@
-<p>gsm-requests-modal works!</p>
+<div class="dialog-container">
+
+  <p class="dialog-title">Ajouter une piéce</p>
+
+  <form [formGroup]="form" class="row justify-content-center align-items-center p-4 pt-3">
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Réparateur</mat-label>
+        <mat-select formControlName="repairerId">
+          <mat-option *ngFor="let repairer of data.array" value="{{repairer.id}}">{{repairer.firstname}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="!form.hasError('required')">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 mt-1" >
+      <button class="submit-btn full-width" (click)="update()" [disabled]="!form.valid" >
+        Sauvgarder
+      </button>
+    </div>
+  </form>
+
+</div>

@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from "@angular/material/list";
+import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatListModule } from "@angular/material/list";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    LeafletModule
   ],
   providers: [
     {

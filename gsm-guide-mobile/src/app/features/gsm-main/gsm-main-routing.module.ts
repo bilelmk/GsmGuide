@@ -24,10 +24,6 @@ const routes: Routes = [
         loadChildren: () => import('./gsm-main-products/gsm-main-products.module').then(m => m.GsmMainProductsPageModule)
       },
       {
-        path: 'gsm-main-myproducts',
-        loadChildren: () => import('./gsm-main-myproducts/gsm-main-myproducts.module').then( m => m.GsmMainMyproductsPageModule)
-      },
-      {
         path: 'gsm-main-home',
         loadChildren: () => import('./gsm-main-home/gsm-main-home.module').then(m => m.GsmMainHomePageModule)
       }

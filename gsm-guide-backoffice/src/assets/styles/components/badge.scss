@@ -1,0 +1,9 @@
+@import "../variables" ;
+
+.badge-red {
+  padding: 5px;
+  background: $danger;
+  color: $white !important;
+  font-size: 12px !important;
+  border-radius: 10px;
+}

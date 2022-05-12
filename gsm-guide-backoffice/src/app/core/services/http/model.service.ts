@@ -15,4 +15,8 @@ export class ModelService {
   add(model): Observable<any> {
     return this.http.post<any>(this.URL , model);
   }
+
+  update(model): Observable<any> {
+    return this.http.put<any>(this.URL , model);
+  }
 }

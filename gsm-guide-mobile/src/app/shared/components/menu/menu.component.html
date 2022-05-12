@@ -5,9 +5,9 @@
 
       <div class="menu-header">
         <ion-row  class="no-margin ion-padding ion-justify-content-center ion-align-items-center" >
-          <ion-col  class="ion-margin-top" size="9">
-            <img src="assets/image/logo.png" alt="logo white" />
-          </ion-col>
+<!--          <ion-col  class="ion-margin-top">-->
+            <img class="menu-header-img" src="assets/image/logo.png" alt="logo" />
+<!--          </ion-col>-->
         </ion-row>
       </div>
 
@@ -15,8 +15,7 @@
 
         <ion-menu-toggle menu="profile" >
           <ion-item (click)="navigate('/gsm-login')"  detail="false">
-            <ion-icon slot="start" name="log-in"></ion-icon>
-            <ion-label>Se Connecter</ion-label>
+            <ion-icon slot="start" name="log-in"></ion-icon>Se Connecter
           </ion-item>
         </ion-menu-toggle>
 

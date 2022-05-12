@@ -18,4 +18,11 @@ public class ArticleServiceImpl implements ArticleService{
     public Article add(Article article) {
         return articleRepository.save(article);
     }
+
+    @Override
+    public Article update(Article article) {
+        Article toUpdateArticle = articleRepository.findById(article.getId()).orElseThrow(IllegalArgumentException::new) ;
+        toUpdateArticle.setName(article.getName());
+        return articleRepository.save(toUpdateArticle);
+    }
 }

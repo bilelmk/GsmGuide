@@ -3,8 +3,11 @@ import { User } from "./user";
 export class Request {
   id: number ;
   date: string ;
+  mark: string ;
   model: string ;
-  brand: string ;
-  epairer: User ;
+  article: string ;
+  part: string ;
+  price: string ;
+  repairer: User ;
   client: User ;
 }

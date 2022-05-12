@@ -36,7 +36,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   entryComponents: [
     GsmRepairersModalComponent

@@ -15,6 +15,7 @@ public class MarkServiceImpl implements MarkService {
     public MarkServiceImpl(MarkRepository markRepository) {
         this.markRepository = markRepository ;
     }
+
     @Override
     public List<Mark> getAll() {
         return markRepository.findAll();
@@ -23,5 +24,12 @@ public class MarkServiceImpl implements MarkService {
     @Override
     public Mark add(Mark mark) {
         return markRepository.save(mark);
+    }
+
+    @Override
+    public Mark update(Mark mark) {
+        Mark toUpdateMark = markRepository.findById(mark.getMarkId()).orElseThrow(IllegalArgumentException::new) ;
+        toUpdateMark.setName(mark.getName());
+        return markRepository.save(toUpdateMark);
     }
 }

@@ -1,10 +1,12 @@
 package com.easydev.gsmguide.services.implementation;
 
 import com.easydev.gsmguide.dtos.RequestDto;
+import com.easydev.gsmguide.dtos.RequestResponse;
 import com.easydev.gsmguide.dtos.SearchRequest;
 import com.easydev.gsmguide.models.*;
 import com.easydev.gsmguide.repositories.*;
 import com.easydev.gsmguide.services.RequestService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -57,9 +59,30 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> getAll(SearchRequest searchRequest) {
+    public RequestResponse getAll(@NotNull SearchRequest searchRequest) {
         Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
-        return requestRepository.findAllByOrderByCreationDateAsc(page);
+        int count = requestRepository.findAll().size() ;
+        List<Request> rows = requestRepository.findAllByOrderByCreationDateAsc(page);
+        return new RequestResponse(count ,rows) ;
+    }
 
+    @Override
+    public RequestResponse getAllByClient(@NotNull SearchRequest searchRequest) {
+        Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
+
+        int count = requestRepository.findAllByClientId(searchRequest.getId()).size() ;
+        List<Request> rows = requestRepository.findAllByClientIdOrderByCreationDateAsc(searchRequest.getId() , page);
+
+        return new RequestResponse(count ,rows) ;
+    }
+
+    @Override
+    public RequestResponse getAllByRepairer(@NotNull SearchRequest searchRequest) {
+        Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
+
+        int count = requestRepository.findAllByRepairerId(searchRequest.getId()).size() ;
+        List<Request> rows = requestRepository.findAllByRepairerIdOrderByCreationDateAsc( searchRequest.getId() , page);
+
+        return new RequestResponse(count ,rows) ;
     }
 }

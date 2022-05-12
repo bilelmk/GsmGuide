@@ -31,7 +31,6 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx' ;
 import { NgxTrimModule } from 'ngx-trim';
-
 import localeIt from '@angular/common/locales/it';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';

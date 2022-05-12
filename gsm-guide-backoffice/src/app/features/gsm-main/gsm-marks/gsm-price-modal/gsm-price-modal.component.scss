@@ -1,0 +1,36 @@
+
+$navy : #112d4e ;
+
+
+
+.dashboard {
+  padding-top: 20px;
+  display: flex;
+  overflow: scroll
+}
+
+.part {
+  background: #f3bcbc;
+  text-align: center;
+  padding: 20px 15px 15px;
+}
+
+
+.title {
+  font-weight: 400;
+  font-size: 130%;
+  color : $navy;
+  text-transform: uppercase;
+  margin: 0;
+  display: block;
+}
+
+.title-icon {
+  padding: 14px 15px 12px 15px ;
+  border-radius: 5px ;
+  background-color: #dbe2ef ;
+  color: $navy;
+  width: 55px;
+  height: 55px;
+  margin-right: 10px;
+}

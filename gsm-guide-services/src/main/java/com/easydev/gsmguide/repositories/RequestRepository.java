@@ -8,4 +8,10 @@ import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request>  findAllByOrderByCreationDateAsc(Pageable page);
+
+    List<Request>  findAllByClientId(Long id);
+    List<Request>  findAllByClientIdOrderByCreationDateAsc( Long id , Pageable page );
+
+    List<Request>  findAllByRepairerId(Long id);
+    List<Request>  findAllByRepairerIdOrderByCreationDateAsc(Long id , Pageable page);
 }

@@ -19,4 +19,8 @@ public class ArticleController {
         return articleService.add(article);
     }
 
+    @PutMapping()
+    public Article update(@RequestBody Article article) {
+        return articleService.update(article);
+    }
 }

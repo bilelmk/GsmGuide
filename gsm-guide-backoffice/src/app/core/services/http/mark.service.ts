@@ -15,4 +15,12 @@ export class MarkService {
   getAll(): Observable<any> {
     return this.http.get<any>(this.URL);
   }
+
+  add(mark): Observable<any> {
+    return this.http.post<any>(this.URL , mark);
+  }
+
+  update(mark): Observable<any> {
+    return this.http.put<any>(this.URL , mark);
+  }
 }

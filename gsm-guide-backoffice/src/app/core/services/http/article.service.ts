@@ -15,4 +15,8 @@ export class ArticleService {
   add(article): Observable<any> {
     return this.http.post<any>(this.URL , article);
   }
+
+  update(article): Observable<any> {
+    return this.http.put<any>(this.URL , article);
+  }
 }

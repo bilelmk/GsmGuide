@@ -1,13 +1,13 @@
 @import "../variables" ;
 
 .fail {
-  background: $cb-danger;
-  color: $cb-white;
+  background: $danger;
+  color: $white;
   text-align: center;
 }
 
 .success {
-  background: $cb-success;
-  color: $cb-white;
+  background: $success;
+  color: $white;
   text-align: center;
 }

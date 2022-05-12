@@ -1,6 +1,7 @@
 <div class="dialog-container">
 
-  <p class="dialog-title" >Ajouter un modéle</p>
+  <p class="dialog-title" *ngIf="!data.isEditMode">Ajouter un modéle</p>
+  <p class="dialog-title" *ngIf="data.isEditMode">Modifier le modéle</p>
 
   <form [formGroup]="form" class="row justify-content-center align-items-center p-4 pt-3">
 
@@ -15,8 +16,11 @@
     </div>
 
     <div class="col-12 mt-1" >
-      <button class="submit-btn full-width" (click)="add()" [disabled]="!form.valid" >
+      <button *ngIf="!data.isEditMode" class="submit-btn full-width" (click)="add()" [disabled]="!form.valid" >
         Ajouter
+      </button>
+      <button *ngIf="data.isEditMode" class="submit-btn full-width" (click)="update()" [disabled]="!form.valid" >
+        Sauvgarder
       </button>
     </div>
   </form>

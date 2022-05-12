@@ -1,13 +1,8 @@
 package com.easydev.gsmguide.controllers;
 
-import com.easydev.gsmguide.models.Part;
 import com.easydev.gsmguide.models.Price;
-import com.easydev.gsmguide.services.PartService;
 import com.easydev.gsmguide.services.PriceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +19,25 @@ public class PriceController {
     @GetMapping("{articleId}/{partId}")
     public List<Price> getByArticleAndPart(@PathVariable long articleId,@PathVariable long partId) {
         return priceService.getByArticleAndPart(articleId , partId) ;
+    }
+
+    @GetMapping("{articleId}")
+    public List<List<Price>> getByArticle(@PathVariable long articleId) {
+        return priceService.getByArticle(articleId) ;
+    }
+
+    @PostMapping
+    public Price add(@RequestBody Price price) {
+        return priceService.add(price) ;
+    }
+
+    @PutMapping
+    public Price update(@RequestBody Price price) {
+        return priceService.update(price) ;
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable long id) {
+        priceService.delete(id) ;
     }
 }

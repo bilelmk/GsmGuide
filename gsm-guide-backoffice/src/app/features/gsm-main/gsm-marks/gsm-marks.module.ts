@@ -11,6 +11,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
+import { GsmPriceAddComponent } from "./gsm-price-modal/gsm-price-add/gsm-price-add.component";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes: Routes = [
   {
@@ -25,7 +27,8 @@ const routes: Routes = [
     GsmMarkModalComponent,
     GsmModelModalComponent,
     GsmArticleModalComponent,
-    GsmPriceModalComponent
+    GsmPriceModalComponent,
+    GsmPriceAddComponent
   ],
   imports: [
     CommonModule,
@@ -34,13 +37,15 @@ const routes: Routes = [
     MatDialogModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
   ],
   entryComponents: [
     GsmMarkModalComponent,
     GsmModelModalComponent,
     GsmArticleModalComponent,
-    GsmPriceModalComponent
+    GsmPriceModalComponent,
+    GsmPriceAddComponent
   ]
 })
 export class GsmMarksModule { }

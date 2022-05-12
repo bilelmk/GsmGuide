@@ -20,9 +20,15 @@ export class GsmModelModalComponent implements OnInit {
               private snackbarService: SnackbarService ,
               private modelService: ModelService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = new FormGroup({
-      name: new FormControl("", Validators.required),
-    });
+    if(!data.isEditMode) {
+      this.form = new FormGroup({
+        name: new FormControl("", Validators.required),
+      });
+    } else {
+      this.form = new FormGroup({
+        name: new FormControl(data.item.name, Validators.required),
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -44,6 +50,25 @@ export class GsmModelModalComponent implements OnInit {
       },
       err => {
         this.snackbarService.openSnackBar('Erreur lors de l\'ajout', 'fail');
+        this.spinnerService.deactivate();
+      }
+    );
+  }
+
+  update() {
+    let model = {
+      ...this.form.value ,
+      modelId : this.data.item.modelId
+    }
+    this.spinnerService.activate();
+    this.modelService.update(model).subscribe(
+      (res) => {
+        this.snackbarService.openSnackBar('Modéle modifié avec succès', 'success');
+        this.spinnerService.deactivate();
+        this.matDialogRef.close();
+      },
+      err => {
+        this.snackbarService.openSnackBar('Erreur lors de la modification', 'fail');
         this.spinnerService.deactivate();
       }
     );

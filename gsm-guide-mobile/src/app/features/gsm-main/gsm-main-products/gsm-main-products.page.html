@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar>
     <ion-buttons slot="start" *ngIf="!isSearching">
-      <ion-button>
+      <ion-button (click)="onToggleMenu('profile')">
         <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -36,21 +36,58 @@
     </ion-segment>
 
     <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll" *ngIf="segment == 'products'">
-      <ion-col size="11" *ngFor="let product of products">
-        <p>{{product.name}}</p>
-        <img [src]="URL + product.image">
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card class="ion-text-center">
+          <img [src]="URL + product.image"  style="height: 150px"/>
+          <ion-card-header>
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+            <ion-card-title>{{product.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card class="ion-text-center">
+          <img [src]="URL + product.image"  style="height: 150px"/>
+          <ion-card-header>
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+            <ion-card-title>{{product.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card class="ion-text-center">
+          <img [src]="URL + product.image"  style="height: 150px"/>
+          <ion-card-header>
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+            <ion-card-title>{{product.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card class="ion-text-center">
+          <img [src]="URL + product.image"  style="height: 150px"/>
+          <ion-card-header>
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+            <ion-card-title>{{product.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
       </ion-col>
     </ion-row>
 
     <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll"  *ngIf="segment == 'myProducts'">
       <ion-col *ngFor="let product of products">
-        <p>test</p>
+<!--        <p>test</p>-->
       </ion-col>
     </ion-row>
 
   </ion-grid>
 
 
-  <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>
+  <div>
+    <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>
+  </div>
 
 </ion-content>

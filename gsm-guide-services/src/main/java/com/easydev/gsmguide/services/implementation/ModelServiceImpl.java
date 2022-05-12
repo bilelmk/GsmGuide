@@ -5,8 +5,6 @@ import com.easydev.gsmguide.repositories.ModelRepository;
 import com.easydev.gsmguide.services.ModelService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ModelServiceImpl implements ModelService {
 
@@ -17,12 +15,14 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> getAll() {
-        return modelRepository.findAll();
+    public Model add(Model model) {
+        return modelRepository.save(model);
     }
 
     @Override
-    public Model add(Model model) {
-        return modelRepository.save(model);
+    public Model update(Model model) {
+        Model toUpdateModel = modelRepository.findById(model.getModelId()).orElseThrow(IllegalArgumentException::new);
+        toUpdateModel.setName(model.getName());
+        return modelRepository.save(toUpdateModel);
     }
 }

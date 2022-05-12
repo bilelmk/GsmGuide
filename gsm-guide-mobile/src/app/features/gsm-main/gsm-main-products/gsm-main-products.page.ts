@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ProductService } from '../../../core/services/http/product.service';
-import { ModalController } from '@ionic/angular';
+import {MenuController, ModalController} from '@ionic/angular';
 import { GsmMainProductsAddComponent } from './gsm-main-products-add/gsm-main-products-add.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class GsmMainProductsPage implements OnInit {
 
   segment = 'products';
 
-  URL = 'http://192.168.1.125:8080/' ;
+  URL = 'http://192.168.1.50:8080/' ;
 
   // request params
   key = '' ;
@@ -27,7 +27,8 @@ export class GsmMainProductsPage implements OnInit {
 
   constructor(private spinnerService: SpinnerService,
               private productService: ProductService,
-              private modalController: ModalController) { }
+              private modalController: ModalController,
+              private menu : MenuController) { }
 
   ngOnInit() {
     this.getProducts();
@@ -68,6 +69,10 @@ export class GsmMainProductsPage implements OnInit {
 
   enableSearch() {
     this.isSearching = true ;
+  }
+
+  onToggleMenu(name : string) {
+    this.menu.open(name);
   }
 
 }

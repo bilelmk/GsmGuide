@@ -15,4 +15,16 @@ export class RequestService {
   add(request): Observable<any> {
     return this.http.post<any>(this.URL , request);
   }
+
+  getAllByClient(request): Observable<Request[]> {
+    return this.http.post<Request[]>(this.URL + '/client' , request);
+  }
+
+  getAllByRepairer(request): Observable<Request[]> {
+    return this.http.post<Request[]>(this.URL + '/repairer' , request);
+  }
+
+  update(request): Observable<Request> {
+    return this.http.put<Request>(this.URL , request);
+  }
 }

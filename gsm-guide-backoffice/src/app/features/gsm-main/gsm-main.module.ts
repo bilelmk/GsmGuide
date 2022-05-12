@@ -38,6 +38,10 @@ const routes: Routes = [
         path: 'parts',
         loadChildren: () => import('./gsm-parts/gsm-parts.module').then(m => m.GsmPartsModule)
       },
+      {
+        path: 'locations',
+        loadChildren: () => import('./gsm-location/gsm-location.module').then(m => m.GsmLocationModule)
+      },
     ]
   }
 ];

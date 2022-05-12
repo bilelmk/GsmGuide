@@ -2,15 +2,16 @@ package com.easydev.gsmguide.models;
 
 import com.easydev.gsmguide.enums.State;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Request {
 
     @Id

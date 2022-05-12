@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-button (click)="onToggleMenu('profile')">
         <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,11 +14,48 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!isLoggedIn">
-  Lazem login
+<!--<ion-content *ngIf="!isLoggedIn">-->
+<!--  Lazem login-->
 
-</ion-content>
+<!--</ion-content>-->
 
-<ion-content *ngIf="isLoggedIn">
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let request of requests">
+      <ion-label>
+        <h3>Etat de la demande</h3>
+        <p>{{ "Apareil " + request.mark + ' ' + request.model + ' ' + request.article }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+
+<!--  &lt;!&ndash; List of Sliding Items &ndash;&gt;-->
+<!--  <ion-list>-->
+<!--    <ion-item-sliding>-->
+<!--      <ion-item>-->
+<!--        <ion-label>Item</ion-label>-->
+<!--      </ion-item>-->
+<!--      <ion-item-options side="end">-->
+<!--        <ion-item-option (click)="unread(item)">Unread</ion-item-option>-->
+<!--      </ion-item-options>-->
+<!--    </ion-item-sliding>-->
+
+<!--    <ion-item-sliding>-->
+<!--      <ion-item>-->
+<!--        <ion-label>Item</ion-label>-->
+<!--      </ion-item>-->
+<!--      <ion-item-options side="end">-->
+<!--        <ion-item-option (click)="unread(item)">Unread</ion-item-option>-->
+<!--      </ion-item-options>-->
+<!--    </ion-item-sliding>-->
+<!--  </ion-list>-->
+
   <ion-button (click)="openAddProductModal()">Demande de réparation</ion-button>
 </ion-content>

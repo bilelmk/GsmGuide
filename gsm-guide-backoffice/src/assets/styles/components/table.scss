@@ -6,7 +6,7 @@ table {
   box-shadow: none !important;
 
   .cell-text {
-    color: $cb-dark;
+    color: $dark;
     margin: 0;
     text-align: center;
     width: 100%;
@@ -15,8 +15,8 @@ table {
 
   .cell-chips {
     font-size: 11px;
-    background-color: $cb-blue;
-    color: $cb-white;
+    background-color: $blue;
+    color: $white;
     padding: 5px;
     border-radius: 15px;
     line-height: 25px;
