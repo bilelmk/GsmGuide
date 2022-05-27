@@ -26,6 +26,11 @@ const routes: Routes = [
       {
         path: 'gsm-main-home',
         loadChildren: () => import('./gsm-main-home/gsm-main-home.module').then(m => m.GsmMainHomePageModule)
+      },
+      {
+        path: 'gsm-main-reparation-requests',
+        // tslint:disable-next-line:max-line-length
+        loadChildren: () => import('./gsm-main-reparation-requests/gsm-main-reparation-requests.module').then(m => m.GsmMainReparationRequestsPageModule)
       }
     ]
   }

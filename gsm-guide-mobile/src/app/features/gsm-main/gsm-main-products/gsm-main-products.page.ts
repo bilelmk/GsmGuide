@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ProductService } from '../../../core/services/http/product.service';
-import {MenuController, ModalController} from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { GsmMainProductsAddComponent } from './gsm-main-products-add/gsm-main-products-add.component';
+import { GsmMainProductsDetailsComponent } from './gsm-main-products-details/gsm-main-products-details.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gsm-main-products',
@@ -16,7 +18,7 @@ export class GsmMainProductsPage implements OnInit {
 
   segment = 'products';
 
-  URL = 'http://192.168.1.50:8080/' ;
+  URL = environment.url ;
 
   // request params
   key = '' ;
@@ -28,7 +30,7 @@ export class GsmMainProductsPage implements OnInit {
   constructor(private spinnerService: SpinnerService,
               private productService: ProductService,
               private modalController: ModalController,
-              private menu : MenuController) { }
+              private menu: MenuController) { }
 
   ngOnInit() {
     this.getProducts();
@@ -37,6 +39,15 @@ export class GsmMainProductsPage implements OnInit {
   openAddProductModal() {
     this.modalController.create({
       component: GsmMainProductsAddComponent ,
+    }).then(modal => modal.present());
+  }
+
+  openProductDetailModal(productDetails) {
+    this.modalController.create({
+      component: GsmMainProductsDetailsComponent ,
+      componentProps: {
+        product: productDetails
+      }
     }).then(modal => modal.present());
   }
 
@@ -71,7 +82,7 @@ export class GsmMainProductsPage implements OnInit {
     this.isSearching = true ;
   }
 
-  onToggleMenu(name : string) {
+  onToggleMenu(name: string) {
     this.menu.open(name);
   }
 

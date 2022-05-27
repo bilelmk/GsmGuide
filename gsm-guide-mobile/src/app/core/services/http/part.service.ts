@@ -10,7 +10,7 @@ import { Part } from '../../classes/part';
 })
 export class PartService {
 
-  URL = environment.url + 'parts' ;
+  URL = environment.url + 'api/parts' ;
 
   constructor(private http: HttpClient) { }
 

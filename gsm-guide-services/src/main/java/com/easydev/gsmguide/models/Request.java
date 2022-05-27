@@ -24,6 +24,7 @@ public class Request {
     private String article ;
     private String part ;
     private String price ;
+
     @OneToOne
     private User repairer ;
 

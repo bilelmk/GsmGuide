@@ -9,13 +9,15 @@ import { Product } from '../../classes/product';
 })
 export class ProductService {
 
+  URL = environment.url + 'api/products' ;
+
   constructor(private http: HttpClient) {}
 
   search(request): Observable<Product[]> {
-    return this.http.post<Product[]>(environment.url + 'products/search' , request);
+    return this.http.post<Product[]>(this.URL + '/search' , request);
   }
 
   add(data: any): Observable<any> {
-    return this.http.post<any>(environment.url + 'products' , data);
+    return this.http.post<any>(this.URL , data);
   }
 }

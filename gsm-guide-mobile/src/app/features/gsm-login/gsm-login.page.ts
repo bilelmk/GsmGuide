@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from '../../core/services/in-app/spinner.service';
 import { ToastService } from '../../core/services/in-app/toast.service';
 import { LoginRequest } from '../../core/dtos/login-request';
-import { UserService } from "../../core/services/http/user.service";
+import { UserService } from '../../core/services/http/user.service';
 
 @Component({
   selector: 'app-gsm-login',
@@ -41,12 +41,12 @@ export class GsmLoginPage implements OnInit {
           sessionStorage.setItem('expiresIn' , res.expiresIn);
           sessionStorage.setItem('id' , res.id);
           sessionStorage.setItem('role' , res.role);
-          this.userService.token.next(true)
+          this.userService.token.next(true) ;
+          this.userService.role.next(res.role) ;
           this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
           this.router.navigate(['/gsm-main']);
         }, error => {
-            alert(JSON.stringify(error)) ;
           this.spinnerService.deactivate() ;
           if (error.error === 'wrong username') {
             this.toastService.show('Nom d\'utilisateur incorrect' , 'danger');

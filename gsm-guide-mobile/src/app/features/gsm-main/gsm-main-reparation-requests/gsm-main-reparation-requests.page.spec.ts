@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GsmMainReparationRequestsComponent } from './gsm-main-reparation-requests.component';
+import { GsmMainReparationRequestsPage } from './gsm-main-reparation-requests.page';
 
-describe('GsmMainReparationRequestsComponent', () => {
-  let component: GsmMainReparationRequestsComponent;
-  let fixture: ComponentFixture<GsmMainReparationRequestsComponent>;
+describe('GsmMainReparationRequestsPage', () => {
+  let component: GsmMainReparationRequestsPage;
+  let fixture: ComponentFixture<GsmMainReparationRequestsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GsmMainReparationRequestsComponent ],
+      declarations: [ GsmMainReparationRequestsPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GsmMainReparationRequestsComponent);
+    fixture = TestBed.createComponent(GsmMainReparationRequestsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

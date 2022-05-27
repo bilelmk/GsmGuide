@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GsmMainProfilePage } from './gsm-main-profile.page';
+
+import { GsmMainReparationRequestsPage } from './gsm-main-reparation-requests.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: GsmMainProfilePage
+    component: GsmMainReparationRequestsPage
   }
 ];
 
@@ -13,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class GsmMainProfilePageRoutingModule {}
+export class GsmMainReparationRequestsPageRoutingModule {}

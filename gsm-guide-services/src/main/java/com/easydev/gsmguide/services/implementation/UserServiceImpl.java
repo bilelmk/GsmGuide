@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
                     return new ResponseEntity<>("blocked", HttpStatus.UNAUTHORIZED);
                 }
                 String token = this.jwtConfig.generateToken(client.getId() , client.getUsername());
-                return ResponseEntity.ok(new AuthenticationResponse(token , client.getId() , null));
+                return ResponseEntity.ok(new AuthenticationResponse(token , client.getId() , client.getRole().toString()));
             } else {
                 return new ResponseEntity<>("wrong password", HttpStatus.NOT_FOUND);
             }

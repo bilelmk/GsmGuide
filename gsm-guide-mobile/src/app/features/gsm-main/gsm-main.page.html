@@ -13,7 +13,12 @@
           <ion-label>Market</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="gsm-main-requests">
+        <ion-tab-button tab="gsm-main-requests" *ngIf="role == 'CLIENT'">
+          <ion-icon name="construct"></ion-icon>
+          <ion-label>Espace Réparation</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="gsm-main-reparation-requests" *ngIf="role == 'REPAIRER'">
           <ion-icon name="construct"></ion-icon>
           <ion-label>Espace Réparation</ion-label>
         </ion-tab-button>
@@ -23,7 +28,7 @@
         <!--        <ion-label>Mes Produits</ion-label>-->
         <!--      </ion-tab-button>-->
 
-        <ion-tab-button tab="gsm-main-profile">
+        <ion-tab-button tab="gsm-main-profile" *ngIf="role == 'CLIENT' || role == 'REPAIRER' ">
           <ion-icon name="person"></ion-icon>
           <ion-label>Mon compte</ion-label>
         </ion-tab-button>

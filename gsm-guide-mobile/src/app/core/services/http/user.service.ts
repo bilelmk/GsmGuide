@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { RegisterRequest } from "../../dtos/register-request";
-import { BehaviorSubject, Observable } from "rxjs";
-import { environment } from "../../../../environments/environment";
-import { LoginRequest } from "../../dtos/login-request";
-import { Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { RegisterRequest } from '../../dtos/register-request';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { LoginRequest } from '../../dtos/login-request';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +12,28 @@ import { Router } from "@angular/router";
 export class UserService {
 
   token = new BehaviorSubject(null);
+  role = new BehaviorSubject(null);
+
+  URL = environment.url + 'api/users' ;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   register(request: RegisterRequest): Observable<any> {
-    return this.http.post<any>(environment.url + 'users', request);
+    return this.http.post<any>(this.URL , request);
   }
 
   login(request: LoginRequest): Observable<any> {
-    return this.http.post<any>(environment.url + 'users/login', request);
+    return this.http.post<any>(this.URL + '/login', request);
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get<any>(environment.url + 'users/' + id);
+    return this.http.get<any>(this.URL + '/' + id);
   }
 
   logout(){
     sessionStorage.clear();
-    this.router.navigate(['/main'])
+    this.token.next(null) ;
+    this.role.next(null ) ;
+    this.router.navigate(['/gsm-main']);
   }
 }

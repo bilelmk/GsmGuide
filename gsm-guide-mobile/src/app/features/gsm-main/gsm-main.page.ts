@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/http/user.service';
 
 @Component({
   selector: 'app-gsm-main',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GsmMainPage implements OnInit {
 
-  constructor() { }
+  role = '' ;
+  constructor(private usersService: UserService) {
+    usersService.role.subscribe(
+        res => this.role = res
+    );
+  }
 
   ngOnInit() {
   }

@@ -21,30 +21,51 @@
     <form [formGroup]="form" class="ion-margin-top">
       <ion-row class="ion-justify-content-center">
 
-        <ion-col size="10" size-sm="7"  >
-          <input formControlName="name" class="input" type="text" placeholder="Nom du produit" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding">
+          <label class="auth-label">Nom du produit</label>
+          <input formControlName="name" class="auth-input" type="text"/>
         </ion-col>
 
-        <ion-col class="mt-10" size="10" size-sm="7">
-          <input formControlName="description" class="input" type="text" placeholder="Description" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Description</label>
+          <input formControlName="description" class="auth-input" type="text"/>
         </ion-col>
 
-        <ion-col class="mt-10" size="10" size-sm="7" >
-          <input formControlName="price" class="input" type="number" placeholder="Prix" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Prix</label>
+          <input formControlName="price" class="auth-input" type="text"/>
         </ion-col>
 
-        <ion-col class="mt-10" size="10" size-sm="7">
-          <input formControlName="quantity" class="input" type="number" placeholder="Quantité" />
+        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
+          <label class="auth-label">Quantité</label>
+          <input formControlName="quantity" class="auth-input" type="text"/>
         </ion-col>
+
+
+<!--        <ion-col size="10" size-sm="7"  >-->
+<!--          <input formControlName="name" class="input" type="text" placeholder="Nom du produit" />-->
+<!--        </ion-col>-->
+
+<!--        <ion-col class="mt-10" size="10" size-sm="7">-->
+<!--          <input formControlName="description" class="input" type="text" placeholder="Description" />-->
+<!--        </ion-col>-->
+
+<!--        <ion-col class="mt-10" size="10" size-sm="7" >-->
+<!--          <input formControlName="price" class="input" type="number" placeholder="Prix" />-->
+<!--        </ion-col>-->
+
+<!--        <ion-col class="mt-10" size="10" size-sm="7">-->
+<!--          <input formControlName="quantity" class="input" type="number" placeholder="Quantité" />-->
+<!--        </ion-col>-->
 
         <ion-col class="mt-15" size="10" size-sm="7">
-          <ion-button (click)="onPickImage()" color="primary" expand="full" >Pick Image</ion-button>
+          <ion-button (click)="onPickImage()" class="btn-primary"  expand="block" >Pick Image</ion-button>
         </ion-col>
 
         <img [src]="imageSrc" />
 
         <ion-col size="10" size-sm="7">
-          <ion-button (click)="add()" color="primary" expand="full" [disabled]="!form.valid">Publier</ion-button>
+          <ion-button (click)="add()" class="btn-primary"  expand="block" [disabled]="!form.valid">Publier</ion-button>
         </ion-col>
 
       </ion-row>

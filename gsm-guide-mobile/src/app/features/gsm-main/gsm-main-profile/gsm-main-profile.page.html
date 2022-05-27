@@ -1,7 +1,3 @@
-<ion-content *ngIf="!isLoggedIn">
-  Lazem login
-</ion-content>
-
 <ion-content *ngIf="isLoggedIn">
   <ion-header class="ion-no-border">
     <ion-toolbar>
@@ -42,20 +38,6 @@
         <ion-item>
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label><h3>Editer le profil</h3></ion-label>
-        </ion-item>
-      </ion-item-group>
-
-      <ion-item-group>
-        <ion-item-divider>
-          <ion-label> Historique </ion-label>
-        </ion-item-divider>
-        <ion-item (click)="toReservations()">
-          <ion-icon slot="start" name="calendar-outline"></ion-icon>
-          <ion-label><h3>Réservations</h3></ion-label>
-        </ion-item>
-        <ion-item (click)="toFavoris()">
-          <ion-icon slot="start" name="heart-outline"></ion-icon>
-          <ion-label><h3>Favoris</h3></ion-label>
         </ion-item>
       </ion-item-group>
 

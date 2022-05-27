@@ -6,6 +6,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Storage } from '@ionic/storage';
 import { Subscription } from 'rxjs';
 import { Network } from '@ionic-native/network/ngx';
+import { UserService } from './core/services/http/user.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
       private platform: Platform,
       private splashScreen: SplashScreen,
       private statusBar: StatusBar,
+      private userService: UserService
       // private traductionServcie: TraductionService,
       // private themeService: ThemeService,
       // private oneSignal : OneSignal ,
@@ -29,7 +31,8 @@ export class AppComponent {
       // private network: Network
   ) {
     this.platform.ready().then(() => {
-
+      this.userService.role.next(sessionStorage.getItem('role'));
+      this.userService.token.next(sessionStorage.getItem('token'));
       // this.disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       //   this.networkErrorService.present();
       // });
