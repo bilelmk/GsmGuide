@@ -1,8 +1,8 @@
-<ion-header >
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
     <ion-buttons slot="start">
       <ion-button (click)="close()">
-        <ion-icon color="primary" slot="icon-only" name="close" ></ion-icon>
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back-outline" ></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -11,63 +11,51 @@
         <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center toolbar">Publier un produit</ion-title>
+    <ion-title class="ion-text-center toolbar">Nouvelle annonce</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid class="ion-margin-top">
 
+    <div class="form-header ion-text-center">
+      <img class="form-header-img" src="assets/image/default-profile.png">
+      <p class="form-header-name">Hayder Ryahdi</p>
+    </div>
+
+
     <form [formGroup]="form" class="ion-margin-top">
-      <ion-row class="ion-justify-content-center">
+      <ion-row class="ion-justify-content-center ion-padding">
 
-        <ion-col size="10" size-sm="7" class="ion-no-padding">
-          <label class="auth-label">Nom du produit</label>
-          <input formControlName="name" class="auth-input" type="text"/>
+        <ion-col size="12" class="ion-text-center form-card"  (click)="onPickImage()" >
+          <ion-icon *ngIf="!imageSrc"  class="form-card-img-logo" name="camera-outline"></ion-icon>
+          <p *ngIf="!imageSrc"  class="form-card-img-text" >Ajouter une photo</p>
+          <img *ngIf="imageSrc" class="form-card-img" [src]="imageSrc" />
         </ion-col>
 
-        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
-          <label class="auth-label">Description</label>
-          <input formControlName="description" class="auth-input" type="text"/>
+        <ion-col size="12" class="form-card">
+          <p class="form-card-label">Nom du produit</p>
+          <input placeholder="Taper le titre de votre article" class="form-card-input"  formControlName="name" type="text"/>
         </ion-col>
 
-        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
-          <label class="auth-label">Prix</label>
-          <input formControlName="price" class="auth-input" type="text"/>
+        <ion-col size="12" class="form-card">
+          <p class="form-card-label">Description</p>
+          <input placeholder="Mentionner les détails de votre article" class="form-card-input"  formControlName="description" type="text"/>
         </ion-col>
 
-        <ion-col size="10" size-sm="7" class="ion-no-padding mt-10">
-          <label class="auth-label">Quantité</label>
-          <input formControlName="quantity" class="auth-input" type="text"/>
+        <ion-col size="12" class="form-card">
+          <p class="form-card-label">Prix</p>
+          <input placeholder="Taper le prix de l'article" class="form-card-input" formControlName="price"  type="number"/>
         </ion-col>
 
-
-<!--        <ion-col size="10" size-sm="7"  >-->
-<!--          <input formControlName="name" class="input" type="text" placeholder="Nom du produit" />-->
-<!--        </ion-col>-->
-
-<!--        <ion-col class="mt-10" size="10" size-sm="7">-->
-<!--          <input formControlName="description" class="input" type="text" placeholder="Description" />-->
-<!--        </ion-col>-->
-
-<!--        <ion-col class="mt-10" size="10" size-sm="7" >-->
-<!--          <input formControlName="price" class="input" type="number" placeholder="Prix" />-->
-<!--        </ion-col>-->
-
-<!--        <ion-col class="mt-10" size="10" size-sm="7">-->
-<!--          <input formControlName="quantity" class="input" type="number" placeholder="Quantité" />-->
-<!--        </ion-col>-->
-
-        <ion-col class="mt-15" size="10" size-sm="7">
-          <ion-button (click)="onPickImage()" class="btn-primary"  expand="block" >Pick Image</ion-button>
+        <ion-col size="12" class="form-card">
+          <p class="form-card-label">Etat</p>
+          <input placeholder="Original, neuf, occation" class="form-card-input"  formControlName="status"  type="text"/>
         </ion-col>
 
-        <img [src]="imageSrc" />
-
-        <ion-col size="10" size-sm="7">
-          <ion-button (click)="add()" class="btn-primary"  expand="block" [disabled]="!form.valid">Publier</ion-button>
+        <ion-col size="12" size-sm="7" class="ion-no-padding ion-margin-top">
+          <ion-button (click)="add()" class="btn-primary"  expand="block" [disabled]="!form.valid || !imageSrc">Publier</ion-button>
         </ion-col>
-
       </ion-row>
     </form>
   </ion-grid>

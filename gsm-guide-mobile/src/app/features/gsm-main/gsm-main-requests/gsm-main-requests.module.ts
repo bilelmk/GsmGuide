@@ -5,9 +5,11 @@ import { IonicModule } from '@ionic/angular' ;
 import { GsmMainRequestsPageRoutingModule } from './gsm-main-requests-routing.module';
 import { GsmMainRequestsPage } from './gsm-main-requests.page';
 import { GsmMainRequestsAddComponent } from './gsm-main-requests-add/gsm-main-requests-add.component';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { GsmMainRequestsListComponent } from './gsm-main-requests-list/gsm-main-requests-list.component';
+import { GsmMainRequestsRdvComponent } from './gsm-main-requests-rdv/gsm-main-requests-rdv.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import {MatInputModule} from '@angular/material/input';
   ],
   declarations: [
     GsmMainRequestsPage,
-    GsmMainRequestsAddComponent
+    GsmMainRequestsAddComponent,
+    GsmMainRequestsListComponent,
+    GsmMainRequestsRdvComponent
   ]
 })
 export class GsmMainRequestsPageModule {}

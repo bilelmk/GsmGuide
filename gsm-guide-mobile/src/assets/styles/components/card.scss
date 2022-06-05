@@ -1,0 +1,119 @@
+.card {
+    border-radius: 20px ;
+
+    box-shadow: -1px 33px 50px -10px rgba(0,0,0,0.2);
+}
+
+.card-title {
+    font-size: 12px !important;
+    --color	: var(--ion-color-secondary)
+}
+
+.card-price {
+    padding-top: 12px ;
+    font-weight: bold ;
+    color: var(--ion-color-tertiary)
+}
+
+
+.request-card {
+
+    margin-top: 50px;
+    box-shadow: -1px 33px 50px -10px rgba(0,0,0,0.1);
+    border-radius: 20px ;
+
+    &-title {
+        font-size: 16px !important;
+        font-family: "Poppins-Bold" !important;
+    }
+
+    &-text {
+        font-size: 12px !important;
+        font-family: "Poppins-Regular" !important;
+    }
+
+    //&-img {
+    //
+    //}
+}
+
+.home-card {
+
+    border-radius: 20px ;
+    background: var(--ion-color-light);
+    padding: 10px 0;
+    width: 190px;
+    box-shadow: -1px 33px 50px -10px rgba(0,0,0,0.1);
+
+    margin-bottom: 100px;
+    &-title {
+        margin-top: 20px !important;
+        margin-bottom: 5px !important;
+        color: var(--ion-color-secondary);
+        font-size: 14px !important;
+        font-family: "Poppins-Medium" !important;
+    }
+
+    &-text {
+        color: var(--ion-color-secondary);
+        font-size: 11px !important;
+        font-family: "Poppins-Regular" !important;
+        line-height: 15px;
+        padding: 0 10px;
+    }
+
+    &-img {
+        height: 80px !important;
+    }
+}
+
+.form-card {
+    border-radius: 20px ;
+    background: white;
+    padding: 15px;
+    margin: 5px 0;
+    box-shadow: -1px 26px 86px -28px rgba(0,0,0,0.57);
+
+    &-label {
+        font-size: 14px;
+        font-family: "Poppins-bold" !important;
+        //display: block;
+    }
+
+    &-input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 12px;
+        font-family: "Poppins-Regular" !important;
+        background: white;
+    }
+
+    &-img {
+
+        &-logo {
+            font-size: 30px;
+        }
+
+        &-text {
+            font-size: 13px;
+            font-family: "Poppins-Regular" !important;
+        }
+    }
+
+}
+
+.form-header{
+
+    &-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    &-name {
+        margin-top: 10px !important;
+        font-size: 18px;
+        font-family: "Poppins-Regular" !important;
+    }
+}

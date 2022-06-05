@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService} from '../../../core/services/http/user.service';
-import {AlertController, MenuController, ModalController} from '@ionic/angular';
+import { AlertController, MenuController, ModalController } from '@ionic/angular';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { MarkService } from '../../../core/services/http/mark.service';
 import { PartService } from '../../../core/services/http/part.service';

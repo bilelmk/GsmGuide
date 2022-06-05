@@ -1,136 +1,75 @@
-<ion-header >
-  <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="!isSearching">
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
+    <ion-buttons slot="start">
       <ion-button (click)="onToggleMenu('profile')">
-        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
+        <ion-icon color="secondary" slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
-    <ion-buttons slot="end" *ngIf="!isSearching">
-      <ion-button (click)="enableSearch()">
-        <ion-icon color="primary" slot="icon-only" name="search"></ion-icon>
+    <ion-title class="ion-text-center toolbar">Marketplace</ion-title>
+    <ion-buttons slot="end">
+      <ion-button >
+        <ion-icon color="secondary" slot="icon-only" name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title *ngIf="!isSearching" class="ion-text-center toolbar">Market Place</ion-title>
-
-    <ion-searchbar *ngIf="isSearching"
-                   showCancelButton="always"
-                   searchIcon="search"
-                   placeholder="Recherche"
-                   (ionCancel)="cancelSearch()"
-                   (ionChange)="getProducts($event.target.value)">
-    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid  class="ion-no-padding">
-    <ion-segment value="products" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="products">
-        <ion-label>Market Place</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="myProducts">
-        <ion-label>Mes Produits</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+  <ion-grid>
+<!--    <ion-segment value="products" (ionChange)="segmentChanged($event)">-->
+<!--      <ion-segment-button value="products">-->
+<!--        <ion-label>Market Place</ion-label>-->
+<!--      </ion-segment-button>-->
+<!--      <ion-segment-button value="myProducts">-->
+<!--        <ion-label>Mes Produits</ion-label>-->
+<!--      </ion-segment-button>-->
+<!--    </ion-segment>-->
 
-    <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll" *ngIf="segment == 'products' ">
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="openProductDetailModal(product)" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  style="height: 150px"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span style="padding-top: 10px ;font-weight: bold ; color: green">{{product.price + ' DT'}}</span>
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
+<!--    <ion-searchbar showCancelButton="always"-->
+<!--                   searchIcon="search"-->
+<!--                   placeholder="Recherche"-->
+<!--                   >-->
+<!--    </ion-searchbar>-->
+
+    <ion-row class="ion-padding">
+      <ion-col size="12" >
+        <input class="search" (input)="getProducts()" placeholder="Rechercher l'article qui vous désirer">
       </ion-col>
 
-
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="openProductDetailModal()" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  style="height: 150px"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span style="padding-top: 10px ;font-weight: bold ; color: green">{{product.price + ' DT'}}</span>
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
+      <ion-col size="6" >
+        <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Vendre
+        </ion-button>
       </ion-col>
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="openProductDetailModal()" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  style="height: 150px"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span style="padding-top: 10px ;font-weight: bold ; color: green">{{product.price + ' DT'}}</span>
-              <!--                <ion-button >-->
-              <!--                  <ion-icon  slot="icon-only" name="reader" size="small"></ion-icon>-->
-              <!--                </ion-button>-->
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="openProductDetailModal()" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  style="height: 150px"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span style="padding-top: 10px ;font-weight: bold ; color: green">{{product.price + ' DT'}}</span>
-              <!--                <ion-button >-->
-              <!--                  <ion-icon  slot="icon-only" name="reader" size="small"></ion-icon>-->
-              <!--                </ion-button>-->
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="openProductDetailModal()" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  style="height: 150px"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span style="padding-top: 10px ;font-weight: bold ; color: green">{{product.price + ' DT'}}</span>
-              <!--                <ion-button >-->
-              <!--                  <ion-icon  slot="icon-only" name="reader" size="small"></ion-icon>-->
-              <!--                </ion-button>-->
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
+      <ion-col size="6" >
+        <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
+          <ion-icon slot="start" name="options-outline"></ion-icon>
+          Filtre
+        </ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row style="height: calc(100vh - 210px ) ; overflow: scroll"  *ngIf="segment == 'myProducts'">
-      <ion-col *ngFor="let product of products">
-<!--        <p>test</p>-->
+    <ion-row style="height: calc(100vh - 270px ) ; overflow: scroll" class="ion-padding">
+
+      <ion-col size="6" *ngFor="let product of products" class="ion-no-padding">
+        <ion-card (click)="openProductDetailModal(product)" class="card" >
+          <div class="ion-text-center">
+            <img [src]="URL + product.image"  class="full-width"/>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="card-title">{{product.name}}</ion-card-subtitle>
+            <ion-row class="ion-justify-content-between ion-align-items-center">
+              <span class="card-price">{{product.price + ' DT'}}</span>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
       </ion-col>
+
     </ion-row>
 
   </ion-grid>
 
-  <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col size="10" size-sm="7" style="padding-top: 0" >
-      <ion-button (click)="openAddProductModal()" class="btn-primary" expand="block" >Vendre un produit</ion-button>
-    </ion-col>
-
-  </ion-row>
-
-<!--  <div>-->
-<!--    <ion-button (click)="openAddProductModal()">Vendre un produit</ion-button>-->
-<!--  </div>-->
 
 </ion-content>

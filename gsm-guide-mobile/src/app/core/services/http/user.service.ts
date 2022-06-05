@@ -30,6 +30,14 @@ export class UserService {
     return this.http.get<any>(this.URL + '/' + id);
   }
 
+  update(user): Observable<any> {
+    return this.http.put<any>(this.URL , user);
+  }
+
+  updateImage(data): Observable<any> {
+    return this.http.put<any>(this.URL + '/image', data);
+  }
+
   logout(){
     sessionStorage.clear();
     this.token.next(null) ;

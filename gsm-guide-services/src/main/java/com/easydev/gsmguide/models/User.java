@@ -26,4 +26,5 @@ public class User {
     private boolean isValid ;
     private boolean isConfirmed ;
     private Role role ;
+    private String image ;
 }

@@ -22,7 +22,7 @@ public class Product {
   private double price;
   private boolean visible;
   private String image;
-  private int quantity;
+  private String status;
   private LocalDateTime creationDate ;
 
   @ManyToOne

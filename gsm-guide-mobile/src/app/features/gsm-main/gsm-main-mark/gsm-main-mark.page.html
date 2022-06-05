@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Nos Marques</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="page-title ion-padding-top">Marques</p>
+
+  <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable>
+    <ion-segment-button class="button-checked" value="Samsung">
+      <ion-label>Samsung</ion-label>
+    </ion-segment-button>
+    <ion-segment-button  class="button-checked" value="Apple">
+      <ion-label>Apple</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Xioami">
+      <ion-label>Xiaomi</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Nokia">
+      <ion-label>Nokia</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Oppo">
+      <ion-label>Oppo</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Huawei">
+      <ion-label>Huawei</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Infinix">
+      <ion-label>Infinix</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-content>

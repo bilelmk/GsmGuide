@@ -52,16 +52,16 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.save(product);
   }
 
-  public Product update(long id, MultipartFile image, String name, String description, double price, double promotionValue, boolean promotion, int quantity) {
-    Product product = productRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-    product.setName(name);
-    product.setDescription(description);
-    product.setPrice(price);
-    product.setQuantity(quantity);
-    if(image != null) {
-      String newFileName = uploadService.upload(image);
-      product.setImage("images/" + newFileName);
-    }
-    return productRepository.save(product);
-  }
+//  public Product update(long id, MultipartFile image, String name, String description, double price, double promotionValue, boolean promotion, int quantity) {
+//    Product product = productRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+//    product.setName(name);
+//    product.setDescription(description);
+//    product.setPrice(price);
+//    product.setStatus(quantity);
+//    if(image != null) {
+//      String newFileName = uploadService.upload(image);
+//      product.setImage("images/" + newFileName);
+//    }
+//    return productRepository.save(product);
+//  }
 }

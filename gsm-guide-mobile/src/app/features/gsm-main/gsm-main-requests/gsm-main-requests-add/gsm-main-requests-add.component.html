@@ -1,100 +1,84 @@
-<ion-header >
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
     <ion-buttons slot="start">
       <ion-button (click)="close()">
-        <ion-icon color="primary" slot="icon-only" name="close" ></ion-icon>
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back" ></ion-icon>
       </ion-button>
     </ion-buttons>
-
+    <ion-title class="ion-text-center toolbar">Demande de réparation</ion-title>
     <ion-buttons slot="end">
       <ion-button disabled="true">
         <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center toolbar">Demande de réparation</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
-  <mat-vertical-stepper [linear]="true" #stepper>
+  <p class="page-title">Bénéficier d’une</p>
+  <p class="page-title">réparation certifiée</p>
 
-    <mat-step [stepControl]="dateForm">
-      <form [formGroup]="dateForm">
-        <ng-template matStepLabel>Choisir une date</ng-template>
+    <ion-row class="ion-justify-content-center mt-50 ">
 
-        <ion-datetime pickerFormat="YYYY-MM-DD" class="input" formControlName="date" display-timezone="utc" (ionChange)="tesr()"></ion-datetime>
+      <ion-col size="12" class="form-card ">
+        <p class="form-card-label">Marque</p>
+        <input [value]="markName" (click)="markRef.open()" placeholder="Choisir la marque de votre appareil" class="form-card-input"  type="text"/>
 
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="markForm">
-      <form [formGroup]="markForm">
-        <ng-template matStepLabel>Choisir une marque</ng-template>
-          <ion-select class="input" formControlName="mark"  (ionChange)="selectModels()">
-            <ion-select-option  *ngFor="let mark of marks" value="{{mark.markId}}">{{mark.name}}</ion-select-option>
-          </ion-select>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="modelForm">
-      <form [formGroup]="modelForm">
-        <ng-template matStepLabel>Choisir une modéle</ng-template>
-        <ion-select class="input" formControlName="model" (ionChange)="selectArticles()">
-          <ion-select-option *ngFor="let model of models" value="{{model.modelId}}">{{model.name}}</ion-select-option>
+        <ion-select [(ngModel)]="markId" class="input" #markRef  (ionChange)="onMarkSelect()">
+          <ion-select-option  *ngFor="let mark of marks" value="{{mark.markId}}">{{mark.name}}</ion-select-option>
         </ion-select>
-        <div>
-          <button mat-button matStepperNext >Next</button>
-        </div>
-      </form>
-    </mat-step>
+      </ion-col>
 
-    <mat-step [stepControl]="articleForm">
-      <form [formGroup]="articleForm">
-        <ng-template matStepLabel>Choisir un article</ng-template>
-        <ion-select class="input" formControlName="article" >
-          <ion-select-option *ngFor="let article of articles" value="{{article.id}}">{{article.name}}</ion-select-option>
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Modéle</p>
+        <input [value]="modelName" (click)="modelRef.open()" placeholder="Choisir le modèle de votre appareil" class="form-card-input"  type="text"/>
+
+        <ion-select [(ngModel)]="modelId" class="input" #modelRef  (ionChange)="onModelSelect()">
+          <ion-select-option   *ngFor="let model of models" value="{{model.modelId}}">{{model.name}}</ion-select-option>
         </ion-select>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+      </ion-col>
 
-    <mat-step [stepControl]="partForm">
-      <form [formGroup]="partForm">
-        <ng-template matStepLabel>Choisir une piéce</ng-template>
-        <ion-select class="input" formControlName="part" (ionChange)="selectPrices()" >
-          <ion-select-option *ngFor="let part of parts" value="{{part.id}}">{{part.name}}</ion-select-option>
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Article</p>
+        <input [value]="articleName" (click)="ArticleRef.open()" placeholder="Choisir votre appareil" class="form-card-input"  type="text"/>
+
+        <ion-select [(ngModel)]="articleId" class="input" #ArticleRef  (ionChange)="onArticleSelect()">
+          <ion-select-option   *ngFor="let article of articles" value="{{article.id}}">{{article.name}}</ion-select-option>
         </ion-select>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+      </ion-col>
 
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Numéro de série</p>
+        <input placeholder="Taper le IMEI de l’appareil" class="form-card-input"   type="text"/>
+      </ion-col>
 
-    <mat-step [stepControl]="priceForm">
-      <form [formGroup]="priceForm">
-        <ng-template matStepLabel>Choisir un prix</ng-template>
-        <ion-select class="input" formControlName="price"  >
-          <ion-select-option *ngFor="let price of prices" value="{{price.id}}">{{price.quality + "  " + price.price + 'DT'}}</ion-select-option>
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Pièce a réparer</p>
+        <input [value]="partName" (click)="PartRef.open()" placeholder="choisir la pièce a réparer" class="form-card-input"  type="text"/>
+
+        <ion-select [(ngModel)]="partId" class="input" #PartRef (ionChange)="onPartSelect()">
+          <ion-select-option  *ngFor="let part of parts" value="{{part.id}}">{{part.name}}</ion-select-option>
         </ion-select>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+      </ion-col>
 
-  </mat-vertical-stepper>
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Prix</p>
+        <input [value]="priceName"  (click)="PriceRef.open()" placeholder="choisir le prix de piéce" class="form-card-input"  type="text"/>
 
-  <ion-button (click)="sendRequest()" [disabled]="!markForm.valid || !modelForm.valid || !articleForm.valid || !partForm.valid || !priceForm.valid || !dateForm.valid">
-    confimer la demande
-  </ion-button>
+        <ion-select [(ngModel)]="priceId" class="input" #PriceRef (ionChange)="onPriceSelect()">
+          <ion-select-option  *ngFor="let price of prices" value="{{price.id}}">{{price.quality + " " + price.price + " DT"}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col size="12" class="form-card">
+        <p class="form-card-label">Détails de la panne</p>
+        <input placeholder="Mentionner les détails de votre panne" class="form-card-input"  type="text"/>
+      </ion-col>
+
+      <ion-col size="12" size-sm="7" class="ion-no-padding ion-margin-top">
+        <ion-button (click)="next()" class="btn-primary"  expand="block" [disabled]="isAllVariablesExists()">confirmer la demande</ion-button>
+      </ion-col>
+    </ion-row>
+
 </ion-content>

@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Liste des demandes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <p class="page-title">Faire le suivie</p>
+  <p class="page-title">de vos demandes !</p>
+
+  <ion-card class="card ion-padding" *ngFor="let request of requests">
+    <h3 style="margin:0 !important;" >Etat de la demande</h3>
+    <p style="margin:0 !important;">{{ "Apareil " + request.mark + ' ' + request.model + ' ' + request.article }}</p>
+  </ion-card>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

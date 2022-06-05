@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { GsmMainPageRoutingModule } from './gsm-main-routing.module';
 import { GsmMainPage } from './gsm-main.page';
 import { SharedModule } from '../../shared/shared.module';
+import { GsmMainMarkPage } from './gsm-main-mark/gsm-main-mark.page';
 
 @NgModule({
     imports: [
@@ -14,6 +15,9 @@ import { SharedModule } from '../../shared/shared.module';
         GsmMainPageRoutingModule,
         SharedModule
     ],
-  declarations: [GsmMainPage]
+  declarations: [
+      GsmMainPage,
+      GsmMainMarkPage
+  ]
 })
 export class GsmMainPageModule {}

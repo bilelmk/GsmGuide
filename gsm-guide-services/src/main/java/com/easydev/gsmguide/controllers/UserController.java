@@ -2,10 +2,12 @@ package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.AuthenticationRequest;
 import com.easydev.gsmguide.enums.Role;
+import com.easydev.gsmguide.models.Product;
 import com.easydev.gsmguide.models.User;
 import com.easydev.gsmguide.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,5 +44,16 @@ public class UserController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         userService.delete(id) ;
+    }
+
+    @PutMapping()
+    public User update(@RequestBody User user) {
+        return userService.update(user) ;
+    }
+
+    @PutMapping("image")
+    public User update(@RequestPart("image") MultipartFile image,
+                       @RequestPart("user") User user) {
+        return userService.updateImage(image , user) ;
     }
 }

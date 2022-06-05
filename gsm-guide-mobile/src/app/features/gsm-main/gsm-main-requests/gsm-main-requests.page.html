@@ -1,61 +1,43 @@
-<ion-header >
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
     <ion-buttons slot="start">
       <ion-button (click)="onToggleMenu('profile')">
-        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button disabled="true">
-        <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
+        <ion-icon color="secondary" slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center toolbar">Espace Réparation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button >
+        <ion-icon color="secondary" slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<!--<ion-content *ngIf="!isLoggedIn">-->
-<!--  Lazem login-->
+<ion-content class="ion-padding">
 
-<!--</ion-content>-->
+  <p class="page-title ion-padding-top">Assurer la réparation</p>
+  <p class="page-title">de votre téléphone avec</p>
+  <p class="page-title">notre équipe <span class="page-title-primary" >professionnel</span> </p>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let request of requests">
-      <ion-label>
-        <h3>Etat de la demande</h3>
-        <p>{{ "Apareil " + request.mark + ' ' + request.model + ' ' + request.article }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-row class="request-card" (click)="openAddRequestModal()">
+    <ion-col size="6" class="ion-align-self-center ion-padding">
+      <h5 class="request-card-title">Demande de réparation</h5>
+      <p class="request-card-text">Vous pouvez presque tout vendre sur Guide Gsm</p>
+    </ion-col>
+    <ion-col size="6">
+      <img class="request-card-img" src="assets/image/request_image_2.png">
+    </ion-col>
+  </ion-row>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <ion-row class="request-card" (click)="openRequestsListModal()">
+    <ion-col size="6" class="ion-align-self-center ion-padding">
+      <h5 class="request-card-title">liste des demandes</h5>
+      <p class="request-card-text">Vous pouvez presque tout vendre sur Guide Gsm</p>
+    </ion-col>
+    <ion-col size="6">
+      <img class="request-card-img" src="assets/image/request_image_1.png">
+    </ion-col>
+  </ion-row>
 
-
-
-<!--  &lt;!&ndash; List of Sliding Items &ndash;&gt;-->
-<!--  <ion-list>-->
-<!--    <ion-item-sliding>-->
-<!--      <ion-item>-->
-<!--        <ion-label>Item</ion-label>-->
-<!--      </ion-item>-->
-<!--      <ion-item-options side="end">-->
-<!--        <ion-item-option (click)="unread(item)">Unread</ion-item-option>-->
-<!--      </ion-item-options>-->
-<!--    </ion-item-sliding>-->
-
-<!--    <ion-item-sliding>-->
-<!--      <ion-item>-->
-<!--        <ion-label>Item</ion-label>-->
-<!--      </ion-item>-->
-<!--      <ion-item-options side="end">-->
-<!--        <ion-item-option (click)="unread(item)">Unread</ion-item-option>-->
-<!--      </ion-item-options>-->
-<!--    </ion-item-sliding>-->
-<!--  </ion-list>-->
-
-  <ion-button (click)="openAddProductModal()">Demande de réparation</ion-button>
 </ion-content>

@@ -1,6 +1,7 @@
 package com.easydev.gsmguide.services.implementation;
 
 import com.easydev.gsmguide.config.JwtConfig;
+import com.easydev.gsmguide.config.UploadConfig;
 import com.easydev.gsmguide.dtos.AuthenticationRequest;
 import com.easydev.gsmguide.dtos.AuthenticationResponse;
 import com.easydev.gsmguide.enums.Role;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Random;
@@ -22,13 +24,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtConfig jwtConfig;
     private final Random random = new Random();
+    private final UploadConfig uploadService;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           JwtConfig jwtConfig) {
+                           JwtConfig jwtConfig,
+                           UploadConfig uploadService) {
         this.userRepository = userRepository ;
         this.passwordEncoder = passwordEncoder ;
         this.jwtConfig = jwtConfig;
+        this.uploadService = uploadService ;
     }
 
     @Override
@@ -51,8 +56,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User client) {
-        return null;
+    public User update(User user) {
+        User ToUpdateUser = userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new) ;
+        ToUpdateUser.setFirstname(user.getFirstname());
+        ToUpdateUser.setLastname(user.getLastname());
+        ToUpdateUser.setPhone(user.getPhone());
+        return userRepository.save(ToUpdateUser) ;
     }
 
     @Override
@@ -84,5 +93,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllByRole(Role role) {
         return userRepository.findAllByRole(role);
+    }
+
+    @Override
+    public User updateImage(MultipartFile image , User user) {
+        User ToUpdateUser = userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new) ;
+        String newFileName = uploadService.upload(image);
+        ToUpdateUser.setImage("images/" + newFileName);
+        return userRepository.save(ToUpdateUser);
     }
 }

@@ -1,21 +1,47 @@
-<ion-header >
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="onToggleMenu('profile')">
-        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+<ion-content class="home">
+  <ion-header  class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="start">
+        <ion-button (click)="onToggleMenu('profile')">
+          <ion-icon color="light" slot="icon-only" name="filter-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon color="primary" slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center toolbar">GSM GUIDE</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <div class="ion-padding">
+    <div class="ion-padding">
+      <p class="page-welcome">Bienvenu,</p>
+      <p class="page-title page-title-light">Avec Guide GSM</p>
+      <p class="page-title page-title-light">devenez des rois et reines</p>
+      <p class="page-title page-title-light">de la réparation !</p>
+    </div>
+  </div>
 
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide >
+      <div class="home-card" (click)="openAddProductModal()">
+        <img class="home-card-img" src="assets/image/home_2.png">
+        <p class="home-card-title">Créer une annonce</p>
+        <p class="home-card-text">Vous pouvez presque tout vendre sur Guide Gsm</p>
+      </div>
+    </ion-slide>
 
-<ion-content>
+    <ion-slide >
+      <div class="home-card" (click)="openAddResquestModal()">
+        <img class="home-card-img" src="assets/image/home_1.png">
+        <p class="home-card-title">Reparation a effectuer</p>
+        <p class="home-card-text">Trouverez toutes nos astuces en réparation téléphone</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide >
+      <div class="home-card" (click)="openMarksModal()">
+        <img class="home-card-img" src="assets/image/home_2.png">
+        <p class="home-card-title">Nos marques</p>
+        <p class="home-card-text">Vous pouvez presque tout vendre sur Guide Gsm</p>
+      </div>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>

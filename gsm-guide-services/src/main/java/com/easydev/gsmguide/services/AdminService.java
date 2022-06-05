@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AdminService {
-    public List<Admin> getAll();
-    public ResponseEntity<?> register(Admin admin) ;
-    public ResponseEntity<?> login(AuthenticationRequest request);
-    public void delete(long id) ;
+    List<Admin> getAll();
+    ResponseEntity<?> register(Admin admin) ;
+    ResponseEntity<?> login(AuthenticationRequest request);
+    void delete(long id) ;
 }

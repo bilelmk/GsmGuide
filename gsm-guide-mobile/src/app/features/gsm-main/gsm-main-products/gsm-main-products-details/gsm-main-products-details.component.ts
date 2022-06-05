@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CallNumber } from "@ionic-native/call-number/ngx";
-import {environment} from "../../../../../environments/environment";
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { environment } from '../../../../../environments/environment';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-gsm-main-products-details',
@@ -12,9 +13,12 @@ export class GsmMainProductsDetailsComponent implements OnInit {
   @Input() product: any;
   URL = environment.url ;
 
-  constructor(private callNumber: CallNumber) {}
+  constructor(private callNumber: CallNumber,
+              private modalController: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.product);
+  }
 
   call() {
     if (!this.product.client.phone) {
@@ -25,5 +29,9 @@ export class GsmMainProductsDetailsComponent implements OnInit {
           .then(res => console.log('Launched dialer!', res))
           .catch(err => console.log('Error launching dialer', err));
     }
+  }
+
+  close() {
+    this.modalController.dismiss();
   }
 }

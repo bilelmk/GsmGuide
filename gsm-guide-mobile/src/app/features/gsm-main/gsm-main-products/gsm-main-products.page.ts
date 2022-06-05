@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ProductService } from '../../../core/services/http/product.service';
 import { MenuController, ModalController } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './gsm-main-products.page.html',
   styleUrls: ['./gsm-main-products.page.scss'],
 })
-export class GsmMainProductsPage implements OnInit {
+export class GsmMainProductsPage  {
 
   products = [];
   myProducts = [];
@@ -25,21 +25,27 @@ export class GsmMainProductsPage implements OnInit {
   limit = 10 ;
   offset = 0 ;
 
-  isSearching = false ;
-
   constructor(private spinnerService: SpinnerService,
               private productService: ProductService,
               private modalController: ModalController,
               private menu: MenuController) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getProducts();
   }
 
-  openAddProductModal() {
-    this.modalController.create({
+  async openAddProductModal() {
+    const modal = await this.modalController.create({
       component: GsmMainProductsAddComponent ,
-    }).then(modal => modal.present());
+    });
+
+    modal.onWillDismiss().then(
+        res => {
+          this.initVariable();
+          this.getProducts();
+        }
+    );
+    return await modal.present();
   }
 
   openProductDetailModal(productDetails) {
@@ -74,16 +80,14 @@ export class GsmMainProductsPage implements OnInit {
     );
   }
 
-  cancelSearch() {
-    this.isSearching = false ;
-  }
-
-  enableSearch() {
-    this.isSearching = true ;
-  }
-
   onToggleMenu(name: string) {
     this.menu.open(name);
+  }
+
+  initVariable() {
+    this.key = '' ;
+    this.limit = 10 ;
+    this.offset = 0 ;
   }
 
 }

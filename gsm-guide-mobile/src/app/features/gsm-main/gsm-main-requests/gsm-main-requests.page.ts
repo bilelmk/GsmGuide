@@ -6,7 +6,8 @@ import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { MarkService } from '../../../core/services/http/mark.service';
 import { forkJoin } from 'rxjs';
 import { PartService } from '../../../core/services/http/part.service';
-import { RequestService } from '../../../core/services/http/request.service';
+import { GsmMainRequestsListComponent } from './gsm-main-requests-list/gsm-main-requests-list.component';
+import { LocationService } from '../../../core/services/http/location.service';
 
 @Component({
   selector: 'app-gsm-main-requests',
@@ -15,93 +16,55 @@ import { RequestService } from '../../../core/services/http/request.service';
 })
 export class GsmMainRequestsPage implements OnInit {
 
-  isLoggedIn ;
-
   marks ;
   parts ;
-
-  requests ;
-
-  limit = 10 ;
-  offset = 0 ;
-  id = sessionStorage.getItem('id') ;
+  locations ;
 
   constructor(private userService: UserService,
               private modalController: ModalController,
               private spinnerService: SpinnerService,
               private markService: MarkService,
               private partService: PartService,
-              private menu: MenuController,
-              private requestService: RequestService) {
-    this.userService.token.subscribe(
-      res => {
-        this.isLoggedIn = res ;
-      }
-    );
-  }
+              private locationService: LocationService,
+              private menu: MenuController) {}
 
   ngOnInit() {
     this.spinnerService.activate() ;
     forkJoin([
       this.markService.getAll() ,
-      this.partService.getAll()
+      this.partService.getAll(),
+      this.locationService.getAll()
     ]).subscribe(
         res => {
           this.spinnerService.deactivate() ;
           this.marks = res[0];
           this.parts = res[1];
+          this.locations = res[2];
         },
         error => {
           this.spinnerService.deactivate() ;
         }
     );
-
-    const searchRequest = {
-      offset: this.offset ,
-      limit : this.limit ,
-      id: this.id
-    };
-    this.requestService.getAllByClient(searchRequest).subscribe(
-        (res: any) => {
-          this.requests = res.rows;
-        }, error => {
-          console.log(error) ;
-        }
-    );
   }
 
-  openAddProductModal() {
+  openAddRequestModal() {
     this.modalController.create({
       component: GsmMainRequestsAddComponent ,
       componentProps: {
         marks: this.marks  ,
-        parts: this.parts
+        parts: this.parts ,
+        locations: this.locations
       }
+    }).then(modal => modal.present());
+  }
+
+  openRequestsListModal() {
+    this.modalController.create({
+      component: GsmMainRequestsListComponent ,
     }).then(modal => modal.present());
   }
 
   onToggleMenu(name: string) {
     this.menu.open(name);
-  }
-
-  loadData(event: any) {
-    this.offset ++ ;
-    const searchRequest = {
-      offset: this.offset ,
-      limit : this.limit ,
-      id: this.id
-    };
-    this.requestService.getAllByClient(searchRequest).subscribe(
-        (res: any) => {
-          this.requests.push(...res.rows);
-          event.target.complete();
-          if (this.requests.length === res.count) {
-            event.target.disabled = true;
-          }
-        }, error => {
-          console.log(error) ;
-          event.target.complete();
-        }
-    );
   }
 }

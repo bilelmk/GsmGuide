@@ -1,51 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { AuthenticationService } from '../../../core/services/http/authentication.service';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ToastService} from '../../../core/services/in-app/toast.service';
-import { AlertController, ModalController, Platform } from '@ionic/angular';
+import {AlertController, MenuController, ModalController, Platform} from '@ionic/angular';
 import { Router } from '@angular/router';
-import { UserService } from "../../../core/services/http/user.service";
+import { UserService } from '../../../core/services/http/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Crop } from '@ionic-native/crop/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { File as NativeFile } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-gsm-main-profile',
   templateUrl: './gsm-main-profile.page.html',
   styleUrls: ['./gsm-main-profile.page.scss'],
 })
-export class GsmMainProfilePage implements OnInit {
+export class GsmMainProfilePage {
 
   client = null;
   language;
-  image;
-  url = environment.url;
+    URL = environment.url ;
+  form: FormGroup;
 
-  isLoggedIn ;
+  // image ;
+  imageSrc ;
+  data: FormData ;
 
-  constructor(private authenticationService: AuthenticationService,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private spinnerService: SpinnerService,
               private toastService: ToastService,
               private alertController: AlertController,
               private modalController: ModalController,
               private platform: Platform,
-              // private camera: Camera,
+              private file: NativeFile ,
               private router: Router,
-              // private crop: Crop ,
-              // private file: File
+              private crop: Crop ,
+              private camera: Camera,
+              private formBuilder: FormBuilder ,
+              private menu: MenuController,
   ) {
-    this.userService.token.subscribe(
-      res => {
-        this.isLoggedIn = res ;
-      }
-    )
+    this.form = this.formBuilder.group({
+      firstname   : ['', [Validators.required]],
+      lastname: ['', Validators.required],
+      username   : ['', [Validators.required]],
+      phone   : ['', [Validators.required]],
+    });
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.spinnerService.activate();
     this.userService.getById(Number(sessionStorage.getItem('id'))).subscribe(
         res => {
           this.client = res;
+          this.form.controls.firstname.setValue(this.client.firstname);
+          this.form.controls.lastname.setValue(this.client.lastname);
+          this.form.controls.username.setValue(this.client.username);
+          this.form.controls.phone.setValue(this.client.phone);
+
           this.spinnerService.deactivate();
         },
         error => {
@@ -55,136 +67,105 @@ export class GsmMainProfilePage implements OnInit {
     );
   }
 
-  // async openGeneralInformationModal() {
-  //   const modal = await this.modalController.create({
-  //     component: ProfileGeneralInformationsPage,
-  //     componentProps: {
-  //       client : this.client
-  //     }
-  //   });
-  //   modal.onDidDismiss().then(
-  //       client => {
-  //         if (client) {
-  //           this.client = client.data.client ;
-  //         }
-  //       }
-  //   ).catch(
-  //       err => console.log(err)
-  //   );
-  //   return await modal.present();
-  // }
-
-
-  // // Change Profile Photo
-  // onPickImage(){
-  //   const cameraOptions = {
-  //     sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-  //     destinationType: this.camera.DestinationType.FILE_URI ,
-  //     allowEdit : false ,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     correctOrientation: true ,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //   };
-  //
-  //   this.camera.getPicture(cameraOptions)
-  //       .then((fileUri) => {
-  //         this.crop.crop(fileUri , { quality: 5 })
-  //             .then(
-  //                 newImage => {
-  //                   let image = newImage.split('?')[0]
-  //                   let splitPath = image.split('/');
-  //                   let imageName = splitPath[splitPath.length - 1];
-  //                   let filePath = image.split(imageName)[0];
-  //                   this.file.readAsDataURL(filePath, imageName).then(
-  //                       base64 => {
-  //                         this.image =  base64 ;
-  //                         this.profile_image = base64
-  //                       }, error => {
-  //                         console.log(error) ;
-  //
-  //                       });
-  //                 } ,
-  //                 error => {
-  //                   this.onCancelImage()
-  //                   console.log(error)
-  //                 }
-  //             );
-  //       }, (error) => {
-  //         this.onCancelImage()
-  //         console.log(error)
-  //       });
-  // }
-  //
-  // onSaveImage(){
-  //   this.loadingService.activate() ;
-  //   this.clientService.editImage( this.profile_image , this.client.seq ).subscribe(
-  //       res => {
-  //         this.client.image = this.profile_image ;
-  //         this.image = null ;
-  //         this.loadingService.deactivate();
-  //       } ,
-  //       err => {
-  //         console.log(err)
-  //         this.toastService.presentToast(this.incompatible_image , 'fail-toast')
-  //         this.loadingService.deactivate();
-  //       }
-  //   );
-  // }
-  //
-  // onCancelImage() {
-  //   this.image =  null ;
-  // }
-
-  onSetMode() {
-    // this.themeService.toggleAppTheme() ;
+  onToggleMenu(name: string) {
+      this.menu.open(name);
   }
 
-  async onDeleteAccount() {
-    // const alert = await this.alertController.create({
-    //   header: this.attention ,
-    //   message: this.confirm_account_delete ,
-    //   cssClass: 'custom-alert',
-    //   buttons: [
-    //     {
-    //       text: this.cancel,
-    //       role: 'cancel',
-    //     },
-    //     {
-    //       text: this.confirm,
-    //       handler: () => {
-    //         this.deleteAccount() ;
-    //       }
-    //     }
-    //   ]
-    // });
-    // await alert.present();
+  update() {
+      this.spinnerService.activate();
+      const user = {
+          ...this.form.value ,
+          id : sessionStorage.getItem('id')
+      };
+      this.userService.update(user).subscribe(
+          res => {
+              this.client = res;
+              this.toastService.show('Modifications sauvgarder avec succès' , 'success') ;
+              this.spinnerService.deactivate();
+          },
+          error => {
+              this.toastService.show('Erreur lors de la mise à jour' , 'danger');
+              this.spinnerService.deactivate();
+          }
+      );
   }
 
-  deleteAccount() {
-    // this.loadingService.activate() ;
-    // this.clientService.deleteAccount().subscribe(
-    //     res => {
-    //       this.loadingService.deactivate() ;
-    //
-    //       this.authService.logout()
-    //     },
-    //     err => {
-    //       this.loadingService.deactivate() ;
-    //       console.log(err)
-    //     }
-    // )
-  }
+    // Change Profile Photo
+    onPickImage(){
+        const cameraOptions = {
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI ,
+            quality: 70,
+            allowEdit : false ,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.JPEG,
+            correctOrientation: true ,
+            mediaType: this.camera.MediaType.PICTURE,
+        };
 
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/gsm-login']);
-  }
+        this.camera.getPicture(cameraOptions)
+            .then((fileUri) => {
+                this.crop.crop(fileUri , { quality: 5 })
+                    .then(
+                        newImage => {
+                            const image = newImage.split('?')[0];
+                            const splitPath = image.split('/');
+                            const imageName = splitPath[splitPath.length - 1];
+                            const filePath = image.split(imageName)[0];
+                            this.file.readAsDataURL(filePath, imageName).then(
+                                base64 => {
+                                    this.imageSrc = base64;
+                                    this.data = new FormData() ;
+                                    this.data.append('image' , this.dataURItoBlob(base64) ) ;
+                                    console.log(base64) ;
+                                }, error => {
+                                    console.log(error) ;
+                                });
+                        } ,
+                        error => {
+                            this.onCancelImage();
+                            console.log(error);
+                        }
+                    );
+            }, (error) => {
+                this.onCancelImage();
+                console.log(error);
+            });
+    }
 
-  toReservations() {
-    this.router.navigate(['/cb-main/cb-main-reservations']);
-  }
+    onCancelImage(){
+        this.imageSrc =  null ;
+    }
 
-  toFavoris() {
-    this.router.navigate(['/cb-main/cb-main-favoris']);
-  }
+    dataURItoBlob(dataURI) {
+        const byteString = atob(dataURI.split(',')[1]);
+        const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {type: mimeString});
+    }
+
+    onSaveImage() {
+        const user = {
+            id : sessionStorage.getItem('id')
+        };
+        this.data.append('user' , new Blob([JSON.stringify(user)], {type: 'application/json'}));
+        this.spinnerService.activate() ;
+        this.userService.updateImage( this.data ).subscribe(
+            res => {
+              this.client.image = res.image ;
+              this.onCancelImage();
+              this.spinnerService.deactivate();
+            } ,
+            err => {
+              // this.toastService.presentToast(this.incompatible_image , 'fail-toast')
+              this.spinnerService.deactivate();
+            }
+        );
+    }
+
 }

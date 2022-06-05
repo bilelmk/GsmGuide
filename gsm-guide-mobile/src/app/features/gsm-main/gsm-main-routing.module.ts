@@ -31,7 +31,7 @@ const routes: Routes = [
         path: 'gsm-main-reparation-requests',
         // tslint:disable-next-line:max-line-length
         loadChildren: () => import('./gsm-main-reparation-requests/gsm-main-reparation-requests.module').then(m => m.GsmMainReparationRequestsPageModule)
-      }
+      },
     ]
   }
 ];

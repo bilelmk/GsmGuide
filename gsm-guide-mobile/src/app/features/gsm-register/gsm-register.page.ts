@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from '../../core/services/in-app/spinner.service';
 import { ToastService } from '../../core/services/in-app/toast.service';
 import { RegisterRequest } from '../../core/dtos/register-request';
-import { UserService } from "../../core/services/http/user.service";
+import { UserService } from '../../core/services/http/user.service';
 
 @Component({
   selector: 'app-gsm-register',

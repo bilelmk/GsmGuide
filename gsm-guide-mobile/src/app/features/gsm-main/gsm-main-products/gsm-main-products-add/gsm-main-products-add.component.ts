@@ -17,7 +17,7 @@ export class GsmMainProductsAddComponent implements OnInit {
 
   form: FormGroup;
 
-  image ;
+  // image ;
   imageSrc ;
 
   data: FormData ;
@@ -35,7 +35,7 @@ export class GsmMainProductsAddComponent implements OnInit {
       name   : ['', [Validators.required]],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      quantity: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
@@ -54,11 +54,12 @@ export class GsmMainProductsAddComponent implements OnInit {
     this.spinnerService.activate();
     this.productService.add(this.data).subscribe(
       res => {
+        this.toastService.show('Produit publier avec succès' , 'success') ;
+        this.modalController.dismiss();
         this.spinnerService.deactivate();
-        alert(JSON.stringify(res));
       }, error => {
+        this.toastService.show('Erreur lors de l\'ajout de produit' , 'danger');
         this.spinnerService.deactivate();
-        alert(JSON.stringify(error));
       }
     );
   }
@@ -67,7 +68,7 @@ export class GsmMainProductsAddComponent implements OnInit {
   onPickImage(){
     const cameraOptions = {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL ,
+      destinationType: this.camera.DestinationType.FILE_URI ,
         quality: 70,
         allowEdit : false ,
         targetWidth: 600,
@@ -78,28 +79,58 @@ export class GsmMainProductsAddComponent implements OnInit {
     };
 
     this.camera.getPicture(cameraOptions)
-        .then((imageData) => {
-            const base64Image = 'data:image/jpeg;base64,' + imageData;
-            this.imageSrc = base64Image.toString() ;
-            this.data = new FormData() ;
-            const file =  this.dataURItoBlob(base64Image);
-            this.data.append('image' , file) ;
-        }, (err) => {
-    });
+      .then((fileUri) => {
+          this.crop.crop(fileUri , { quality: 5 })
+              .then(
+                  newImage => {
+                      const image = newImage.split('?')[0];
+                      const splitPath = image.split('/');
+                      const imageName = splitPath[splitPath.length - 1];
+                      const filePath = image.split(imageName)[0];
+                      this.file.readAsDataURL(filePath, imageName).then(
+                          base64 => {
+                              this.imageSrc = base64;
+                              this.data = new FormData() ;
+                              this.data.append('image' , this.dataURItoBlob(base64) ) ;
+                              console.log(base64) ;
+                          }, error => {
+                              console.log(error) ;
+                          });
+                  } ,
+                  error => {
+                      this.onCancelImage();
+                      console.log(error);
+                  }
+              );
+      }, (error) => {
+          this.onCancelImage();
+          console.log(error);
+      });
   }
+
+  //   this.camera.getPicture(cameraOptions)
+  //       .then((imageData) => {
+  //           const base64Image = 'data:image/jpeg;base64,' + imageData;
+  //           this.imageSrc = base64Image.toString() ;
+  //           this.data = new FormData() ;
+  //           const file =  this.dataURItoBlob(base64Image);
+  //           this.data.append('image' , file) ;
+  //       }, (err) => {
+  //   });
+  // }
 
   onCancelImage(){
-    // this.image =  null ;
+    this.imageSrc =  null ;
   }
 
-  dataURItoBlob(dataURI) {
-      const byteString = atob(dataURI.split(',')[1]);
-      const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ab], {type: mimeString});
-  }
+    dataURItoBlob(dataURI) {
+        const byteString = atob(dataURI.split(',')[1]);
+        const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {type: mimeString});
+    }
 }
