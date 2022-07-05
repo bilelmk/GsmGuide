@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-// import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
@@ -31,16 +30,17 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx' ;
 import { NgxTrimModule } from 'ngx-trim';
-import localeIt from '@angular/common/locales/it';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
+
+
+
 // import { AuthInterceptor } from './core/interceptors/auth-interceptor';
-// registerLocaleData(localeIt);
-//
-// // fuction needed for traduction
-// export function createTranslateLoader(http: HttpClient){
-//   return new TranslateHttpLoader(http ,  'assets/i18n/' , '.json');
-// }
+
+// fuction needed for traduction
+export function createTranslateLoader(http: HttpClient){
+  return new TranslateHttpLoader(http ,  'assets/i18n/' , '.json');
+}
 
 @NgModule({
     declarations: [
@@ -56,25 +56,25 @@ import { SpinnerComponent } from './core/components/spinner/spinner.component';
         CommonModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        // TranslateModule.forRoot({
-        //     loader: {
-        //         provide: TranslateLoader,
-        //         useFactory: (createTranslateLoader),
-        //         deps: [HttpClient]
-        //     }
-        // }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
         NgxSpinnerModule,
         HttpClientModule,
         IonicSelectableModule,
         NgxTrimModule,
-        SharedModule
+        SharedModule,
     ],
     providers: [
         Camera,
         HTTP,
         StatusBar,
         SplashScreen,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         GooglePlus,
         Facebook,
         DatePicker,
@@ -88,8 +88,7 @@ import { SpinnerComponent } from './core/components/spinner/spinner.component';
         OneSignal,
         BarcodeScanner,
         // { provide: LOCALE_ID, useValue: "it_IT" }
-
-],
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

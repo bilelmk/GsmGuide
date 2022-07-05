@@ -21,8 +21,16 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Article update(Article article) {
-        Article toUpdateArticle = articleRepository.findById(article.getId()).orElseThrow(IllegalArgumentException::new) ;
+        Article toUpdateArticle = articleRepository.findById(article.getArticleId()).orElseThrow(IllegalArgumentException::new) ;
         toUpdateArticle.setName(article.getName());
         return articleRepository.save(toUpdateArticle);
+    }
+
+    @Override
+    public void delete(Long id) {
+        // you detach child from parent to delete (else deleting operation fail)
+        Article article = articleRepository.findById(id).orElseThrow(IllegalArgumentException::new) ;
+        article.setModel(null);
+        articleRepository.delete(article);
     }
 }

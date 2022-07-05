@@ -24,7 +24,7 @@ export class GsmPartsComponent implements OnInit {
   error = false;
   loading = false;
 
-  @ViewChild(MatPaginator, {static: false}) set paginator(pager: MatPaginator) {
+  @ViewChild(MatPaginator, { static: false }) set paginator(pager: MatPaginator) {
     if (pager) this.dataSource.paginator = pager;
   }
 

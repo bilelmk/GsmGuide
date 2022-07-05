@@ -32,4 +32,9 @@ public class MarkServiceImpl implements MarkService {
         toUpdateMark.setName(mark.getName());
         return markRepository.save(toUpdateMark);
     }
+
+    @Override
+    public void delete(Long id) {
+        markRepository.deleteById(id);
+    }
 }

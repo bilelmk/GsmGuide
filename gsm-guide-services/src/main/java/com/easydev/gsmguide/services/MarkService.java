@@ -8,4 +8,5 @@ public interface MarkService {
     List<Mark> getAll();
     Mark add(Mark mark) ;
     Mark update(Mark mark) ;
+    void delete(Long id) ;
 }

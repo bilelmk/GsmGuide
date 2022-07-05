@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,10 +16,15 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long articleId;
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "modelId" )
     private Model model ;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name="articleId" , referencedColumnName = "articleId")
+    @JsonIgnoreProperties(value = {"article"}, allowSetters = true)
+    private List<Price> prices;
 }

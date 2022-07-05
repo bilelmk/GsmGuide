@@ -22,7 +22,7 @@
         <div *ngFor="let model of mark.models" class="model"  >
           <p class="pointer" (click)="openModelActionSheet(model.modelId , model)">{{model.name}}</p>
           <div *ngFor="let article of model.articles" class="article"  >
-            <p class="pointer"  (click)="openArticleActionSheet(article.id , article)">{{article.name}}</p>
+            <p class="pointer"  (click)="openArticleActionSheet(article.articleId , article)">{{article.name}}</p>
           </div>
         </div>
       </div>

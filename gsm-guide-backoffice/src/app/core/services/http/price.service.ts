@@ -17,7 +17,11 @@ export class PriceService {
     return this.http.get<any>(this.URL + '/' + id);
   }
 
-  add(price): Observable<any> {
+  addOrUpdate(price): Observable<any> {
     return this.http.post<any>(this.URL, price);
+  }
+
+  delete(id): Observable<any> {
+    return this.http.delete<any>(this.URL + '/' + id);
   }
 }

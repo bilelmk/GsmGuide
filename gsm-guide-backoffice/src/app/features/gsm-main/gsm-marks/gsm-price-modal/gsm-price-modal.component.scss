@@ -34,3 +34,18 @@ $navy : #112d4e ;
   height: 55px;
   margin-right: 10px;
 }
+
+.price-btn {
+  margin: 0 3px !important;
+  height: 20px;
+  width: 20px;
+  cursor: pointer ;
+  color : $navy;
+  transition: 0.4s;
+  background-color: transparent;
+  border: none;
+
+  mat-icon {
+    font-size: 20px !important;
+  }
+}

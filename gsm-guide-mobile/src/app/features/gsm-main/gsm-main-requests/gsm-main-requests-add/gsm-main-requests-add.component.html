@@ -50,7 +50,7 @@
 
       <ion-col size="12" class="form-card">
         <p class="form-card-label">Numéro de série</p>
-        <input placeholder="Taper le IMEI de l’appareil" class="form-card-input"   type="text"/>
+        <input placeholder="Taper le IMEI de l’appareil" class="form-card-input"  [(ngModel)]="imei" type="text"/>
       </ion-col>
 
       <ion-col size="12" class="form-card">
@@ -73,7 +73,7 @@
 
       <ion-col size="12" class="form-card">
         <p class="form-card-label">Détails de la panne</p>
-        <input placeholder="Mentionner les détails de votre panne" class="form-card-input"  type="text"/>
+        <input placeholder="Mentionner les détails de votre panne" class="form-card-input" [(ngModel)]="details" type="text"/>
       </ion-col>
 
       <ion-col size="12" size-sm="7" class="ion-no-padding ion-margin-top">

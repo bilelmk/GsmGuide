@@ -18,28 +18,434 @@
 <ion-content class="ion-padding">
   <p class="page-title ion-padding-top">Marques</p>
 
-  <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable>
-    <ion-segment-button class="button-checked" value="Samsung">
+  <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable="true" value="{{segment}}">
+    <ion-segment-button value="samsung">
       <ion-label>Samsung</ion-label>
     </ion-segment-button>
-    <ion-segment-button  class="button-checked" value="Apple">
+    <ion-segment-button  value="apple">
       <ion-label>Apple</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Xioami">
+    <ion-segment-button value="xioami">
       <ion-label>Xiaomi</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Nokia">
+    <ion-segment-button value="nokia">
       <ion-label>Nokia</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Oppo">
+    <ion-segment-button value="oppo">
       <ion-label>Oppo</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Huawei">
+    <ion-segment-button value="huawei">
       <ion-label>Huawei</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Infinix">
+    <ion-segment-button value="infinix">
       <ion-label>Infinix</ion-label>
     </ion-segment-button>
   </ion-segment>
+
+  <ion-row *ngIf="segment == 'samsung'" >
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'apple'">
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'xioami'" >
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'nokia'">
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'oppo'">
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'huawei'">
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="segment == 'infinix'" >
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Informations générales sur votre mobile Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#*#4636#*#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#*#4636#*#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître la version du Firmware de votre Samsung</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#1234#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#1234#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaître le numéro IMEI</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#06#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#06#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Retourner en mode Samsung normal USB</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >*#726872#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('*#726872#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Déverrouiller la carte SIM</p></ion-col>
+        <ion-col size="11"><p class="form-card-number" >#0111*0000000#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('#0111*0000000#')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" class="form-card">
+      <ion-row>
+        <ion-col size="12"><p class="form-card-label m-0">Connaitre l’adresse MAC WLAN</p></ion-col>
+        <ion-col size="11"><p class="form-card-number"> *#232338#</p></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="call('')" class="form-card-icon" name="call"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 
 </ion-content>

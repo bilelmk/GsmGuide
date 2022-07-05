@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PriceRepository extends JpaRepository<Price, Long> {
-    List<Price> findAllByArticleIdAndPartId(long articleId, long partId);
+    List<Price> findAllByArticleArticleIdAndPartId(long articleId, long partId);
 
 //    @Query(value = "SELECT id, quality, price  FROM price AS p GROUP BY p.part_id HAVING p.article_id = :articleId", nativeQuery = true)
-    List<Price> findAllByArticleId(long articleId);
+    List<Price> findAllByArticleArticleId(long articleId);
 }

@@ -19,4 +19,8 @@ export class ArticleService {
   update(article): Observable<any> {
     return this.http.put<any>(this.URL , article);
   }
+
+  delete(id): Observable<any> {
+    return this.http.delete<any>(this.URL + '/' + id);
+  }
 }

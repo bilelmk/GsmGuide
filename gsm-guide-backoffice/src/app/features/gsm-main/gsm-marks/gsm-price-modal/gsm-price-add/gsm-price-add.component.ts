@@ -11,6 +11,7 @@ import { PartService } from "../../../../../core/services/http/part.service";
   templateUrl: './gsm-price-add.component.html',
   styleUrls: ['./gsm-price-add.component.scss']
 })
+
 export class GsmPriceAddComponent implements OnInit {
 
   form: FormGroup;
@@ -24,15 +25,22 @@ export class GsmPriceAddComponent implements OnInit {
               private priceService: PriceService,
               private partService: PartService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = new FormGroup({
-      price: new FormControl("", Validators.required),
-      quality: new FormControl(""),
-      part: new FormControl("", Validators.required),
-    });
+    if(!data.isEditMode) {
+      this.form = new FormGroup({
+        price: new FormControl("", Validators.required),
+        quality: new FormControl(""),
+        part: new FormControl("", Validators.required),
+      });
+    } else {
+      this.form = new FormGroup({
+        price: new FormControl(this.data.item.price, Validators.required),
+        quality: new FormControl(this.data.item.quality),
+        part: new FormControl(this.data.item.part.id, Validators.required),
+      });
+    }
   }
 
   ngOnInit(): void {
-    console.log(this.data.id)
     this.spinnerService.activate();
     this.partService.getAll().subscribe(
       (res) => {
@@ -48,12 +56,11 @@ export class GsmPriceAddComponent implements OnInit {
   add() {
     let price = {
       ...this.form.value ,
-      article : { id: this.data.id },
+      article : { articleId: this.data.id },
       part : { id: this.form.value.part }
     }
-    console.log(price)
     this.spinnerService.activate();
-    this.priceService.add(price).subscribe(
+    this.priceService.addOrUpdate(price).subscribe(
       (res) => {
         this.snackbarService.openSnackBar('Prix ajouté avec succès', 'success');
         this.spinnerService.deactivate();
@@ -66,4 +73,24 @@ export class GsmPriceAddComponent implements OnInit {
     );
   }
 
+  update() {
+    let price = {
+      id: this.data.item.id ,
+      ...this.form.value ,
+      article : { articleId: this.data.id },
+      part : { id: this.form.value.part }
+    }
+    this.spinnerService.activate();
+    this.priceService.addOrUpdate(price).subscribe(
+      (res) => {
+        this.snackbarService.openSnackBar('Prix modifié avec succès', 'success');
+        this.spinnerService.deactivate();
+        this.matDialogRef.close();
+      },
+      err => {
+        this.snackbarService.openSnackBar('Erreur lors de la modification ', 'fail');
+        this.spinnerService.deactivate();
+      }
+    );
+  }
 }

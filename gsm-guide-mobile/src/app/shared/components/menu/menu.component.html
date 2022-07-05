@@ -5,31 +5,27 @@
 
       <div class="menu-header">
         <ion-row  class="no-margin ion-padding ion-justify-content-center ion-align-items-center" >
-<!--          <ion-col  class="ion-margin-top">-->
             <img class="menu-header-img" src="assets/image/logo.png" alt="logo" />
-<!--          </ion-col>-->
         </ion-row>
       </div>
 
       <ion-list lines="none" class="menu-container">
 
         <ion-menu-toggle menu="profile" >
-          <ion-item (click)="navigate('/gsm-login')"  detail="false">
-            <ion-icon slot="start" name="log-in"></ion-icon>Se Connecter
+          <ion-item class="menu-item-text" (click)="navigate('/gsm-login')"  detail="false">
+            <ion-icon class="menu-item-logo" slot="start" name="log-in-outline"></ion-icon>Se Connecter
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle menu="profile" >
-          <ion-item (click)="navigate('/gsm-register')" detail="false">
-            <ion-icon slot="start" name="person-add"></ion-icon>
-            <ion-label>S'inscrire</ion-label>
+          <ion-item class="menu-item-text"  (click)="navigate('/gsm-register')" detail="false">
+            <ion-icon class="menu-item-logo" slot="start" name="person-add-outline"></ion-icon>S'inscrire
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle menu="profile" >
-          <ion-item (click)="logout()" detail="false">
-            <ion-icon slot="start" name="log-out"></ion-icon>
-            <ion-label>Se Déconnecter</ion-label>
+          <ion-item class="menu-item-text"  (click)="logout()" detail="false">
+            <ion-icon class="menu-item-logo" slot="start" name="log-out-outline"></ion-icon>Se Déconnecter
           </ion-item>
         </ion-menu-toggle>
 

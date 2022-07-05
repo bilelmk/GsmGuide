@@ -1,15 +1,16 @@
 {
     "menu" : {
-        "event" : "Evénement" ,
-        "settings" : "Paramètres",
-        "invitations" : "Invitations",
-        "events": "Evénements" ,
-        "profile": "Profil" ,
-        "logout": "Se déconnecter",
-        "darkmode": "Mode Sombre",
-        "language": "Langue",
-        "offlinemode": "Mode Hors Ligne" ,
-        "main-menu" : "Menu Principale"
+        "logout": "Se déconnecter"
+    },
+    "home" : {
+        "welcome": "Bienvenu"
+    },
+    "requests" : {
+        "IN_PROGRESS": "En cours" ,
+        "PART_UNAVAILABLE": "Piéce introuvable" ,
+        "WAITING_FOR_PART": "En attente de piéce" ,
+        "NON_REPARABLE": "Non réparable" ,
+        "REPARED": "Réparé"
     }
 }
 

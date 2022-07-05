@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,13 +18,17 @@ public class Request {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String date ;
+    private LocalDate date ;
 
     private String mark ;
     private String model ;
     private String article ;
     private String part ;
     private String price ;
+
+    private String location ;
+    private String imei ;
+    private String details ;
 
     @OneToOne
     private User repairer ;

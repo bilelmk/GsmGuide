@@ -11,11 +11,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestDto {
-    private String date ;
+    private LocalDate date ;
     private long modelId ;
     private long markId ;
     private long articleId ;
     private long partId ;
     private long priceId ;
     private User client ;
+    private String location ;
+    private String imei ;
+    private String details ;
 }

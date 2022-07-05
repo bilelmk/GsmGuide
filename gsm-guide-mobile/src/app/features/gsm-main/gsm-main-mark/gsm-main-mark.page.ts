@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
   selector: 'app-gsm-main-mark',
@@ -8,12 +9,25 @@ import { ModalController } from '@ionic/angular';
 })
 export class GsmMainMarkPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  segment: string = 'samsung';
+
+  constructor(private modalController: ModalController,
+              private callNumber: CallNumber) { }
 
   ngOnInit() {
   }
 
   close() {
     this.modalController.dismiss();
+  }
+
+  segmentChanged(event: any) {
+    this.segment = event.detail.value ;
+  }
+
+  call(key: string) {
+    this.callNumber.callNumber(key, true)
+        .then(res => console.log('Launched dialer!', res))
+        .catch(err => console.log('Error launching dialer', err));
   }
 }

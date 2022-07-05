@@ -26,4 +26,9 @@ public class ModelController {
     public Model update(@RequestBody Model model) {
         return modelService.update(model);
     }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") long id) {
+        modelService.delete(id);
+    }
 }

@@ -13,6 +13,7 @@ import { MatInputModule } from "@angular/material/input";
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
 import { GsmPriceAddComponent } from "./gsm-price-modal/gsm-price-add/gsm-price-add.component";
 import {MatSelectModule} from "@angular/material/select";
+import {MatIconModule} from "@angular/material/icon";
 
 const routes: Routes = [
   {
@@ -30,16 +31,17 @@ const routes: Routes = [
     GsmPriceModalComponent,
     GsmPriceAddComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatBottomSheetModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatBottomSheetModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatIconModule,
+    ],
   entryComponents: [
     GsmMarkModalComponent,
     GsmModelModalComponent,

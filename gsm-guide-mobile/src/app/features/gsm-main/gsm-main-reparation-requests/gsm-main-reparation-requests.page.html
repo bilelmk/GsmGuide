@@ -1,45 +1,38 @@
-<ion-header >
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
     <ion-buttons slot="start">
       <ion-button (click)="onToggleMenu('profile')">
-        <ion-icon color="primary" slot="icon-only" name="menu"></ion-icon>
+        <ion-icon color="secondary" slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Liste des demandes</ion-title>
     <ion-buttons slot="end">
       <ion-button disabled="true">
         <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center toolbar">Espace Réparation</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
-  <ion-list>
-    <ion-item-sliding  *ngFor="let request of requests">
-      <ion-item-options side="end">
-        <ion-item-option (click)="openDetails()">
-          <ion-icon slot="icon-only" name="list"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="success" (click)="openStatus(request)">
-          <ion-icon slot="icon-only" name="refresh-circle"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+  <p class="page-title">Méttre à jour</p>
+  <p class="page-title">votre liste de demandes !</p>
 
-      <ion-item>
-        <ion-label>
-          <h3>Etat de la demande</h3>
-          <p>{{ "Apareil " + request.mark + ' ' + request.model + ' ' + request.article }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-sliding>
-
-  </ion-list>
+  <ion-row>
+    <ion-col *ngFor="let request of requests" size="12" class="form-card" (click)="openStatus(request)">
+      <ion-row>
+        <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
+        <ion-col size="6"><p class="form-card-label" [ngClass]="getSateColor(request.state)">{{ request.state.toString() | translate}}</p></ion-col>
+      </ion-row>
+      <p class="form-card-text">{{ "Adresse de récupération :" + request.location}}</p>
+    </ion-col>
+  </ion-row>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
 
 </ion-content>

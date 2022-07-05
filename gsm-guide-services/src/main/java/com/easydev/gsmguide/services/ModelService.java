@@ -7,4 +7,5 @@ import java.util.List;
 public interface ModelService {
     Model add(Model model) ;
     Model update(Model model) ;
+    void delete(Long id) ;
 }

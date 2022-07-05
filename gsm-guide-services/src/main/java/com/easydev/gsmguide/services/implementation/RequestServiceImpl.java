@@ -3,6 +3,7 @@ package com.easydev.gsmguide.services.implementation;
 import com.easydev.gsmguide.dtos.RequestDto;
 import com.easydev.gsmguide.dtos.RequestResponse;
 import com.easydev.gsmguide.dtos.SearchRequest;
+import com.easydev.gsmguide.enums.State;
 import com.easydev.gsmguide.models.*;
 import com.easydev.gsmguide.repositories.*;
 import com.easydev.gsmguide.services.RequestService;
@@ -48,7 +49,7 @@ public class RequestServiceImpl implements RequestService {
 
         return requestRepository.save(new Request(null ,request.getDate() , mark.getName() ,
                 model.getName() , article.getName() , part.getName() ,
-                price.getPrice(), null ,request.getClient() ,null , LocalDateTime.now()));
+                price.getPrice(), request.getLocation() , request.getImei() , request.getDetails() , null, request.getClient()  , State.IN_PROGRESS , LocalDateTime.now()));
 
     }
 

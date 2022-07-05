@@ -23,4 +23,8 @@ export class MarkService {
   update(mark): Observable<any> {
     return this.http.put<any>(this.URL , mark);
   }
+
+  delete(id): Observable<any> {
+    return this.http.delete<any>(this.URL + '/' + id);
+  }
 }

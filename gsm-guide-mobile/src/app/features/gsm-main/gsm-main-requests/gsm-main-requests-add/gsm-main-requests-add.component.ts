@@ -39,6 +39,9 @@ export class GsmMainRequestsAddComponent implements OnInit {
   priceId = null ;
   priceName = null ;
 
+  imei = null;
+  details = null ;
+
   constructor(private spinnerService: SpinnerService,
               private toastService: ToastService,
               private modalController: ModalController,
@@ -126,27 +129,31 @@ export class GsmMainRequestsAddComponent implements OnInit {
     }
   }
 
-  next() {
+  async next() {
     const request = {
       modelId: this.modelId ,
       markId: this.markId ,
       articleId: this.articleId  ,
       partId: this.partId ,
       priceId: this.priceId ,
-      client: { id: sessionStorage.getItem('id') }
+      client: { id: sessionStorage.getItem('id') } ,
+      details: this.details,
+      imei: this.imei
     };
 
-    this.modalController.create({
+    const modal = await this.modalController.create({
       component: GsmMainRequestsRdvComponent ,
-      componentProps: request
-    }).then(modal => modal.present());
-    // this.requestService.add(request).subscribe(
-    //     res => {
-    //       console.log(res) ;
-    //     },error => {
-    //       console.log(error) ;
-    //     }
-    // );
+      componentProps: {
+        request ,
+        locations: this.locations
+      }
+    }) ;
+    modal.onWillDismiss().then(
+        res => {
+          this.close() ;
+        }
+    );
+    return await modal.present();
   }
 
   isAllVariablesExists() {

@@ -23,4 +23,9 @@ public class ArticleController {
     public Article update(@RequestBody Article article) {
         return articleService.update(article);
     }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") long id) {
+        articleService.delete(id);
+    }
 }

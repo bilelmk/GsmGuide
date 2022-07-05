@@ -17,4 +17,8 @@
         font-family: "Poppins-Medium" ;
         color: var(--ion-color-primary);
     }
+
+    &-bg-secondary {
+        --background: var(--ion-color-secondary) !important;
+    }
 }

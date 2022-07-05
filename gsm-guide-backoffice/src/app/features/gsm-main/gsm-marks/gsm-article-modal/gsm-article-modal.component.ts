@@ -58,7 +58,7 @@ export class GsmArticleModalComponent implements OnInit {
   update() {
     let article = {
       ...this.form.value ,
-      id : this.data.item.id
+      articleId : this.data.item.articleId
     }
     this.spinnerService.activate();
     this.articleService.update(article).subscribe(

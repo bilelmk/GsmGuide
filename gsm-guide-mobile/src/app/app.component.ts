@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Subscription } from 'rxjs';
 import { Network } from '@ionic-native/network/ngx';
 import { UserService } from './core/services/http/user.service';
+import {TraductionService} from "./core/services/in-app/traduction.service";
 
 @Component({
   selector: 'app-root',
@@ -22,8 +23,8 @@ export class AppComponent {
       private platform: Platform,
       private splashScreen: SplashScreen,
       private statusBar: StatusBar,
-      private userService: UserService
-      // private traductionServcie: TraductionService,
+      private userService: UserService,
+      private traductionService: TraductionService, // required for translation init
       // private themeService: ThemeService,
       // private oneSignal : OneSignal ,
       // private storage: Storage,

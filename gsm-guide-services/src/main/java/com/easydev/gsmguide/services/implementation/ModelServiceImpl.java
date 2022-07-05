@@ -25,4 +25,11 @@ public class ModelServiceImpl implements ModelService {
         toUpdateModel.setName(model.getName());
         return modelRepository.save(toUpdateModel);
     }
+
+    @Override
+    public void delete(Long id) {
+        Model model = modelRepository.findById(id).orElseThrow(IllegalArgumentException::new) ;
+        model.setMark(null);
+        modelRepository.delete(model);
+    }
 }

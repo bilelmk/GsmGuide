@@ -27,7 +27,7 @@
     <form [formGroup]="form" class="ion-margin-top">
       <ion-row class="ion-justify-content-center ion-padding">
 
-        <ion-col size="12" class="ion-text-center form-card"  (click)="onPickImage()" >
+        <ion-col size="12" class="ion-text-center form-card"  (click)="onPickImageChoice()" >
           <ion-icon *ngIf="!imageSrc"  class="form-card-img-logo" name="camera-outline"></ion-icon>
           <p *ngIf="!imageSrc"  class="form-card-img-text" >Ajouter une photo</p>
           <img *ngIf="imageSrc" class="form-card-img" [src]="imageSrc" />

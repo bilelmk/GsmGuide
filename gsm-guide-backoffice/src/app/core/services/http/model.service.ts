@@ -19,4 +19,8 @@ export class ModelService {
   update(model): Observable<any> {
     return this.http.put<any>(this.URL , model);
   }
+
+  delete(id): Observable<any> {
+    return this.http.delete<any>(this.URL + '/' + id);
+  }
 }

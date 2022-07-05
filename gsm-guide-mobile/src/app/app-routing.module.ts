@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gsm-intro',
+    redirectTo: 'gsm-main',
     pathMatch: 'full'
   },
   {
@@ -31,10 +31,6 @@ const routes: Routes = [
   {
     path: 'gsm-send-passowrd-code',
     loadChildren: () => import('./features/gsm-send-passowrd-code/gsm-send-passowrd-code.module').then(m => m.GsmSendPassowrdCodePageModule)
-  },
-  {
-    path: 'gsm-intro',
-    loadChildren: () => import('./features/gsm-intro/gsm-intro.module').then(m => m.GsmIntroPageModule)
   }
 ];
 

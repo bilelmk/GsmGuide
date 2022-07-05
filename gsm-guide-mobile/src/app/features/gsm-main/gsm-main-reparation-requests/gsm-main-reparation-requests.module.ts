@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { GsmMainReparationRequestsPageRoutingModule } from './gsm-main-reparation-requests-routing.module';
 
 import { GsmMainReparationRequestsPage } from './gsm-main-reparation-requests.page';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    GsmMainReparationRequestsPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        GsmMainReparationRequestsPageRoutingModule,
+        TranslateModule
+    ],
   declarations: [GsmMainReparationRequestsPage]
 })
 export class GsmMainReparationRequestsPageModule {}

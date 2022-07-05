@@ -10,7 +10,6 @@ public interface PriceService {
 
     List<Price> getByArticleAndPart(long articleId , long partId) ;
     List<List<Price>> getByArticle(long articleId) ;
-    Price add(Price price);
-    Price update(Price price);
+    Price addOrUpdate(Price price);
     void delete(long id) ;
 }

@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { GsmMainProductsPageRoutingModule } from './gsm-main-products-routing.module';
 import { GsmMainProductsPage } from './gsm-main-products.page';
 import { GsmMainProductsAddComponent } from './gsm-main-products-add/gsm-main-products-add.component';
-import {GsmMainProductsDetailsComponent} from './gsm-main-products-details/gsm-main-products-details.component';
+import { GsmMainProductsDetailsComponent } from './gsm-main-products-details/gsm-main-products-details.component';
 
 @NgModule({
   imports: [
@@ -19,6 +19,6 @@ import {GsmMainProductsDetailsComponent} from './gsm-main-products-details/gsm-m
     GsmMainProductsPage,
     GsmMainProductsAddComponent,
     GsmMainProductsDetailsComponent
-  ]
+  ],
 })
 export class GsmMainProductsPageModule {}

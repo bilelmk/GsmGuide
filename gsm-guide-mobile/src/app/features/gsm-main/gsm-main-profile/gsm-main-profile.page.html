@@ -34,7 +34,7 @@
   <ion-grid class="ion-margin-top">
 
     <div class="form-header ion-text-center">
-      <img (click)="onPickImage()" [src]=" imageSrc ? imageSrc : ( client?.image ? URL + client.image : './../../../../assets/image/default-profile.png') " alt="image"  class="form-header-img" >
+      <img (click)="onPickImageChoice()" [src]=" imageSrc ? imageSrc : ( client?.image ? URL + client.image : './../../../../assets/image/default-profile.png') " alt="image"  class="form-header-img" >
       <p class="form-header-name">{{client?.firstname + " " + client?.lastname}}</p>
     </div>
 

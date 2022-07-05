@@ -5,6 +5,8 @@ import { MenuController, ModalController } from '@ionic/angular';
 import { GsmMainProductsAddComponent } from './gsm-main-products-add/gsm-main-products-add.component';
 import { GsmMainProductsDetailsComponent } from './gsm-main-products-details/gsm-main-products-details.component';
 import { environment } from '../../../../environments/environment';
+import { UserService } from '../../../core/services/http/user.service';
+import { ToastService } from '../../../core/services/in-app/toast.service';
 
 @Component({
   selector: 'app-gsm-main-products',
@@ -25,27 +27,35 @@ export class GsmMainProductsPage  {
   limit = 10 ;
   offset = 0 ;
 
-  constructor(private spinnerService: SpinnerService,
+  isAuthenticated ;
+
+  constructor(private userService: UserService,
+              private spinnerService: SpinnerService,
               private productService: ProductService,
               private modalController: ModalController,
-              private menu: MenuController) { }
+              private menu: MenuController,
+              private toastService: ToastService) { }
 
   ionViewWillEnter() {
+    this.userService.token.subscribe(res => this.isAuthenticated = res != null);
     this.getProducts();
   }
 
   async openAddProductModal() {
-    const modal = await this.modalController.create({
-      component: GsmMainProductsAddComponent ,
-    });
+    if (!this.isAuthenticated) { this.toastService.show('Il faut se connecter' , 'info') ; }
+    else {
+      const modal = await this.modalController.create({
+        component: GsmMainProductsAddComponent ,
+      });
 
-    modal.onWillDismiss().then(
-        res => {
-          this.initVariable();
-          this.getProducts();
-        }
-    );
-    return await modal.present();
+      modal.onWillDismiss().then(
+          res => {
+            this.initVariable();
+            this.getProducts();
+          }
+      );
+      return await modal.present();
+    }
   }
 
   openProductDetailModal(productDetails) {

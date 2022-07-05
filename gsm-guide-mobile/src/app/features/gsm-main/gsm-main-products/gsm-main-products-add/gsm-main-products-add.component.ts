@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpinnerService } from '../../../../core/services/in-app/spinner.service';
 import { ToastService } from '../../../../core/services/in-app/toast.service';
-import { ModalController, Platform } from '@ionic/angular';
+import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import { ProductService } from '../../../../core/services/http/product.service';
 import { Crop } from '@ionic-native/crop/ngx';
 import { File as NativeFile } from '@ionic-native/file/ngx';
@@ -30,7 +30,8 @@ export class GsmMainProductsAddComponent implements OnInit {
               private crop: Crop ,
               private platform: Platform ,
               private camera: Camera,
-              private file: NativeFile) {
+              private file: NativeFile,
+              private actionSheetController: ActionSheetController) {
     this.form = this.formBuilder.group({
       name   : ['', [Validators.required]],
       description: ['', Validators.required],
@@ -64,10 +65,33 @@ export class GsmMainProductsAddComponent implements OnInit {
     );
   }
 
-  // Change Profile Photo
-  onPickImage(){
+    async onPickImageChoice() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Source de l\'image',
+            buttons: [
+                {
+                    text: 'Prendre une photo',
+                    icon: 'camera-outline' ,
+                    handler: () => {
+                        this.onPickImage(this.camera.PictureSourceType.CAMERA) ;
+                    }
+                }, {
+                    text: 'Choisir une image de la galerie',
+                    icon: 'image-outline',
+                    handler: () => {
+                        this.onPickImage(this.camera.PictureSourceType.PHOTOLIBRARY) ;
+                    }
+                }
+            ]
+        });
+        await actionSheet.present();
+    }
+
+
+    // Change Profile Photo
+  onPickImage(source){
     const cameraOptions = {
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: source ,
       destinationType: this.camera.DestinationType.FILE_URI ,
         quality: 70,
         allowEdit : false ,

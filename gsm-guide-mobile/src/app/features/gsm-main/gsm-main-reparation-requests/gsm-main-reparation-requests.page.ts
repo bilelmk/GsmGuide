@@ -32,6 +32,10 @@ export class GsmMainReparationRequestsPage implements OnInit {
               private alertController: AlertController) {
   }
 
+  onToggleMenu(name: string) {
+    this.menu.open(name);
+  }
+
   ngOnInit() {
     this.spinnerService.activate() ;
     const searchRequest = {
@@ -48,10 +52,6 @@ export class GsmMainReparationRequestsPage implements OnInit {
           console.log(error) ;
         }
     );
-  }
-
-  onToggleMenu(name: string) {
-    this.menu.open(name);
   }
 
   loadData(event: any) {
@@ -140,5 +140,20 @@ export class GsmMainReparationRequestsPage implements OnInit {
     });
     await alert.present();
     // const { role } = await alert.onDidDismiss();
+  }
+
+  getSateColor(state: any) {
+    if (state === 'IN_PROGRESS' || state === 'WAITING_FOR_PART') {
+      return 'state-info' ;
+    }
+    else if (state === 'REPARED') {
+      return 'state-success' ;
+    }
+    else if (state === 'PART_UNAVAILABLE' || state === 'NON_REPARABLE') {
+      return 'state-danger' ;
+    }
+    else {
+      return '' ;
+    }
   }
 }

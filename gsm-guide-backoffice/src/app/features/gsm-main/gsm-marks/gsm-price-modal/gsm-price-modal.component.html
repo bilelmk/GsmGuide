@@ -4,7 +4,7 @@
     Liste des prix
   </p>
   <div class="row align-items-center">
-    <button class="square-btn ml-2"  (click)="addPrice()">
+    <button class="square-btn ml-2"  (click)="openPriceModal(false , null)">
       <i class="material-icons icon-blue" >
         add
       </i>
@@ -16,8 +16,15 @@
   <div class="dashboard">
     <div *ngFor="let partPrice of prices" class="part" >
       <p>{{partPrice[0].part.name}}</p>
-        <div *ngFor="let price of partPrice"  >
-          <p>{{price.quality + ' ' + price.price + ' DT'}}</p>
+        <div  class="row justify-content-center m-2" *ngFor="let price of partPrice"  >
+          <span>{{price.quality + ' ' + price.price + ' DT'}}
+          </span>
+          <button class="price-btn no-padding" (click)="delete(price)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="price-btn no-padding" (click)="openPriceModal(true , price)">
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
     </div>
   </div>

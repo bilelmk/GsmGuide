@@ -16,8 +16,10 @@ export class GsmMainProductsDetailsComponent implements OnInit {
   constructor(private callNumber: CallNumber,
               private modalController: ModalController) {}
 
-  ngOnInit() {
-    console.log(this.product);
+  ngOnInit() {}
+
+  close() {
+    this.modalController.dismiss();
   }
 
   call() {
@@ -31,7 +33,13 @@ export class GsmMainProductsDetailsComponent implements OnInit {
     }
   }
 
-  close() {
-    this.modalController.dismiss();
+
+  sendSms() {
+    if (!this.product.client.phone) {
+
+    }
+    else {
+
+    }
   }
 }

@@ -58,4 +58,19 @@ export class GsmMainRequestsListComponent implements OnInit {
         }
     );
   }
+
+    getSateColor(state: any) {
+        if (state === 'IN_PROGRESS' || state === 'WAITING_FOR_PART') {
+            return 'state-info' ;
+        }
+        else if (state === 'REPARED') {
+            return 'state-success' ;
+        }
+        else if (state === 'PART_UNAVAILABLE' || state === 'NON_REPARABLE') {
+            return 'state-danger' ;
+        }
+        else {
+            return '' ;
+        }
+    }
 }

@@ -31,8 +31,8 @@ public class MarkController {
         return markService.update(mark);
     }
 
-//    @DeleteMapping("{id}")
-//    public void delete(@PathVariable("id") long id) {
-//        markService.deleteById(id);
-//    }
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") long id) {
+        markService.delete(id);
+    }
 }

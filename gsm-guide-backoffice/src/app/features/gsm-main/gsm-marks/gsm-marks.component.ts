@@ -8,8 +8,12 @@ import { MatDialog } from "@angular/material/dialog";
 import { GsmArticleModalComponent } from "./gsm-article-modal/gsm-article-modal.component";
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
 import { PartService } from "../../../core/services/http/part.service";
-import { forkJoin } from "rxjs";
-import {GsmMarkModalComponent} from "./gsm-mark-modal/gsm-mark-modal.component";
+import { GsmMarkModalComponent } from "./gsm-mark-modal/gsm-mark-modal.component";
+import { Helpers } from "../../../shared/helpers/helpers";
+import { ModelService } from "../../../core/services/http/model.service";
+import { ArticleService } from "../../../core/services/http/article.service";
+import { AlertService } from "../../../core/services/in-app/alert.service";
+import {SnackbarService} from "../../../core/services/in-app/snackbar.service";
 
 @Component({
   selector: 'app-gsm-marks',
@@ -22,10 +26,14 @@ export class GsmMarksComponent implements OnInit {
   parts ;
 
   constructor(private markService: MarkService,
+              private modelService: ModelService,
+              private articleService: ArticleService,
               private SpinnerService: SpinnerService,
               private bottomSheet: MatBottomSheet,
               private dialog: MatDialog,
-              private partService: PartService) {}
+              private partService: PartService,
+              private alertService: AlertService,
+              private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.getAll()
@@ -36,6 +44,7 @@ export class GsmMarksComponent implements OnInit {
     this.markService.getAll().subscribe(
     res => {
         this.marks = res
+      console.log(this.marks)
         this.SpinnerService.deactivate()
       },
     error => {
@@ -63,7 +72,19 @@ export class GsmMarksComponent implements OnInit {
   }
 
   deleteMark(id , item) {
-    console.log("deleteMark")
+    this.alertService.showAlert(
+      () => {
+        this.markService.delete(id).subscribe(
+          res => {
+            this.snackbarService.openSnackBar('Marque supprimé avec succès','success') ;
+            this.getAll()
+          },error => {
+            this.snackbarService.openSnackBar('Erreur lors de la suppression', 'fail');
+            console.log(error)
+          }
+        )
+      }, "voulez-vous vraiment supprimer ?"
+    )
   }
 
   //models
@@ -86,7 +107,19 @@ export class GsmMarksComponent implements OnInit {
   }
 
   deleteModel(id , item) {
-    console.log("deleteModel")
+    this.alertService.showAlert(
+      () => {
+        this.modelService.delete(id).subscribe(
+          res => {
+            this.snackbarService.openSnackBar('Modéle supprimé avec succès','success') ;
+            this.getAll() ;
+          },error => {
+            this.snackbarService.openSnackBar('Erreur lors de la suppression', 'fail');
+            console.log(error)
+          }
+        )
+      }, "voulez-vous vraiment supprimer ?"
+    )
   }
 
   //articles
@@ -109,7 +142,19 @@ export class GsmMarksComponent implements OnInit {
   }
 
   deleteArticle(id , item ) {
-    console.log("deleteArticle")
+    this.alertService.showAlert(
+      () => {
+        this.articleService.delete(id).subscribe(
+          res => {
+            this.snackbarService.openSnackBar('Article supprimé avec succès','success') ;
+           this.getAll() ;
+          },error => {
+            this.snackbarService.openSnackBar('Erreur lors de la suppression', 'fail');
+            console.log(error)
+          }
+        )
+      }, "voulez-vous vraiment supprimer ?"
+    )
   }
 
   openPriceModal(id , item) {

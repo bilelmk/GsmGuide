@@ -27,14 +27,10 @@ public class PriceController {
     }
 
     @PostMapping
-    public Price add(@RequestBody Price price) {
-        return priceService.add(price) ;
+    public Price addOrUpdate(@RequestBody Price price) {
+        return priceService.addOrUpdate(price) ;
     }
 
-    @PutMapping
-    public Price update(@RequestBody Price price) {
-        return priceService.update(price) ;
-    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable long id) {

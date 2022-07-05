@@ -19,12 +19,12 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public List<Price> getByArticleAndPart(long articleId, long partId) {
-        return priceRepository.findAllByArticleIdAndPartId(articleId,partId);
+        return priceRepository.findAllByArticleArticleIdAndPartId(articleId,partId);
     }
 
     @Override
     public List<List<Price>> getByArticle(long articleId) {
-        List<Price> prices = priceRepository.findAllByArticleId(articleId);
+        List<Price> prices = priceRepository.findAllByArticleArticleId(articleId);
         List<List<Price>> groupedPrices  = new ArrayList<>() ;
         for( int i=0; i<prices.size() ; i++) {
             if(i == 0){
@@ -52,16 +52,8 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Price add(Price price) {
+    public Price addOrUpdate(Price price) {
         return priceRepository.save(price);
-    }
-
-    @Override
-    public Price update(Price price) {
-        Price toUpdatePrice = priceRepository.getById(price.getId());
-        toUpdatePrice.setPrice(price.getPrice());
-        toUpdatePrice.setQuality(price.getQuality());
-        return priceRepository.save(toUpdatePrice);
     }
 
     @Override

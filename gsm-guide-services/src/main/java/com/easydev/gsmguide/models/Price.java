@@ -20,7 +20,8 @@ public class Price {
 
     private String price ;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "articleId" )
     private Article article ;
     
     @OneToOne
