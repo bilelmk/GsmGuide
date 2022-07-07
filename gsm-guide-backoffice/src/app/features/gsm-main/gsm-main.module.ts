@@ -42,6 +42,10 @@ const routes: Routes = [
         path: 'locations',
         loadChildren: () => import('./gsm-location/gsm-location.module').then(m => m.GsmLocationModule)
       },
+      {
+        path: 'statistics',
+        loadChildren: () => import('./gsm-statistics/gsm-statistics.module').then(m => m.GsmStatisticsModule)
+      },
     ]
   }
 ];

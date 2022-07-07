@@ -1,0 +1,37 @@
+@import "../variables" ;
+
+.statistics {
+
+  background-color: $white-blue ;
+  border-radius: 10px;
+  height: 145px;
+
+  &-icon {
+    font-size: 50px;
+    color: $navy;
+  }
+
+  &-text {
+    text-transform: uppercase;
+    color: $navy;
+    font-size: 13px;
+    margin: 0 !important ;
+  }
+
+  &:hover {
+
+    background-color: $navy ;
+    transition: 0.3s;
+    cursor: pointer;
+
+    .statistics-icon {
+      color: $white-blue !important;
+    }
+
+    .statistics-text {
+      color: $white-blue !important;
+    }
+
+  }
+}
+

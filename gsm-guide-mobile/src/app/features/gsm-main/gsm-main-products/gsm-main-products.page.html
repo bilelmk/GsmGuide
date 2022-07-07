@@ -14,54 +14,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-no-padding ion-no-margin" >
 
-  <ion-grid>
-<!--    <ion-segment value="products" (ionChange)="segmentChanged($event)">-->
-<!--      <ion-segment-button value="products">-->
-<!--        <ion-label>Market Place</ion-label>-->
-<!--      </ion-segment-button>-->
-<!--      <ion-segment-button value="myProducts">-->
-<!--        <ion-label>Mes Produits</ion-label>-->
-<!--      </ion-segment-button>-->
-<!--    </ion-segment>-->
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row style="padding: 10px" class="ion-no-padding ion-no-margin">
 
-<!--    <ion-searchbar showCancelButton="always"-->
-<!--                   searchIcon="search"-->
-<!--                   placeholder="Recherche"-->
-<!--                   >-->
-<!--    </ion-searchbar>-->
-
-    <ion-row class="ion-padding">
       <ion-col size="12" >
         <input class="search" (input)="getProducts()" placeholder="Rechercher l'article qui vous désirer">
       </ion-col>
 
-      <ion-col size="6" >
+      <ion-col size="6">
         <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
           <ion-icon slot="start" name="add-circle-outline"></ion-icon>
           Vendre
         </ion-button>
       </ion-col>
+
       <ion-col size="6" >
         <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
           <ion-icon slot="start" name="options-outline"></ion-icon>
           Filtre
         </ion-button>
       </ion-col>
+
     </ion-row>
 
-    <ion-row style="height: calc(100vh - 270px ) ; overflow: scroll" class="ion-padding">
+    <ion-row class="ion-no-padding ion-no-margin" style="height: calc(100vh - 230px ) ; overflow: scroll ;" >
 
       <ion-col size="6" *ngFor="let product of products" class="ion-no-padding">
-        <ion-card (click)="openProductDetailModal(product)" class="card" >
+        <ion-card (click)="openProductDetailModal(product)" class="product-card" >
           <div class="ion-text-center">
             <img [src]="URL + product.image"  class="full-width"/>
           </div>
           <ion-card-header>
-            <ion-card-subtitle class="card-title">{{product.name}}</ion-card-subtitle>
+            <ion-card-subtitle class="product-card-title">{{product.name}}</ion-card-subtitle>
             <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span class="card-price">{{product.price + ' DT'}}</span>
+              <span class="product-card-price">{{product.price}} <span class="product-card-curreny">DT</span></span>
             </ion-row>
           </ion-card-header>
         </ion-card>

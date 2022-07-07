@@ -7,6 +7,8 @@ import com.easydev.gsmguide.models.Request;
 import com.easydev.gsmguide.services.RequestService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("api/requests")
@@ -41,6 +43,11 @@ public class RequestController {
     @PutMapping
     public Request update(@RequestBody Request request) {
         return requestService.update(request) ;
+    }
+
+    @GetMapping
+    public List<Object[]> findAllGroupByRepairer() {
+        return requestService.findAllGroupByRepairer() ;
     }
 
 }

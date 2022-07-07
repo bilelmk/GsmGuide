@@ -38,8 +38,6 @@ export class GsmLocationComponent implements OnInit {
         this.dataSource.data = res;
         this.loading = false ;
         this.spinnerService.deactivate()
-        console.log(res)
-
       },
       err => {
         this.loading = false ;

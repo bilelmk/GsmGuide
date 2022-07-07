@@ -7,6 +7,7 @@ import com.easydev.gsmguide.enums.State;
 import com.easydev.gsmguide.models.*;
 import com.easydev.gsmguide.repositories.*;
 import com.easydev.gsmguide.services.RequestService;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -84,5 +85,10 @@ public class RequestServiceImpl implements RequestService {
         List<Request> rows = requestRepository.findAllByRepairerIdOrderByCreationDateAsc( searchRequest.getId() , page);
 
         return new RequestResponse(count ,rows) ;
+    }
+
+    @Override
+    public List<Object[]> findAllGroupByRepairer() {
+        return requestRepository.findAllGroupByRepairer();
     }
 }

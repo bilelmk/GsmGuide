@@ -26,6 +26,9 @@ export class GsmMainProfilePage {
   imageSrc ;
   data: FormData ;
 
+  loading = false ;
+  error = false ;
+
   constructor(private userService: UserService,
               private spinnerService: SpinnerService,
               private toastService: ToastService,
@@ -58,10 +61,12 @@ export class GsmMainProfilePage {
           this.form.controls.lastname.setValue(this.client.lastname);
           this.form.controls.username.setValue(this.client.username);
           this.form.controls.phone.setValue(this.client.phone);
-
+          this.loading = false ;
           this.spinnerService.deactivate();
         },
         error => {
+          this.loading = false ;
+          this.error = true ;
           this.spinnerService.deactivate();
           console.log(error);
         }

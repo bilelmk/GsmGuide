@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from "@angular/material/list";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
+import { Daterangepicker } from "ng2-daterangepicker";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
     MatInputModule,
     MatSelectModule,
     MatListModule,
-    LeafletModule
+    LeafletModule,
+    Daterangepicker
   ],
   providers: [
     {

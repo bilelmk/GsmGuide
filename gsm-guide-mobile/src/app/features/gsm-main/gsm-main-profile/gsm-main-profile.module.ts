@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { GsmMainProfilePageRoutingModule } from './gsm-main-profile-routing.module';
 import { GsmMainProfilePage } from './gsm-main-profile.page';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { GsmMainProfilePage } from './gsm-main-profile.page';
         FormsModule,
         IonicModule,
         GsmMainProfilePageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
   declarations: [
     GsmMainProfilePage,

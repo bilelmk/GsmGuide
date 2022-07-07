@@ -1,19 +1,35 @@
-.card {
+.product-card {
     border-radius: 20px ;
-
     box-shadow: -1px 33px 50px -10px rgba(0,0,0,0.2);
+
+    ion-card-header {
+        padding: 12px !important;
+    }
+
+    &-title {
+        height: 45px;
+        font-size: 12px !important;
+        --color	: var(--ion-color-dark) ;
+        font-family: 'Poppins-bold' ;
+        overflow-y : scroll;
+        line-height: 16px;
+    }
+
+    &-price {
+        padding-top: 10px ;
+        font-size: 13px !important;
+        font-weight: bold ;
+        color: var(--ion-color-tertiary) ;
+        font-family: 'Poppins-Medium' ;
+    }
+
+    &-curreny {
+        font-size: 8px !important;
+    }
 }
 
-.card-title {
-    font-size: 12px !important;
-    --color	: var(--ion-color-secondary)
-}
 
-.card-price {
-    padding-top: 12px ;
-    font-weight: bold ;
-    color: var(--ion-color-tertiary)
-}
+
 
 
 .request-card {

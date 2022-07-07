@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { MenuComponent } from "./components/menu/menu.component";
-
+import { MenuComponent } from './components/menu/menu.component';
+import { ErrorsComponent } from './components/errors/errors.component';
 
 @NgModule({
   declarations: [
-    MenuComponent
+    MenuComponent,
+    ErrorsComponent
   ],
   exports: [
-    MenuComponent
+    MenuComponent,
+    ErrorsComponent
   ],
   imports: [
     CommonModule,

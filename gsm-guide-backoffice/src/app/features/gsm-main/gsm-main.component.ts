@@ -51,6 +51,12 @@ export class GsmMainComponent implements OnInit {
       icon : "store",
     },
     {
+      type: "route",
+      route : "statistics" ,
+      name : "Statistiques" ,
+      icon : "bar_chart",
+    },
+    {
       type: "button",
       handler : this.logout.bind(this) ,
       name : "Se déconnecter" ,

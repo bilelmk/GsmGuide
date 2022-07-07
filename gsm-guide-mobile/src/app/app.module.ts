@@ -34,7 +34,6 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 
 
-
 // import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 
 // fuction needed for traduction

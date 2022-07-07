@@ -16,6 +16,7 @@ public interface RequestService {
     RequestResponse getAll(SearchRequest searchRequest);
     RequestResponse getAllByClient(SearchRequest searchRequest) ;
     RequestResponse getAllByRepairer(SearchRequest searchRequest) ;
+    List<Object[]> findAllGroupByRepairer() ;
 }
 
     
