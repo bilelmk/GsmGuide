@@ -14,7 +14,7 @@ import { LocationService } from '../../../core/services/http/location.service';
   templateUrl: './gsm-main-requests.page.html',
   styleUrls: ['./gsm-main-requests.page.scss'],
 })
-export class GsmMainRequestsPage implements OnInit {
+export class GsmMainRequestsPage {
 
   marks ;
   parts ;
@@ -28,7 +28,7 @@ export class GsmMainRequestsPage implements OnInit {
               private locationService: LocationService,
               private menu: MenuController) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.spinnerService.activate() ;
     forkJoin([
       this.markService.getAll() ,

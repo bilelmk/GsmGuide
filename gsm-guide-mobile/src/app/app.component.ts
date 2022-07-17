@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Subscription } from 'rxjs';
 import { Network } from '@ionic-native/network/ngx';
 import { UserService } from './core/services/http/user.service';
-import {TraductionService} from "./core/services/in-app/traduction.service";
+import { TraductionService } from './core/services/in-app/traduction.service';
 
 @Component({
   selector: 'app-root',

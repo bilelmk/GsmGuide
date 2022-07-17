@@ -81,7 +81,7 @@
 
 .form-card {
     border-radius: 20px ;
-    background: white;
+    background: var(--ion-color-light);
     padding: 15px;
     margin: 5px 0;
     box-shadow: -1px 26px 86px -28px rgba(0,0,0,0.57);
@@ -103,7 +103,7 @@
         outline: none;
         font-size: 12px;
         font-family: "Poppins-Regular" !important;
-        background: white;
+        background: var(--ion-color-light);
     }
 
     &-img {
@@ -137,6 +137,28 @@
     margin: 5px 0;
     box-shadow: -1px 26px 86px -28px rgba(0,0,0,0.57);
 
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: var(--ion-color-light);
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: var(--ion-color-light);
+        opacity:  1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: var(--ion-color-light);
+        opacity:  1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: var(--ion-color-light);
+    }
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color:var(--ion-color-light);
+    }
+
+    ::placeholder { /* Most modern browsers support this now. */
+        color: var(--ion-color-light);
+    }
+
     &-label {
         font-size: 14px;
         font-family: "Poppins-bold" !important;
@@ -150,7 +172,7 @@
         font-size: 12px;
         font-family: "Poppins-Regular" !important;
         background: var(--ion-color-secondary-tint);
-        color: var(--ion-color-light);
+        color: var(--ion-color-light) !important;
     }
 
 }

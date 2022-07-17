@@ -41,15 +41,18 @@
     <ion-row class="ion-margin-top ion-justify-content-center">
       <ion-col size="12" class="form-card-dark">
         <p class="form-card-dark-label">Adresse de récuperation</p>
-        <input [value]="locationName"  (click)="PriceRef.open()" placeholder="choisir le prix de piéce" class="form-card-dark-input"  type="text"/>
+        <input [value]="locationName"  (click)="PriceRef.open()" placeholder="choisir l'un de nos boutiques" class="form-card-dark-input"  type="text"/>
 
-        <ion-select [(ngModel)]="locationId" class="input" #PriceRef (ionChange)="onLocationSelect()">
-          <ion-select-option  *ngFor="let location of locations" value="{{location.id}}">{{location.address}}</ion-select-option>
-        </ion-select>
+        <ion-item class="input" >
+          <ion-label>Choisir une adresse</ion-label>
+          <ion-select [(ngModel)]="locationId" #PriceRef (ionChange)="onLocationSelect()">
+            <ion-select-option  *ngFor="let location of locations" [value]="location.id">{{location.address }}</ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-col>
 
-      <ion-col size="12" size-sm="7" class="ion-no-padding ion-margin-top">
-        <ion-button (click)="submit()" class="btn-secondary-tint"  expand="block" [disabled]="isAllVariablesExists()">confirmer la demande</ion-button>
+      <ion-col size="12" class="ion-no-padding ion-margin-top">
+        <ion-button (click)="submit()" class="btn-secondary-tint"  expand="block" [disabled]="!isAllVariablesExists()">Suivant</ion-button>
       </ion-col>
 
     </ion-row>

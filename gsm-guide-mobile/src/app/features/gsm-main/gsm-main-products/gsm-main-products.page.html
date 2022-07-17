@@ -14,50 +14,57 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-no-padding ion-no-margin" >
+<div class="ion-no-padding ion-no-margin" >
 
   <ion-grid class="ion-no-padding ion-no-margin">
-    <ion-row style="padding: 10px" class="ion-no-padding ion-no-margin">
 
-      <ion-col size="12" >
-        <input class="search" (input)="getProducts()" placeholder="Rechercher l'article qui vous désirer">
+    <ion-row class="ion-no-padding ion-no-margin ion-justify-content-center">
+      <ion-col  class="ion-no-padding ion-no-margin"  size="12" size-sm="8">
+        <ion-row style="padding: 10px ; height: 128px" class="ion-no-padding ion-no-margin">
+
+          <ion-col size="12" >
+            <input class="search" (input)="getProducts()" placeholder="Rechercher l'article qui vous désirer">
+          </ion-col>
+
+          <ion-col size="6" class="pl-5">
+            <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
+              <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+              Vendre
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6" class="pr-5">
+            <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
+              <ion-icon slot="start" name="options-outline"></ion-icon>
+              Filtre
+            </ion-button>
+          </ion-col>
+
+        </ion-row>
       </ion-col>
-
-      <ion-col size="6">
-        <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
-          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-          Vendre
-        </ion-button>
-      </ion-col>
-
-      <ion-col size="6" >
-        <ion-button (click)="openAddProductModal()" class="btn-light" expand="block" >
-          <ion-icon slot="start" name="options-outline"></ion-icon>
-          Filtre
-        </ion-button>
-      </ion-col>
-
     </ion-row>
 
-    <ion-row class="ion-no-padding ion-no-margin" style="height: calc(100vh - 230px ) ; overflow: scroll ;" >
-
-      <ion-col size="6" *ngFor="let product of products" class="ion-no-padding">
-        <ion-card (click)="openProductDetailModal(product)" class="product-card" >
-          <div class="ion-text-center">
-            <img [src]="URL + product.image"  class="full-width"/>
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle class="product-card-title">{{product.name}}</ion-card-subtitle>
-            <ion-row class="ion-justify-content-between ion-align-items-center">
-              <span class="product-card-price">{{product.price}} <span class="product-card-curreny">DT</span></span>
-            </ion-row>
-          </ion-card-header>
-        </ion-card>
+    <ion-row class="ion-no-padding ion-no-margin ion-justify-content-center">
+      <ion-col  class="ion-no-padding ion-no-margin"  size="12" size-sm="8">
+        <ion-row class="ion-no-padding ion-no-margin" style="height: calc(100vh - 225px ) ; overflow: scroll ;" >
+          <ion-col size="6" *ngFor="let product of products" class="ion-no-padding">
+            <ion-card (click)="openProductDetailModal(product)" class="product-card" >
+              <div class="ion-text-center">
+                <img [src]="URL + product.image"  class="full-width"/>
+              </div>
+              <ion-card-header>
+                <ion-card-subtitle class="product-card-title">{{product.name}}</ion-card-subtitle>
+                <ion-row class="ion-justify-content-between ion-align-items-center">
+                  <span class="product-card-price">{{product.price}} <span class="product-card-curreny">DT</span></span>
+                </ion-row>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
       </ion-col>
-
     </ion-row>
 
   </ion-grid>
 
 
-</ion-content>
+</div>

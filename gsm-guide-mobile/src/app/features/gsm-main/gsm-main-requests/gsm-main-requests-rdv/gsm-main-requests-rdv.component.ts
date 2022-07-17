@@ -15,16 +15,23 @@ export class GsmMainRequestsRdvComponent implements OnInit {
   @Input() locations: any;
   @Input() request: any;
 
-  monthEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  monthFr = [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre' , 'Décembre'];
   months: any;
   calendar = {
     mode: 'month' as CalendarMode,
     step: 30 as Step,
-    currentDate: new Date()
+    currentDate: new Date() ,
+    dateFormatter: {
+      formatMonthViewDayHeader(date:Date) {
+        const dayFr = [ 'Dim' , 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+        return dayFr[date.getDay()];
+      },
+    }
   };
 
-  locationName: any;
-  locationId: any;
+
+  locationName = null ;
+  locationId = null ;
 
   date = '' ;
 
@@ -34,10 +41,11 @@ export class GsmMainRequestsRdvComponent implements OnInit {
               private requestService: RequestService) { }
 
   ngOnInit() {
+    const date = new Date ;
     this.months = {
-      previous : this.monthEn[(new Date).getMonth() - 2],
-      current : this.monthEn[(new Date).getMonth() - 1],
-      next : this.monthEn[(new Date).getMonth()],
+      previous: date.getMonth() === 0 ? this.monthFr[11] : this.monthFr[date.getMonth() - 1] || '',
+      current: this.monthFr[date.getMonth()] || '',
+      next: date.getMonth() === 11 ? this.monthFr[0] : this.monthFr[date.getMonth() + 1] || '',
     };
   }
 
@@ -49,9 +57,9 @@ export class GsmMainRequestsRdvComponent implements OnInit {
     this.date = event.toString() ;
     const date = new Date(event) ;
     this.months = {
-      previous : this.monthEn[date.getMonth() - 2] || '',
-      current : this.monthEn[date.getMonth() - 1] || '',
-      next : this.monthEn[date.getMonth()] || '',
+      previous: date.getMonth() === 0 ? this.monthFr[11] : this.monthFr[date.getMonth() - 1] || '',
+      current: this.monthFr[date.getMonth()] || '',
+      next: date.getMonth() === 11 ? this.monthFr[0] : this.monthFr[date.getMonth() + 1] || '',
     };
   }
 
@@ -77,7 +85,6 @@ export class GsmMainRequestsRdvComponent implements OnInit {
           this.toastService.show('Demende envoyé avec succès' , 'success') ;
           this.spinnerService.deactivate();
           this.modalController.dismiss();
-          console.log(res) ;
         }, error => {
           this.toastService.show('Erreur lors de l\'evoie de la demande' , 'danger');
           this.spinnerService.deactivate();
@@ -87,6 +94,6 @@ export class GsmMainRequestsRdvComponent implements OnInit {
   }
 
   isAllVariablesExists() {
-
+    return (this.date && this.locationId)
   }
 }

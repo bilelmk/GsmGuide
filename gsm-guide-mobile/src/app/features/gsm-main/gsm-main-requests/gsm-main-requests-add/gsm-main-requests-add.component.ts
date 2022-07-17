@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SpinnerService } from '../../../../core/services/in-app/spinner.service';
 import { ToastService } from '../../../../core/services/in-app/toast.service';
-import { ModalController } from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import { PriceService } from '../../../../core/services/http/price.service';
 import { GsmMainRequestsRdvComponent } from '../gsm-main-requests-rdv/gsm-main-requests-rdv.component';
 
@@ -29,12 +29,8 @@ export class GsmMainRequestsAddComponent implements OnInit {
   articleId = null ;
   articleName = null ;
 
-  partId ;
-  partName = 'DIAGNOSTIQUE' ;
-  initParts = {
-    id: -1,
-    name: 'DIAGNOSTIQUE'
-  };
+  partId = null ;
+  partName = null ;
 
   priceId = null ;
   priceName = null ;
@@ -45,11 +41,12 @@ export class GsmMainRequestsAddComponent implements OnInit {
   constructor(private spinnerService: SpinnerService,
               private toastService: ToastService,
               private modalController: ModalController,
-              private priceService: PriceService ) {}
+              private priceService: PriceService,
+              private alertController: AlertController) {}
 
   ngOnInit() {
-    this.parts.unshift(this.initParts);
-    this.partId = '-1';
+    // this.parts.unshift(this.initParts);
+    // this.partId = '-1';
   }
 
   close() {
@@ -83,15 +80,37 @@ export class GsmMainRequestsAddComponent implements OnInit {
     this.articleName = null ;
   }
 
+  async showModelAlert() {
+    if (!this.markId) {
+      setTimeout(() => {
+        this.alertController.create({
+          header: 'Attention',
+          message: 'If faut sélectionner une marque avant !',
+          buttons: ['OK']
+        }).then(alert => alert.present() );
+      } , 500) ;
+    }
+  }
+
   onArticleSelect() {
     for (const article of this.articles) {
       // tslint:disable-next-line:triple-equals
-      if (article.id == this.articleId) {
+      if (article.articleId == this.articleId) {
         this.articleName = article.name ;
       }
     }
-    // this.articleId = null ;
-    // this.articleName = null ;
+  }
+
+  async showArticleAlert() {
+    if (!this.markId || !this.modelId) {
+      setTimeout(() => {
+        this.alertController.create({
+          header: 'Attention',
+          message: 'If faut sélectionner une marque et un modèle avant !',
+          buttons: ['OK']
+        }).then(alert => alert.present() );
+      } , 500) ;
+    }
   }
 
   onPartSelect() {
@@ -148,18 +167,12 @@ export class GsmMainRequestsAddComponent implements OnInit {
         locations: this.locations
       }
     }) ;
-    modal.onWillDismiss().then(
-        res => {
-          this.close() ;
-        }
-    );
+    modal.onWillDismiss().then(res => { this.close(); });
     return await modal.present();
   }
 
   isAllVariablesExists() {
-    return false;
+    return (this.articleId && this.modelId && this.markId && this.partId && this.priceId) ;
   }
-
-
 }
 
