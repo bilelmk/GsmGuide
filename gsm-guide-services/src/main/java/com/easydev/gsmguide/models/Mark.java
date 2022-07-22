@@ -22,4 +22,9 @@ public class Mark {
     @JoinColumn(name="markId" , referencedColumnName = "markId")
     @JsonIgnoreProperties(value = {"mark"}, allowSetters = true)
     private List<Model> models ;
+
+    @OneToMany(cascade = CascadeType.ALL)
+////    @JoinColumn(name="markId" , referencedColumnName = "markId")
+//    @JsonIgnoreProperties(value = {"mark"}, allowSetters = true)
+    private List<Shortcut> shortcuts ;
 }
