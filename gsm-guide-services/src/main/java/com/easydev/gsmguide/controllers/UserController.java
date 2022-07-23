@@ -2,8 +2,7 @@ package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.AuthenticationRequest;
 import com.easydev.gsmguide.enums.Role;
-import com.easydev.gsmguide.models.Product;
-import com.easydev.gsmguide.models.User;
+import com.easydev.gsmguide.models.AppUser;
 import com.easydev.gsmguide.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +21,18 @@ public class UserController {
     }
 
     @GetMapping("/role/{role}")
-    public List<User> getAllByRole(@PathVariable Role role) {
+    public List<AppUser> getAllByRole(@PathVariable Role role) {
         return userService.getAllByRole(role) ;
     }
 
     @GetMapping("{id}")
-    public User getById(@PathVariable Long id) {
+    public AppUser getById(@PathVariable Long id) {
         return userService.getById(id) ;
     }
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody User user) {
-        return userService.register(user) ;
+    public ResponseEntity<?> register(@RequestBody AppUser appUser) {
+        return userService.register(appUser) ;
     }
 
     @PostMapping("login")
@@ -47,13 +46,13 @@ public class UserController {
     }
 
     @PutMapping()
-    public User update(@RequestBody User user) {
-        return userService.update(user) ;
+    public AppUser update(@RequestBody AppUser appUser) {
+        return userService.update(appUser) ;
     }
 
     @PutMapping("image")
-    public User update(@RequestPart("image") MultipartFile image,
-                       @RequestPart("user") User user) {
-        return userService.updateImage(image , user) ;
+    public AppUser update(@RequestPart("image") MultipartFile image,
+                          @RequestPart("user") AppUser appUser) {
+        return userService.updateImage(image , appUser) ;
     }
 }

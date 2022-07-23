@@ -1,6 +1,6 @@
 package com.easydev.gsmguide.dtos;
 
-import com.easydev.gsmguide.models.User;
+import com.easydev.gsmguide.models.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class RequestDto {
     private long articleId ;
     private long partId ;
     private long priceId ;
-    private User client ;
+    private AppUser client ;
     private String location ;
     private String imei ;
     private String details ;

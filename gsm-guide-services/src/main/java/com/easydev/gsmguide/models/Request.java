@@ -31,10 +31,10 @@ public class Request {
     private String details ;
 
     @OneToOne
-    private User repairer ;
+    private AppUser repairer ;
 
     @OneToOne
-    private User client ;
+    private AppUser client ;
 
     private State state ;
 

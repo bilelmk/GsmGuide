@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Component
 @Slf4j
 public class StartupEvent implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     private AdminService adminservice;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -21,7 +24,7 @@ public class StartupEvent implements ApplicationListener<ApplicationReadyEvent> 
             admin.setUsername("admin");
             admin.setFirstname("admin");
             admin.setLastname("test");
-            admin.setPassword("0000");
+            admin.setPassword(passwordEncoder.encode("0000"));
             adminservice.register(admin);
 
     }

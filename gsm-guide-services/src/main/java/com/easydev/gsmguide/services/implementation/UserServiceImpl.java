@@ -5,7 +5,7 @@ import com.easydev.gsmguide.config.UploadConfig;
 import com.easydev.gsmguide.dtos.AuthenticationRequest;
 import com.easydev.gsmguide.dtos.AuthenticationResponse;
 import com.easydev.gsmguide.enums.Role;
-import com.easydev.gsmguide.models.User;
+import com.easydev.gsmguide.models.AppUser;
 import com.easydev.gsmguide.repositories.UserRepository;
 import com.easydev.gsmguide.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -37,13 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<AppUser> getAll() {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> register(User toAddClient) {
-        User client = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
+    public ResponseEntity<?> register(AppUser toAddClient) {
+        AppUser client = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
         if (client != null) {
             return new ResponseEntity<>("username exist", HttpStatus.NOT_FOUND);
         }
@@ -51,17 +51,17 @@ public class UserServiceImpl implements UserService {
         toAddClient.setValid(true);
 //        String code = Integer.toString(100000 + random.nextInt(899999) + 1);
 //        this.mailingService.sendMail(new EmailDto(client.getEmail(), code));
-        User newClient = userRepository.save(toAddClient);
+        AppUser newClient = userRepository.save(toAddClient);
         return new ResponseEntity<>(newClient, HttpStatus.OK) ;
     }
 
     @Override
-    public User update(User user) {
-        User ToUpdateUser = userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new) ;
-        ToUpdateUser.setFirstname(user.getFirstname());
-        ToUpdateUser.setLastname(user.getLastname());
-        ToUpdateUser.setPhone(user.getPhone());
-        return userRepository.save(ToUpdateUser) ;
+    public AppUser update(AppUser appUser) {
+        AppUser toUpdateAppUser = userRepository.findById(appUser.getId()).orElseThrow(IllegalArgumentException::new) ;
+        toUpdateAppUser.setFirstname(appUser.getFirstname());
+        toUpdateAppUser.setLastname(appUser.getLastname());
+        toUpdateAppUser.setPhone(appUser.getPhone());
+        return userRepository.save(toUpdateAppUser) ;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> login(AuthenticationRequest request) {
-        User client = this.userRepository.findByUsernameIgnoreCase(request.getUsername()).orElse(null);
+        AppUser client = this.userRepository.findByUsernameIgnoreCase(request.getUsername()).orElse(null);
         if (client != null) {
             if (this.passwordEncoder.matches(request.getPassword(), client.getPassword())) {
                  if (!client.isValid() ) {
@@ -86,20 +86,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
+    public AppUser getById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<User> getAllByRole(Role role) {
+    public List<AppUser> getAllByRole(Role role) {
         return userRepository.findAllByRole(role);
     }
 
     @Override
-    public User updateImage(MultipartFile image , User user) {
-        User ToUpdateUser = userRepository.findById(user.getId()).orElseThrow(IllegalArgumentException::new) ;
+    public AppUser updateImage(MultipartFile image , AppUser appUser) {
+        AppUser toUpdateAppUser = userRepository.findById(appUser.getId()).orElseThrow(IllegalArgumentException::new) ;
         String newFileName = uploadService.upload(image);
-        ToUpdateUser.setImage("images/" + newFileName);
-        return userRepository.save(ToUpdateUser);
+        toUpdateAppUser.setImage("images/" + newFileName);
+        return userRepository.save(toUpdateAppUser);
     }
 }
