@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'coucou-backoffice';
+  title = 'gsm-backoffice';
 
   ngOnInit(): void {
   }
