@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: gsm
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: gsm#123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - gsm
+  gsm-server:
+    image: "gsm_server"
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/gsm
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: gsm#123
+    volumes:
+      - staticfiles:/opt/gsm-software/files
+    depends_on:
+      - db
+    restart: on-failure
+    networks:
+      - gsm
+  back-office:
+    image: "back_office"
+    ports:
+      - 4200:80
+    environment:
+      PROXY_API_DEST: gsm-server
+    networks:
+      - gsm
+    depends_on:
+      - gsm-server
+volumes:
+  staticfiles:
+    driver: local
+  pgdata:
+    driver: local
+networks:
+  gsm:
+
