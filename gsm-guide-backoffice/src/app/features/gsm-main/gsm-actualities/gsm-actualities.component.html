@@ -1,0 +1,32 @@
+<div class="page" *ngIf="!loading" >
+
+  <div class="row mt-2 mb-2 justify-content-between align-items-center">
+    <p class="title">
+      <span class="material-icons title-icon">newspaper</span>
+      Actualités
+    </p>
+    <div class="row align-items-center">
+      <button class="square-btn ml-2"  (click)="openModal()">
+        <i class="material-icons icon-blue" >
+          add
+        </i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-5"  *ngIf="actualities?.length > 0">
+    <div class="col-12 col-sm-6 col-md-4 no-padding" *ngFor="let actuality of actualities">
+      <div class="row justify-content-center align-items-center">
+        <img  class="img-fluid col-6" [src]=" actuality?.image ? URL + actuality.image : './../../../../assets/image/default-profile.png' " alt="image"  >
+        <div class="col-6">{{actuality.content}}</div>
+      </div>
+      <button class="img-btn" (click)="delete(actuality)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <app-cb-errors [array]="actualities" [error]="error"></app-cb-errors>
+
+</div>
+

@@ -1,7 +1,6 @@
 package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.models.Actuality;
-import com.easydev.gsmguide.models.User;
 import com.easydev.gsmguide.services.ActualityService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

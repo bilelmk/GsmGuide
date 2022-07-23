@@ -6,6 +6,8 @@ import { UserService } from '../../../core/services/http/user.service';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { ToastService } from '../../../core/services/in-app/toast.service';
 import { Router } from '@angular/router';
+import {ActualityService} from "../../../core/services/http/actuality.service";
+import {Actuality} from "../../../core/classes/actuality";
 
 @Component({
   selector: 'app-gsm-main-home',
@@ -29,16 +31,29 @@ export class GsmMainHomePage  {
   isAuthenticated ;
   role ;
 
+  actualities: Actuality[] ;
+
   constructor(private userService: UserService,
               private spinnerService: SpinnerService,
               private menu: MenuController,
               private modalController: ModalController,
               private toastService: ToastService,
-              private router: Router) { }
+              private router: Router,
+              private actualityService: ActualityService) { }
 
   ionViewWillEnter() {
     this.userService.token.subscribe(res => this.isAuthenticated = res != null);
     this.userService.role.subscribe(res => this.role = res);
+    this.spinnerService.activate() ;
+    this.actualityService.getAll().subscribe(
+        res => {
+          this.actualities = res;
+          this.spinnerService.deactivate();
+        },
+        error => {
+          this.spinnerService.deactivate();
+        }
+    );
   }
 
   onToggleMenu(name: string) {

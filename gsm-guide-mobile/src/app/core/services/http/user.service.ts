@@ -13,6 +13,7 @@ export class UserService {
 
   token = new BehaviorSubject(null);
   role = new BehaviorSubject(null);
+  private tokenTimer: any ;
 
   URL = environment.url + 'api/users' ;
 
@@ -43,5 +44,11 @@ export class UserService {
     this.token.next(null) ;
     this.role.next(null ) ;
     this.router.navigate(['/gsm-main']);
+  }
+
+  setAuthTimer(duration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, duration * 1000 );
   }
 }

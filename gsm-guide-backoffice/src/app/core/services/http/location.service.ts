@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class LocationService {
 
-  URL = environment.url + "/api/locations";
+  URL = environment.url + "api/locations";
 
   constructor(private http: HttpClient) {
   }

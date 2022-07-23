@@ -41,6 +41,7 @@ export class GsmLoginPage implements OnInit {
           sessionStorage.setItem('expiresIn' , res.expiresIn);
           sessionStorage.setItem('id' , res.id);
           sessionStorage.setItem('role' , res.role);
+          this.userService.setAuthTimer(res.expiresIn) ;
           this.userService.token.next(true) ;
           this.userService.role.next(res.role) ;
           this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
@@ -48,7 +49,6 @@ export class GsmLoginPage implements OnInit {
           this.router.navigate(['/gsm-main']);
         }, error => {
           this.spinnerService.deactivate() ;
-          alert(error)
           if (error.error === 'wrong username') {
             this.toastService.show('Nom d\'utilisateur incorrect' , 'danger');
           } else if (error.error === 'wrong password') {

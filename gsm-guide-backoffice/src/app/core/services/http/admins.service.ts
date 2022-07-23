@@ -10,7 +10,7 @@ import { environment } from "../../../../environments/environment";
 })
 export class AdminsService {
 
-  URL = environment.url + "/api/admins" ;
+  URL = environment.url + "api/admins" ;
 
   constructor(private http: HttpClient) { }
 

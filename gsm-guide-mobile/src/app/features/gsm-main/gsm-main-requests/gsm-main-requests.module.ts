@@ -11,7 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { GsmMainRequestsListComponent } from './gsm-main-requests-list/gsm-main-requests-list.component';
 import { GsmMainRequestsRdvComponent } from './gsm-main-requests-rdv/gsm-main-requests-rdv.component';
 import { NgCalendarModule } from 'ionic2-calendar';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {TranslateModule} from "@ngx-translate/core";
         MatButtonModule,
         MatInputModule,
         NgCalendarModule,
-        TranslateModule
+        TranslateModule,
+        SharedModule
     ],
   declarations: [
     GsmMainRequestsPage,

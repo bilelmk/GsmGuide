@@ -22,6 +22,9 @@ export class GsmMainReparationRequestsPage implements OnInit {
   offset = 0 ;
   id = sessionStorage.getItem('id') ;
 
+  loading = false ;
+  error = false ;
+
   constructor(private userService: UserService,
               private modalController: ModalController,
               private spinnerService: SpinnerService,
@@ -43,11 +46,15 @@ export class GsmMainReparationRequestsPage implements OnInit {
       limit : this.limit ,
       id: this.id
     };
+    this.loading = true ;
     this.requestService.getAllByRepairer(searchRequest).subscribe(
         (res: any) => {
           this.spinnerService.deactivate() ;
           this.requests = res.rows;
+          this.loading = false ;
         }, error => {
+          this.loading = false ;
+          this.error = true ;
           this.spinnerService.deactivate() ;
           console.log(error) ;
         }

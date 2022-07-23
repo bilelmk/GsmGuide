@@ -3,19 +3,22 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorsComponent } from './components/errors/errors.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    SliderComponent
   ],
   exports: [
     MenuComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,
     IonicModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

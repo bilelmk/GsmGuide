@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { GsmMainHomePageRoutingModule } from './gsm-main-home-routing.module';
 import { GsmMainHomePage } from './gsm-main-home.page';
 import { TranslateModule } from '@ngx-translate/core';
+import {SharedModule} from "../../../shared/shared.module";
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
         IonicModule,
         GsmMainHomePageRoutingModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
+        SharedModule
     ],
   declarations: [GsmMainHomePage]
 })
