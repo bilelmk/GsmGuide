@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Proxy(lazy = false)
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

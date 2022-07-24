@@ -26,6 +26,6 @@ public class Product {
   private LocalDateTime creationDate ;
 
   @ManyToOne
-  private User client;
+  private AppUser client;
 
 }
