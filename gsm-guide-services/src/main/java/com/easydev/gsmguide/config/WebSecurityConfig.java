@@ -1,4 +1,4 @@
-package com.easydev.gsmguide.config;//package com.easydev.easynotes.config;
+package com.easydev.gsmguide.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -24,9 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService myUserDetailsService;
-
-//    @Autowired
-//    private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,17 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().cors().and()
                 .authorizeRequests().antMatchers(
                         "/**",
-                        // authorize swagger Apis
                         "/swagger-resources/**",
                         "/swagger-ui.html",
-                        // "/swagger-ui/**",
-                        //"/authenticate",
                         "/webjars/**",
-                        "/v2/api-docs",
-                        "/sockets/**",
                         "/api/**",
-                        //"/api/oauth/user/me",
-                        "/private/tenants",
                         "/api/auth").permitAll().
                 anyRequest().authenticated().and().
                 exceptionHandling().and().sessionManagement()
@@ -70,14 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://162.19.67.38"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Collections.singletonList("http://162.19.67.38"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
 }
