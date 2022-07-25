@@ -49,6 +49,14 @@ const routes: Routes = [
       {
         path: 'actualities',
         loadChildren: () => import('./gsm-actualities/gsm-actualities.module').then(m => m.GsmActualitiesModule)
+      },
+      {
+        path: 'shortcuts',
+        loadChildren: () => import('./gsm-shortcuts/gsm-shortcuts.module').then(m => m.GsmShortcutsModule)
+      },
+      {
+        path: 'sms',
+        loadChildren: () => import('./gsm-sms/gsm-sms.module').then(m => m.GsmSmsModule)
       }
     ]
   }

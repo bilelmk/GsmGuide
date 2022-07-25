@@ -1,8 +1,11 @@
 package com.easydev.gsmguide.controllers;
 
+import com.easydev.gsmguide.dtos.ShortcutListDto;
 import com.easydev.gsmguide.models.Shortcut;
 import com.easydev.gsmguide.services.ShortcutService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/shortcuts")
@@ -12,6 +15,11 @@ public class ShortcutController {
 
     public ShortcutController(ShortcutService shortcutService) {
         this.shortcutService = shortcutService ;
+    }
+
+    @GetMapping()
+    public List<ShortcutListDto> getAll() {
+        return shortcutService.getAll();
     }
 
     @PostMapping()

@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from "@angular/material/list";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { Daterangepicker } from "ng2-daterangepicker";
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { Daterangepicker } from "ng2-daterangepicker";
     MatSelectModule,
     MatListModule,
     LeafletModule,
-    Daterangepicker
+    Daterangepicker,
+    NgCircleProgressModule.forRoot() ,
   ],
   providers: [
     {

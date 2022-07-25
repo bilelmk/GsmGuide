@@ -58,6 +58,18 @@ export class GsmMainComponent implements OnInit {
     },
     {
       type: "route",
+      route : "shortcuts" ,
+      name : "Aliases" ,
+      icon : "move_up",
+    },
+    {
+      type: "route",
+      route : "sms" ,
+      name : "Sms Service" ,
+      icon : "sms",
+    },
+    {
+      type: "route",
       route : "statistics" ,
       name : "Statistiques" ,
       icon : "bar_chart",

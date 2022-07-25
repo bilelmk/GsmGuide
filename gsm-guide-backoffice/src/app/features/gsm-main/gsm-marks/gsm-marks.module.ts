@@ -12,8 +12,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
 import { GsmPriceAddComponent } from "./gsm-price-modal/gsm-price-add/gsm-price-add.component";
-import {MatSelectModule} from "@angular/material/select";
-import {MatIconModule} from "@angular/material/icon";
+import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

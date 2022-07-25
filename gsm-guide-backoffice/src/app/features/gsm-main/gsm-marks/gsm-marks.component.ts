@@ -9,11 +9,10 @@ import { GsmArticleModalComponent } from "./gsm-article-modal/gsm-article-modal.
 import { GsmPriceModalComponent } from "./gsm-price-modal/gsm-price-modal.component";
 import { PartService } from "../../../core/services/http/part.service";
 import { GsmMarkModalComponent } from "./gsm-mark-modal/gsm-mark-modal.component";
-import { Helpers } from "../../../shared/helpers/helpers";
 import { ModelService } from "../../../core/services/http/model.service";
 import { ArticleService } from "../../../core/services/http/article.service";
 import { AlertService } from "../../../core/services/in-app/alert.service";
-import {SnackbarService} from "../../../core/services/in-app/snackbar.service";
+import { SnackbarService } from "../../../core/services/in-app/snackbar.service";
 
 @Component({
   selector: 'app-gsm-marks',
