@@ -32,6 +32,11 @@ const routes: Routes = [
         // tslint:disable-next-line:max-line-length
         loadChildren: () => import('./gsm-main-reparation-requests/gsm-main-reparation-requests.module').then(m => m.GsmMainReparationRequestsPageModule)
       },
+      {
+        path: 'gsm-main-shortcuts',
+        // tslint:disable-next-line:max-line-length
+        loadChildren: () => import('./gsm-main-shortcuts/gsm-main-shortcuts.module').then(m => m.GsmMainShortcutsPageModule)
+      }
     ]
   }
 ];

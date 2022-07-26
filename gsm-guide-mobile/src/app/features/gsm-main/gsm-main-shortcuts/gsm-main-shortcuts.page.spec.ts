@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GsmMainMarkPage } from './gsm-main-mark.page';
+import { GsmMainShortcutsPage } from './gsm-main-shortcuts.page';
 
-describe('GsmMainMarkPage', () => {
-  let component: GsmMainMarkPage;
-  let fixture: ComponentFixture<GsmMainMarkPage>;
+describe('GsmMainShortcutsPage', () => {
+  let component: GsmMainShortcutsPage;
+  let fixture: ComponentFixture<GsmMainShortcutsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GsmMainMarkPage ],
+      declarations: [ GsmMainShortcutsPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GsmMainMarkPage);
+    fixture = TestBed.createComponent(GsmMainShortcutsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
