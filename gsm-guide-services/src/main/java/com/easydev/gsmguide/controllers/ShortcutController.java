@@ -5,6 +5,7 @@ import com.easydev.gsmguide.models.Shortcut;
 import com.easydev.gsmguide.services.ShortcutService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController

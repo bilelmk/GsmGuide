@@ -19,7 +19,7 @@ export class GsmMainHomePage  {
     initialSlide: 0,
     speed: 400,
     zoom: false ,
-    slidesPerView: 1.5 ,
+    slidesPerView: 1.7 ,
     centredSlides: true ,
     spaceBetween: 10,
     pagination: false

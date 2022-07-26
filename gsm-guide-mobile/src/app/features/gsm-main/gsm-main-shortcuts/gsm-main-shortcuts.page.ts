@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ShortcutService } from '../../../core/services/http/shortcut.service';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gsm-main-shortcuts',
@@ -12,33 +12,37 @@ import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 export class GsmMainShortcutsPage {
 
   segment;
-
-  loading;
-  error;
-
   marks ;
 
-  constructor(private modalController: ModalController,
-              private callNumber: CallNumber,
+  loading = false ;
+  error = false ;
+
+  constructor(private callNumber: CallNumber,
               private shortcutService: ShortcutService,
-              private spinnerService: SpinnerService) { }
+              private spinnerService: SpinnerService,
+              private router: Router) { }
 
   ionViewWillEnter() {
+    this.loading = true ;
     this.spinnerService.activate();
     this.shortcutService.getAll().subscribe(
         res => {
+          this.loading = false ;
           this.marks = res ;
-          this.segment = res[0].markName || null ;
+          this.segment = res[0]?.markName;
           this.spinnerService.deactivate();
         },
         error => {
+          this.loading = false ;
+          this.error = true ;
           this.spinnerService.deactivate();
+          console.log(error);
         }
     );
   }
 
   close() {
-    this.modalController.dismiss();
+    this.router.navigate(['gsm-main/gsm-main-home']);
   }
 
   segmentChanged(event: any) {

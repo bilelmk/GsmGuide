@@ -15,28 +15,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <p class="page-title ion-padding-top">Marques</p>
+<ion-content>
 
+  <div  class="ion-padding" *ngIf="!loading && marks?.length > 0">
 
-  <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable="true" value="{{segment}}">
-    <ion-segment-button *ngFor="let mark of marks " value="{{mark?.markName}}" >
-      <ion-label>{{mark.markName}}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <p class="page-title ion-padding-top">Marques</p>
 
-  <div *ngFor="let mark of marks " >
-    <ion-row  *ngIf="segment == mark?.markName" >
-      <ion-col size="12" class="form-card">
-        <ion-row *ngFor="let shortcut of mark?.shortcuts">
-          <ion-col size="12"><p class="form-card-label m-0">{{shortcut?.name}}</p></ion-col>
-          <ion-col size="11"><p class="form-card-number" >{{shortcut?.code}}</p></ion-col>
-          <ion-col size="1">
-            <ion-icon (click)="call(shortcut.code)" class="form-card-icon" name="call"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+    <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable="true" value="{{segment}}">
+      <ion-segment-button *ngFor="let mark of marks " value="{{mark?.markName}}" >
+        <ion-label>{{mark?.markName}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngFor="let mark of marks " >
+      <ion-row  *ngIf="segment == mark?.markName" >
+        <ion-col size="12" class="form-card">
+          <ion-row *ngFor="let shortcut of mark?.shortcuts">
+            <ion-col size="12"><p class="form-card-label m-0">{{shortcut?.name}}</p></ion-col>
+            <ion-col size="11"><p class="form-card-number" >{{shortcut?.code}}</p></ion-col>
+            <ion-col size="1">
+              <ion-icon (click)="call(shortcut.code)" class="form-card-icon" name="call"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </div>
+
   </div>
+
+  <app-errors [exist]="marks?.length == 0" [message]="'Aucun alias trouvé'" [icon]="'arrow-undo-outline'"></app-errors>
+  <app-errors [exist]="error" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
+
 
 </ion-content>
