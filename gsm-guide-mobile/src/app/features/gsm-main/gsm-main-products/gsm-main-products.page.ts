@@ -16,18 +16,16 @@ import { ToastService } from '../../../core/services/in-app/toast.service';
 export class GsmMainProductsPage  {
 
   products = [];
-  myProducts = [];
-
-  segment = 'products';
-
   URL = environment.url ;
 
   // request params
   key = '' ;
-  limit = 10 ;
+  limit = 4 ;
   offset = 0 ;
 
   isAuthenticated ;
+  loading = false ;
+  error = false ;
 
   constructor(private userService: UserService,
               private spinnerService: SpinnerService,
@@ -67,10 +65,6 @@ export class GsmMainProductsPage  {
     }).then(modal => modal.present());
   }
 
-  segmentChanged($event: any) {
-    this.segment = $event.detail.value;
-  }
-
   getProducts(key = '') {
     this.key = key ;
     const request = {
@@ -79,13 +73,38 @@ export class GsmMainProductsPage  {
       offset: this.offset,
     };
     this.spinnerService.activate();
+    this.loading = true ;
     this.productService.search(request).subscribe(
         (res: any) => {
-          this.products = res;
+          this.loading = false ;
+          this.products = res.rows;
           this.spinnerService.deactivate();
         },
         error => {
+          this.error = true ;
+          this.loading = false ;
           this.spinnerService.deactivate();
+        }
+    );
+  }
+
+  loadData(event: any) {
+    this.offset ++ ;
+    const request = {
+      key: this.key || '',
+      limit : this.limit,
+      offset: this.offset,
+    };
+    this.productService.search(request).subscribe(
+        (res: any) => {
+          this.products.push(...res.rows);
+          event.target.complete();
+          if (this.products.length === res.count) {
+            event.target.disabled = true;
+          }
+        },
+        error => {
+          this.error = true ;
         }
     );
   }
@@ -96,8 +115,7 @@ export class GsmMainProductsPage  {
 
   initVariable() {
     this.key = '' ;
-    this.limit = 10 ;
+    this.limit = 4 ;
     this.offset = 0 ;
   }
-
 }

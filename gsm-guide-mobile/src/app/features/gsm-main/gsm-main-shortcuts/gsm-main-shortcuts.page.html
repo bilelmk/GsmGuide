@@ -15,9 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-  <div  class="ion-padding" *ngIf="!loading && marks?.length > 0">
+<ion-content class="ion-padding" *ngIf="!loading && marks?.length > 0">
 
     <p class="page-title ion-padding-top">Marques</p>
 
@@ -41,10 +39,7 @@
       </ion-row>
     </div>
 
-  </div>
-
   <app-errors [exist]="marks?.length == 0" [message]="'Aucun alias trouvé'" [icon]="'arrow-undo-outline'"></app-errors>
   <app-errors [exist]="error" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
-
 
 </ion-content>

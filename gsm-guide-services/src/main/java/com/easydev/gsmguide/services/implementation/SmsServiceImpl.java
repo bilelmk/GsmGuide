@@ -1,10 +1,7 @@
 package com.easydev.gsmguide.services.implementation;
 
 import com.easydev.gsmguide.dtos.*;
-import com.easydev.gsmguide.dtos.sms.OutboundSMSMessageRequest;
-import com.easydev.gsmguide.dtos.sms.OutboundSMSTextMessage;
-import com.easydev.gsmguide.dtos.sms.SendSmsDto;
-import com.easydev.gsmguide.dtos.sms.UsageDto;
+import com.easydev.gsmguide.dtos.sms.*;
 import com.easydev.gsmguide.services.SmsService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

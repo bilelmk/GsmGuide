@@ -42,6 +42,7 @@ export class GsmLoginComponent implements OnInit {
     }
     this.adminsService.login(authRequest).subscribe(
       res => {
+        console.log(res)
         // save data in browser
         sessionStorage.setItem('token' , res.token) ;
         // sessionStorage.setItem('admin' , JSON.stringify({firstname : res.admin.firstname , lastname : res.admin.lastname }));

@@ -1,6 +1,7 @@
 package com.easydev.gsmguide.services.implementation;
 
 import com.easydev.gsmguide.config.UploadConfig;
+import com.easydev.gsmguide.dtos.PageResponse;
 import com.easydev.gsmguide.dtos.SearchRequest;
 import com.easydev.gsmguide.models.Product;
 import com.easydev.gsmguide.repositories.ProductRepository;
@@ -23,9 +24,13 @@ public class ProductServiceImpl implements ProductService {
     this.productRepository = productRepository ;
     this.uploadService = uploadService ;
   }
-  public List<Product> search(SearchRequest searchRequest) {
+
+  public PageResponse<Product> search(SearchRequest searchRequest) {
     Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
-    return productRepository.findAllByNameContainingOrDescriptionContaining(searchRequest.getKey() , searchRequest.getKey() , page);
+    List<Product> products =  productRepository.findAllByVisible(true , page );
+    //    List<Product> products =  productRepository.findAllByVisibleAndNameContainingOrDescriptionContaining(true ,searchRequest.getKey() , searchRequest.getKey() , page );
+    int count =  productRepository.findAllByVisible(true).size();
+    return new PageResponse<Product>(count, products) ;
   }
 
   @Override

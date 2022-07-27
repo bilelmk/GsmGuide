@@ -38,10 +38,10 @@ export class GsmLoginPage implements OnInit {
     this.userService.login(request).subscribe(
         res => {
           sessionStorage.setItem('token' , res.token);
-          sessionStorage.setItem('expiresIn' , res.expiresIn);
+          // sessionStorage.setItem('expiresIn' , res.expiresIn);
           sessionStorage.setItem('id' , res.id);
           sessionStorage.setItem('role' , res.role);
-          this.userService.setAuthTimer(res.expiresIn) ;
+          // this.userService.setAuthTimer(res.expiresIn) ;
           this.userService.token.next(true) ;
           this.userService.role.next(res.role) ;
           this.toastService.show('Vous êtes connecté avec succès' , 'success') ;

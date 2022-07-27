@@ -12,5 +12,10 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 //  void deleteProductsByCategoryId(long id);
   List<Product> findAllByNameContainingOrDescriptionContaining(String nameKey , String descKey, Pageable page);
+
+  List<Product> findAllByVisibleAndNameContainingOrDescriptionContaining(boolean visible ,String nameKey , String descKey, Pageable page );
+  List<Product> findAllByVisible(boolean visible);
+  List<Product> findAllByVisible(boolean visible, Pageable page);
+
   List<Product> findByClientId(long id , Pageable page);
 }
