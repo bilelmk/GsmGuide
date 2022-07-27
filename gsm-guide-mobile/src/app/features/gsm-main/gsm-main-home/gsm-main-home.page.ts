@@ -70,10 +70,10 @@ export class GsmMainHomePage  {
 
   openAddResquestModal() {
     if (this.role === 'CLIENT') {
-      this.router.navigate(['/gsm-main/gsm-main-requests']);
+      this.router.navigate(['/main/requests']);
     }
     else if (this.role === 'REPAIRER') {
-      this.router.navigate(['/gsm-main/gsm-main-reparation-requests']);
+      this.router.navigate(['/main/reparation-requests']);
     }
     else {
       this.toastService.show('Il faut se connecter' , 'info') ;

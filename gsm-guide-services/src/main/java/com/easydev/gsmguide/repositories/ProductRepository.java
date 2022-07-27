@@ -17,5 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   List<Product> findAllByVisible(boolean visible);
   List<Product> findAllByVisible(boolean visible, Pageable page);
 
+  List<Product> findAllByVisibleAndClientId(boolean visible , Long id);
+  List<Product> findAllByVisibleAndClientId(boolean visible , Long id ,Pageable page);
+
   List<Product> findByClientId(long id , Pageable page);
 }

@@ -24,6 +24,11 @@ public class ProductController {
     return productService.search(searchRequest);
   }
 
+  @PostMapping("client")
+  public PageResponse<Product> getAllByClient(@RequestBody SearchRequest searchRequest) {
+    return productService.getByClientId(searchRequest);
+  }
+
   @PostMapping
   public Product add(@RequestPart("image") MultipartFile image ,
                      @RequestPart("product") Product product) {

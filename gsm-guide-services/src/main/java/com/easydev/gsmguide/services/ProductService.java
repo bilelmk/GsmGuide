@@ -11,5 +11,5 @@ public interface ProductService {
   void deleteById(long id);
   Product updateStatus(boolean visible, long id);
   PageResponse<Product> search(SearchRequest searchRequest);
-  List<Product> getByClientId(SearchRequest searchRequest);
+  PageResponse<Product> getByClientId(SearchRequest searchRequest);
 }

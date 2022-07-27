@@ -34,9 +34,11 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public List<Product> getByClientId(SearchRequest searchRequest) {
+  public PageResponse<Product> getByClientId(SearchRequest searchRequest) {
     Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
-    return productRepository.findByClientId(searchRequest.getId() , page);
+    List<Product> products =  productRepository.findAllByVisibleAndClientId(true , searchRequest.getId() , page );
+    int count =  productRepository.findAllByVisibleAndClientId(true , searchRequest.getId()).size();
+    return new PageResponse<Product>(count, products) ;
   }
 
   public Product save(MultipartFile image, Product product) {

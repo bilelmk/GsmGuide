@@ -9,6 +9,7 @@ import { UserService } from '../../core/services/http/user.service';
 export class GsmMainPage implements OnInit {
 
   role = '' ;
+
   constructor(private usersService: UserService) {
     usersService.role.subscribe(
         res => this.role = res

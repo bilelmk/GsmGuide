@@ -17,6 +17,10 @@ export class ProductService {
     return this.http.post<Product[]>(this.URL + '/search' , request);
   }
 
+  getById(request): Observable<Product[]> {
+    return this.http.post<Product[]>(this.URL + '/client' , request);
+  }
+
   add(data: any): Observable<any> {
     return this.http.post<any>(this.URL , data);
   }

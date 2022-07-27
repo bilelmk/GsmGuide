@@ -3,26 +3,26 @@
     <ion-tabs>
       <ion-tab-bar slot="bottom">
 
-        <ion-tab-button tab="gsm-main-home">
+        <ion-tab-button tab="home">
           <ion-icon name="home"></ion-icon>
           <ion-label>Acceuil</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="gsm-main-products">
+        <ion-tab-button tab="products">
           <ion-icon name="basket"></ion-icon>
           <ion-label>Marketplace</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="gsm-main-requests" *ngIf="role == 'CLIENT'">
+        <ion-tab-button tab="requests" *ngIf="role == 'CLIENT'">
           <ion-icon name="construct"></ion-icon>
           <ion-label>Espace Réparation</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="gsm-main-reparation-requests" *ngIf="role == 'REPAIRER'">
+        <ion-tab-button tab="reparation-requests" *ngIf="role == 'REPAIRER'">
           <ion-icon name="construct"></ion-icon>
         </ion-tab-button>
 
-        <ion-tab-button tab="gsm-main-profile" *ngIf="role == 'CLIENT' || role == 'REPAIRER' ">
+        <ion-tab-button tab="profile" *ngIf="role == 'CLIENT' || role == 'REPAIRER' ">
           <ion-icon name="person"></ion-icon>
           <ion-label>Mon Compte</ion-label>
         </ion-tab-button>

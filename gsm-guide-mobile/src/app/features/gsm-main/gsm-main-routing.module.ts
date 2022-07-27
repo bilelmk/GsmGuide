@@ -9,34 +9,40 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'gsm-main-home',
+        redirectTo: 'home',
       },
       {
-        path: 'gsm-main-profile',
+        path: 'profile',
         loadChildren: () => import('./gsm-main-profile/gsm-main-profile.module').then( m => m.GsmMainProfilePageModule)
       },
       {
-        path: 'gsm-main-requests',
+        path: 'requests',
         loadChildren: () => import('./gsm-main-requests/gsm-main-requests.module').then( m => m.GsmMainRequestsPageModule)
       },
       {
-        path: 'gsm-main-products',
+        path: 'products',
         loadChildren: () => import('./gsm-main-products/gsm-main-products.module').then(m => m.GsmMainProductsPageModule)
       },
       {
-        path: 'gsm-main-home',
+        path: 'home',
         loadChildren: () => import('./gsm-main-home/gsm-main-home.module').then(m => m.GsmMainHomePageModule)
       },
       {
-        path: 'gsm-main-reparation-requests',
+        path: 'reparation-requests',
         // tslint:disable-next-line:max-line-length
         loadChildren: () => import('./gsm-main-reparation-requests/gsm-main-reparation-requests.module').then(m => m.GsmMainReparationRequestsPageModule)
       },
       {
-        path: 'gsm-main-shortcuts',
+        path: 'shortcuts',
         // tslint:disable-next-line:max-line-length
         loadChildren: () => import('./gsm-main-shortcuts/gsm-main-shortcuts.module').then(m => m.GsmMainShortcutsPageModule)
+      },
+      {
+        path: 'products-client',
+        // tslint:disable-next-line:max-line-length
+        loadChildren: () => import('./gsm-main-products/gsm-main-products-client/gsm-main-products-client.module').then(m => m.GsmMainProductsClientPageModule)
       }
+
     ]
   }
 ];

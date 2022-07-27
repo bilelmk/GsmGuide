@@ -46,7 +46,7 @@ export class GsmLoginPage implements OnInit {
           this.userService.role.next(res.role) ;
           this.toastService.show('Vous êtes connecté avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
-          this.router.navigate(['/gsm-main']);
+          this.router.navigate(['/main']);
         }, error => {
           this.spinnerService.deactivate() ;
           if (error.error === 'wrong username') {

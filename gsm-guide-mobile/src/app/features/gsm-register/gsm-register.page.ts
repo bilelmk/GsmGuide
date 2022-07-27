@@ -37,7 +37,7 @@ export class GsmRegisterPage implements OnInit {
     const request: RegisterRequest = { ...this.form.value , role : 'CLIENT' };
     this.userService.register(request).subscribe(
         res => {
-          this.router.navigate(['/gsm-login']);
+          this.router.navigate(['/login']);
           this.toastService.show('Votre compte à été créé avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
         }, error => {

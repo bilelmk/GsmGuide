@@ -42,7 +42,7 @@ export class GsmMainShortcutsPage {
   }
 
   close() {
-    this.router.navigate(['gsm-main/gsm-main-home']);
+    this.router.navigate(['main/home']);
   }
 
   segmentChanged(event: any) {

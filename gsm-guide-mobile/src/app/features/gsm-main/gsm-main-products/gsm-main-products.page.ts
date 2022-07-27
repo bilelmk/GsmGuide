@@ -20,7 +20,7 @@ export class GsmMainProductsPage  {
 
   // request params
   key = '' ;
-  limit = 4 ;
+  limit = 6 ;
   offset = 0 ;
 
   isAuthenticated ;
@@ -36,6 +36,7 @@ export class GsmMainProductsPage  {
 
   ionViewWillEnter() {
     this.userService.token.subscribe(res => this.isAuthenticated = res != null);
+    this.initVariable();
     this.getProducts();
   }
 
@@ -115,7 +116,7 @@ export class GsmMainProductsPage  {
 
   initVariable() {
     this.key = '' ;
-    this.limit = 4 ;
+    this.limit = 6 ;
     this.offset = 0 ;
   }
 }

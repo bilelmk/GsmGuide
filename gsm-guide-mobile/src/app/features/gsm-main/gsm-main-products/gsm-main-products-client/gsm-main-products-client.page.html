@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Mes produits</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon color="primary" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<p class="page-title ion-padding">Mes produits</p>
+
+<ion-content class="ion-no-padding ion-no-margin" >
+
+  <ion-row class="ion-no-padding ion-no-margin ion-justify-content-center">
+    <ion-col size="12" size-sm="8">
+
+      <ion-row class="ion-no-padding ion-no-margin"  >
+
+        <ion-col size="6" *ngFor="let product of products" class="ion-no-padding">
+          <ion-card (click)="openProductDetailModal(product)" class="product-card" >
+            <div class="ion-text-center">
+              <img [src]="URL + product.image"  class="full-width"/>
+            </div>
+            <ion-card-header>
+              <ion-card-subtitle class="product-card-title">{{product.name}}</ion-card-subtitle>
+              <ion-row class="ion-justify-content-between ion-align-items-center">
+                <span class="product-card-price">{{product.price}} <span class="product-card-curreny">DT</span></span>
+              </ion-row>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+          <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
