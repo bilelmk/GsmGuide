@@ -19,7 +19,13 @@
     <ion-row style="padding: 10px;" class="ion-no-padding ion-no-margin">
 
       <ion-col size="12" >
-        <input class="search" (input)="getProducts()" placeholder="Rechercher l'article qui vous désirer">
+        <div class="search-container">
+            <input type="text" placeholder="Recherche.." name="search">
+            <button (click)="getProducts()">
+              <ion-icon name="search" color="light"></ion-icon>
+            </button>
+        </div>
+
       </ion-col>
 
       <ion-col size="6" class="pl-5">

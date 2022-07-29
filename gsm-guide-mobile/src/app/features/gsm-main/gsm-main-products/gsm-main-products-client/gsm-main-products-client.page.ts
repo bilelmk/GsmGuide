@@ -9,7 +9,7 @@ import { environment } from '../../../../../environments/environment';
   templateUrl: './gsm-main-products-client.page.html',
   styleUrls: ['./gsm-main-products-client.page.scss'],
 })
-export class GsmMainProductsClientPage implements OnInit {
+export class GsmMainProductsClientPage {
 
   products = [];
   URL = environment.url ;
@@ -25,15 +25,13 @@ export class GsmMainProductsClientPage implements OnInit {
               private spinnerService: SpinnerService,
               private router: Router) { }
 
-  ngOnInit() {}
-
-  close() {
-    this.router.navigate(['/main/products']);
-  }
-
   ionViewWillEnter() {
     this.initVariable();
     this.getProducts();
+  }
+
+  close() {
+    this.router.navigate(['/main/products']);
   }
 
   getProducts() {
@@ -44,13 +42,14 @@ export class GsmMainProductsClientPage implements OnInit {
     };
     this.spinnerService.activate();
     this.loading = true ;
-    this.productService.search(request).subscribe(
+    this.productService.getByClient(request).subscribe(
         (res: any) => {
           this.loading = false ;
           this.products = res.rows;
           this.spinnerService.deactivate();
         },
         error => {
+
           this.error = true ;
           this.loading = false ;
           this.spinnerService.deactivate();
@@ -65,7 +64,7 @@ export class GsmMainProductsClientPage implements OnInit {
       limit : this.limit,
       offset: this.offset,
     };
-    this.productService.search(request).subscribe(
+    this.productService.getByClient(request).subscribe(
         (res: any) => {
           this.products.push(...res.rows);
           event.target.complete();

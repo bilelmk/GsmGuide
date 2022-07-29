@@ -15,17 +15,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="!loading && marks?.length > 0">
+<ion-content >
 
-    <p class="page-title ion-padding-top">Marques</p>
+  <p class="page-title ion-padding ion-padding-top" *ngIf="!loading && marks?.length > 0" >Marques</p>
 
-    <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable="true" value="{{segment}}">
-      <ion-segment-button *ngFor="let mark of marks " value="{{mark?.markName}}" >
-        <ion-label>{{mark?.markName}}</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+  <ion-segment mode="md" (ionChange)="segmentChanged($event)" scrollable="true" value="{{segment}}" *ngIf="!loading && marks?.length > 0">
+    <ion-segment-button *ngFor="let mark of marks " value="{{mark?.markName}}" >
+      <ion-label>{{mark?.markName}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-    <div *ngFor="let mark of marks " >
+  <div  *ngIf="!loading && marks?.length > 0" class="ion-padding">
+    <div *ngFor="let mark of marks ">
       <ion-row  *ngIf="segment == mark?.markName" >
         <ion-col size="12" class="form-card">
           <ion-row *ngFor="let shortcut of mark?.shortcuts">
@@ -38,8 +39,9 @@
         </ion-col>
       </ion-row>
     </div>
+  </div>
 
-  <app-errors [exist]="marks?.length == 0" [message]="'Aucun alias trouvé'" [icon]="'arrow-undo-outline'"></app-errors>
+  <app-errors [exist]="marks?.length == 0 && !loading && !error" [message]="'Aucun alias trouvé'" [icon]="'arrow-undo-outline'"></app-errors>
   <app-errors [exist]="error" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
 
 </ion-content>

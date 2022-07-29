@@ -13,14 +13,13 @@ export class GsmMainShortcutsPage {
 
   segment;
   marks ;
-
   loading = false ;
   error = false ;
 
   constructor(private callNumber: CallNumber,
               private shortcutService: ShortcutService,
               private spinnerService: SpinnerService,
-              private router: Router) { }
+              private router: Router) {}
 
   ionViewWillEnter() {
     this.loading = true ;

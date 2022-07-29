@@ -64,7 +64,7 @@ public class SmsServiceImpl implements SmsService {
     public TokenDto getToken() throws IOException {
         // headers
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Basic WngyZjRzcjhFSzBrWkJ5Q3pBV1dZRTdrSXdGUnhhb0g6OGlxelJydjJGUGlSSEdxVg==");
+        headers.set("Authorization", "Basic cHozZkVDYTI4TVRNWUEwbXdhTUxjM0pMZ1VzRDRFQXg6bDhKZEZlNVd3QkJhSE1jbg==");
         headers.set("Content-Type", "application/x-www-form-urlencoded");
         headers.set("Accept", "application/json");
 

@@ -67,7 +67,7 @@ export class GsmMainProductsPage  {
   }
 
   getProducts(key = '') {
-    this.key = key ;
+    this.initVariable();
     const request = {
       key: this.key,
       limit : this.limit,

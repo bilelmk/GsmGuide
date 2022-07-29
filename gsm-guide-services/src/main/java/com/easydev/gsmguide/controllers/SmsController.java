@@ -1,6 +1,7 @@
 package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.sms.SendSmsDto;
+import com.easydev.gsmguide.dtos.sms.UsageDto;
 import com.easydev.gsmguide.services.SmsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class SmsController {
     }
 
     @GetMapping("usage")
-    public Object getUsage() throws IOException {
+    public UsageDto getUsage() throws IOException {
         return smsService.getUsage();
     }
 }

@@ -14,11 +14,11 @@
   </ion-toolbar>
 </ion-header>
 
-<p class="page-title ion-padding">Mes produits</p>
+<p class="page-title ion-padding" *ngIf="!loading && products?.length > 0">Mes produits</p>
 
-<ion-content class="ion-no-padding ion-no-margin" >
+<ion-content class="ion-no-padding ion-no-margin"  >
 
-  <ion-row class="ion-no-padding ion-no-margin ion-justify-content-center">
+  <ion-row class="ion-no-padding ion-no-margin ion-justify-content-center" *ngIf="!loading && products?.length > 0">
     <ion-col size="12" size-sm="8">
 
       <ion-row class="ion-no-padding ion-no-margin"  >
@@ -45,5 +45,8 @@
       </ion-row>
     </ion-col>
   </ion-row>
+
+  <app-errors [exist]="products?.length == 0 && !error && !loading" [message]="'Aucun produit trouvé'" [icon]="'phone-portrait-outline'"></app-errors>
+  <app-errors [exist]="error && !loading" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
 
 </ion-content>
