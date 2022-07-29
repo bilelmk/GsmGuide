@@ -27,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
 
   public PageResponse<Product> search(SearchRequest searchRequest) {
     Pageable page  = PageRequest.of(searchRequest.getOffset(), searchRequest.getLimit());
-    List<Product> products =  productRepository.findAllByVisible(true , page );
-    //    List<Product> products =  productRepository.findAllByVisibleAndNameContainingOrDescriptionContaining(true ,searchRequest.getKey() , searchRequest.getKey() , page );
-    int count =  productRepository.findAllByVisible(true).size();
+    String key = '%'+ searchRequest.getKey() + '%' ;
+    List<Product> products =  productRepository.findAllByVisibleAndKey(true , key , page );
+    int count =  productRepository.findAllByVisibleAndKey(true , key).size();
     return new PageResponse<Product>(count, products) ;
   }
 

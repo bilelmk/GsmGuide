@@ -20,8 +20,8 @@
 
       <ion-col size="12" >
         <div class="search-container">
-            <input type="text" placeholder="Recherche.." name="search">
-            <button (click)="getProducts()">
+            <input #keyInput type="text" placeholder="Recherche.." name="search">
+            <button (click)="getProducts(keyInput)">
               <ion-icon name="search" color="light"></ion-icon>
             </button>
         </div>

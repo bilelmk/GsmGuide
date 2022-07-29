@@ -66,8 +66,11 @@ export class GsmMainProductsPage  {
     }).then(modal => modal.present());
   }
 
-  getProducts(key = '') {
+  getProducts(keyInput = null) {
     this.initVariable();
+    if (keyInput) {
+      this.key = keyInput.value ;
+    }
     const request = {
       key: this.key,
       limit : this.limit,
@@ -100,9 +103,6 @@ export class GsmMainProductsPage  {
         (res: any) => {
           this.products.push(...res.rows);
           event.target.complete();
-          if (this.products.length === res.count) {
-            event.target.disabled = true;
-          }
         },
         error => {
           this.error = true ;
