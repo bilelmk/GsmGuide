@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../../core/services/http/user.service';
 import { GsmMainRequestsAddComponent } from './gsm-main-requests-add/gsm-main-requests-add.component';
 import { MenuController, ModalController } from '@ionic/angular';

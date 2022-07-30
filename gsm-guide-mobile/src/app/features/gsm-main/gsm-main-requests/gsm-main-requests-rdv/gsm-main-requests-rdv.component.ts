@@ -4,6 +4,7 @@ import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import { SpinnerService } from '../../../../core/services/in-app/spinner.service';
 import { ToastService } from '../../../../core/services/in-app/toast.service';
 import { RequestService } from '../../../../core/services/http/request.service';
+import { GsmMainRequestsRecapComponent } from '../gsm-main-requests-recap/gsm-main-requests-recap.component';
 
 @Component({
   selector: 'app-gsm-main-requests-rdv',
@@ -22,7 +23,7 @@ export class GsmMainRequestsRdvComponent implements OnInit {
     step: 30 as Step,
     currentDate: new Date() ,
     dateFormatter: {
-      formatMonthViewDayHeader(date:Date) {
+      formatMonthViewDayHeader(date: Date) {
         const dayFr = [ 'Dim' , 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
         return dayFr[date.getDay()];
       },
@@ -75,7 +76,7 @@ export class GsmMainRequestsRdvComponent implements OnInit {
   submit() {
     const request = {
       ...this.request ,
-      date: this.date ,
+      date: new Date(this.date) ,
       location: this.locationName
     };
 
@@ -94,6 +95,23 @@ export class GsmMainRequestsRdvComponent implements OnInit {
   }
 
   isAllVariablesExists() {
-    return (this.date && this.locationId)
+    return (this.date && this.locationId) ;
   }
+
+  async recap() {
+    const request = {
+      ...this.request ,
+      date: new Date(this.date) ,
+      location: this.locationName
+    };
+
+    const modal = await this.modalController.create({
+      component: GsmMainRequestsRecapComponent ,
+      componentProps: {
+        request ,
+      }
+    }) ;
+    return await modal.present();
+  }
+
 }

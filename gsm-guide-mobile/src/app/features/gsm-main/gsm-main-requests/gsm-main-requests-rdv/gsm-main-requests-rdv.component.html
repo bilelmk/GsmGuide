@@ -52,6 +52,10 @@
       </ion-col>
 
       <ion-col size="12" class="ion-no-padding ion-margin-top">
+        <ion-button (click)="recap()" class="btn-secondary-tint"  expand="block" [disabled]="!isAllVariablesExists()">Voir la recapitulatif</ion-button>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding ion-margin-top">
         <ion-button (click)="submit()" class="btn-secondary-tint"  expand="block" [disabled]="!isAllVariablesExists()">Suivant</ion-button>
       </ion-col>
 

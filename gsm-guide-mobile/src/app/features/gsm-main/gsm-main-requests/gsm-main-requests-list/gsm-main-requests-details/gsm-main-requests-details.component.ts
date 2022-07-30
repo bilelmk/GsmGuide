@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastService} from '../../../../core/services/in-app/toast.service';
-import { SpinnerService } from '../../../../core/services/in-app/spinner.service';
-import { ModalController } from '@ionic/angular' ;
+import { ModalController } from '@ionic/angular';
+import { SpinnerService } from '../../../../../core/services/in-app/spinner.service';
+import { ToastService } from '../../../../../core/services/in-app/toast.service';
 
 @Component({
-  selector: 'app-gsm-main-requests-recap',
-  templateUrl: './gsm-main-requests-recap.component.html',
-  styleUrls: ['./gsm-main-requests-recap.component.scss'],
+  selector: 'app-gsm-main-requests-details',
+  templateUrl: './gsm-main-requests-details.component.html',
+  styleUrls: ['./gsm-main-requests-details.component.scss'],
 })
-export class GsmMainRequestsRecapComponent implements OnInit {
+export class GsmMainRequestsDetailsComponent implements OnInit {
 
   @Input() request ;
 
@@ -20,12 +20,11 @@ export class GsmMainRequestsRecapComponent implements OnInit {
               private toastService: ToastService) { }
 
   ngOnInit() {
+    console.log(this.request)
     this.value = JSON.stringify({text: 'qsàçqsdçà)qsd)àq;)àçsqdà)çq@@@@@@@@)àçqsàçdqsàd)', id: this.request.id});
   }
 
   close() {
     this.modalController.dismiss();
   }
-
-
 }

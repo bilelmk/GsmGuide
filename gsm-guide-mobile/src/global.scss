@@ -28,7 +28,6 @@
 /* Custom styles */
 @import "assets/styles/components/input";
 @import "assets/styles/components/toast";
-@import "assets/styles/components/badge";
 @import "assets/styles/components/scroll";
 @import "assets/styles/components/toolbar";
 @import "assets/styles/components/menu";
@@ -37,9 +36,10 @@
 @import "assets/styles/components/state";
 
 @import "assets/styles/pages/auth.scss" ;
-@import "assets/styles/pages/profile.scss";
 @import "assets/styles/pages/generic-page";
 @import "assets/styles/pages/products";
+@import "assets/styles/pages/recap";
+
 
 @import "assets/styles/utilities";
 

@@ -157,7 +157,13 @@ export class GsmMainRequestsAddComponent implements OnInit {
       priceId: this.priceId ,
       client: { id: sessionStorage.getItem('id') } ,
       details: this.details,
-      imei: this.imei
+      imei: this.imei,
+
+      modelName: this.modelName ,
+      markName: this.markName ,
+      articleName: this.articleName  ,
+      partName: this.partName ,
+      priceName: this.priceName ,
     };
 
     const modal = await this.modalController.create({

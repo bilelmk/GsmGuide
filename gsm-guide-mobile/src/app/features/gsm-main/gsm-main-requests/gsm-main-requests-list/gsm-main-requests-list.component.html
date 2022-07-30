@@ -16,25 +16,32 @@
 
 <ion-content class="ion-padding">
 
-  <p class="page-title">Faire le suivie</p>
-  <p class="page-title">de vos demandes !</p>
+  <p class="page-title" *ngIf="!loading && requests?.length > 0">Faire le suivie</p>
+  <p class="page-title" *ngIf="!loading && requests?.length > 0">de vos demandes !</p>
 
-  <ion-row>
-    <ion-col *ngFor="let request of requests" size="12" class="form-card">
-      <ion-row>
-        <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
-        <ion-col size="6"><p class="form-card-label" [ngClass]="getSateColor(request.state)">{{ request.state.toString() | translate}}</p></ion-col>
-      </ion-row>
-      <p class="form-card-text">{{ "Adresse de récupération :" + request.location}}</p>
-    </ion-col>
-  </ion-row>
+  <div *ngIf="!loading && requests?.length > 0">
+    <ion-row>
+      <ion-col *ngFor="let request of requests" size="12" class="form-card">
+        <ion-row  (click)="openDetailsModal(request)" >
+          <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
+          <ion-col size="6">
+            <p class="form-card-label" >
+              <span [ngClass]="getSateColor(request.state)">{{ getSateText(request.state)}}</span>
+            </p>
+          </ion-col>
+        </ion-row>
+        <p class="form-card-text">{{ "Adresse de récupération : " + request.location}}</p>
+      </ion-col>
+    </ion-row>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 
-  <app-errors [exist]="requests?.length == 0" [message]="'Aucune réservation trouvée'" [icon]="'calendar-outline'"></app-errors>
-<!--  <app-errors [exist]="error" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>-->
+
+  <app-errors [exist]="requests?.length == 0 && !error && !loading" [message]="'Aucune demande trouvée'" [icon]="'calendar-outline'"></app-errors>
+  <app-errors [exist]="error && !loading" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
 
 </ion-content>

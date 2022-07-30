@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" >
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon color="secondary" slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center toolbar">Détails de demande</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon color="primary" slot="icon-only" name=""></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <p class="page-title">Informations relatives</p>
+  <p class="page-title">à votre demande</p>
+
+  <ion-row class="ion-justify-content-center">
+
+    <ion-col class="ion-text-center" size="12" size-md="7">
+      <ngx-qrcode
+              [elementType]="'url'"
+              [value]="value"
+              cssClass="aclass"
+              errorCorrectionLevel="L">
+      </ngx-qrcode>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Client:  </span>{{ request?.client?.firstname + ' ' + request?.client?.lastname }}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Date:  </span>{{ request?.date | date}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Address de récuperation:  </span>{{ request?.location }}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Marque:  </span>{{ request?.mark}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Modéle:  </span>{{ request?.model}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Article:  </span>{{ request?.article}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Imei:  </span>{{ request?.imei}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0 recap-text"><span class="recap-title">Panne:  </span>{{ request?.part}}</p>
+    </ion-col>
+
+    <ion-col size="12">
+      <p class="m-0"><span class="recap-title">Détails de la panne:  </span></p>
+      <p class="m-0 recap-text">{{request?.details}}</p>
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>
