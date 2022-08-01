@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestResponse {
-    private int count ;
+    private Long count ;
     private List<Request> rows ;
 }

@@ -8,6 +8,7 @@ import { User } from "../../../core/models/user";
 import {GsmModelModalComponent} from "../gsm-marks/gsm-model-modal/gsm-model-modal.component";
 import {GsmRequestsModalComponent} from "./gsm-requests-modal/gsm-requests-modal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-gsm-requests',
@@ -37,21 +38,12 @@ export class GsmRequestsComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getRecords()
-  }
-
-  onPaginationChange(event){
-    this.offset = event.pageIndex
-    this.getRecords()
-  }
-
-  getRecords(){
-    this.loading = true ;
-    this.spinnerService.activate()
     let searchRequest = {
       offset: this.offset ,
       limit : this.limit ,
     }
+    this.spinnerService.activate()
+    this.loading = true ;
     forkJoin([
       this.requestService.getAll(searchRequest) ,
       this.userService.getAllByRole('REPAIRER')
@@ -65,18 +57,11 @@ export class GsmRequestsComponent implements OnInit {
         this.spinnerService.deactivate()
       },
       error => {
-        console.log(error)
         this.loading = false ;
         this.error = true ;
         this.spinnerService.deactivate()
       }
     )
-  }
-
-  search(key){
-    this.offset = 0 ;
-    this.key = key.value
-    this.getRecords()
   }
 
   openRequestModal(request){
@@ -87,4 +72,43 @@ export class GsmRequestsComponent implements OnInit {
     });
     // dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
+
+  getRecords(date: string = null, repairerId: number= null, state: string= null, requestDiagnostic: string= null){
+    this.spinnerService.activate()
+    let searchRequest = {
+      offset: this.offset ,
+      limit : this.limit ,
+      date,
+      repairerId,
+      state,
+      requestDiagnostic
+    }
+    this.spinnerService.activate()
+    this.loading = true ;
+    this.requestService.getAll(searchRequest).subscribe(
+    (res :any) => {
+        this.loading = false ;
+        this.recordsNumber = res.count ;
+        this.requests =  res.rows ;
+        this.dataSource = this.requests
+        this.spinnerService.deactivate()
+    },
+    error => {
+      console.log(error)
+      this.loading = false ;
+      this.error = true ;
+      this.spinnerService.deactivate()
+    })
+  }
+
+  onPaginationChange(event){
+    this.offset = event.pageIndex
+    this.getRecords()
+  }
+
+  // search(key){
+  //   this.offset = 0 ;
+  //   this.key = key.value
+  //   this.getRecords()
+  // }
 }

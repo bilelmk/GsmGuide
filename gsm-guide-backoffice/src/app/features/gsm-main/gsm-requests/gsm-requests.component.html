@@ -7,6 +7,38 @@
         Demandes de réparation
       </p>
     </div>
+
+    <div class="row align-items-center">
+      <input #date class="search ml-2" type="date" placeholder="Date">
+
+      <mat-select #repairer class="search ml-2" placeholder="Réparateur">
+        <mat-option *ngFor="let repairer of repairers" [value]="repairer.id">
+          {{repairer.firstname + " " + repairer.lastname}}
+        </mat-option>
+        <mat-option [value]="null">Tout</mat-option>
+      </mat-select>
+
+      <mat-select #state class="search ml-2" placeholder="Etat de demande">
+        <mat-option [value]="'IN_PROGRESS'">En cours</mat-option>
+        <mat-option [value]="'WAITING_FOR_PART'">En attente de piéce</mat-option>
+        <mat-option [value]="'REPARED'">Réparé</mat-option>
+        <mat-option [value]="'PART_UNAVAILABLE'">Piéce introuvable</mat-option>
+        <mat-option [value]="'NON_REPARABLE'">Non réparable</mat-option>
+        <mat-option [value]="null">Tout</mat-option>
+      </mat-select>
+
+      <mat-select #diagnostic class="search ml-2" placeholder="Diagnostique ?">
+        <mat-option [value]="true">Avec Diagnostique</mat-option>
+        <mat-option [value]="false">Sans Diagnostique</mat-option>
+        <mat-option [value]="null">Tout</mat-option>
+      </mat-select>
+
+      <button class="square-btn ml-2"  (click)="getRecords(date.value, repairer.value , state.value, diagnostic.value)">
+        <i class="material-icons icon-blue" >
+          search
+        </i>
+      </button>
+    </div>
   </div>
 
   <div class="row"  *ngIf="requests?.length > 0">

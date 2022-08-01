@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RequestRepository extends JpaRepository<Request, Long> {
+public interface RequestRepository extends JpaRepository<Request, Long> , RequestCustomRepository {
     List<Request>  findAllByOrderByCreationDateAsc(Pageable page);
 
     List<Request>  findAllByClientId(Long id);
@@ -16,6 +16,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request>  findAllByRepairerId(Long id);
     List<Request>  findAllByRepairerIdOrderByCreationDateAsc(Long id , Pageable page);
 
-    @Query("SELECT r FROM Request r group by r.repairer.id")
-    List<Object[]> findAllGroupByRepairer();
+//    @Query("SELECT r FROM Request r group by r.repairer.id")
+//    List<Object[]> findAllGroupByRepairer();
 }

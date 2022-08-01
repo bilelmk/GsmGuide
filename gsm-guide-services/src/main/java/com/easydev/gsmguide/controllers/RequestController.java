@@ -2,12 +2,11 @@ package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.RequestDto;
 import com.easydev.gsmguide.dtos.RequestResponse;
+import com.easydev.gsmguide.dtos.RequestSearchDto;
 import com.easydev.gsmguide.dtos.SearchRequest;
 import com.easydev.gsmguide.models.Request;
 import com.easydev.gsmguide.services.RequestService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -26,8 +25,8 @@ public class RequestController {
     }
 
     @PostMapping("search")
-    public RequestResponse getAll(@RequestBody SearchRequest request) {
-        return requestService.getAll(request) ;
+    public RequestResponse getAll(@RequestBody RequestSearchDto searchDto) {
+        return requestService.search(searchDto) ;
     }
 
     @PostMapping("client")
@@ -45,9 +44,9 @@ public class RequestController {
         return requestService.update(request) ;
     }
 
-    @GetMapping
-    public List<Object[]> findAllGroupByRepairer() {
-        return requestService.findAllGroupByRepairer() ;
-    }
+//    @GetMapping
+//    public List<Object[]> findAllGroupByRepairer() {
+//        return requestService.findAllGroupByRepairer() ;
+//    }
 
 }

@@ -21,4 +21,5 @@ public class RequestDto {
     private String location ;
     private String imei ;
     private String details ;
+    private boolean requestDiagnostic;
 }

@@ -19,7 +19,7 @@ public class ProductController {
     this.productService = productService ;
   }
 
-  @PostMapping("search")
+  @PostMapping(value = "search" ,  produces = "application/json")
   public PageResponse<Product> getAll(@RequestBody SearchRequest searchRequest) {
     return productService.search(searchRequest);
   }

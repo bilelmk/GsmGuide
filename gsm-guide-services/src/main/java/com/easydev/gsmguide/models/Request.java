@@ -39,4 +39,6 @@ public class Request {
     private State state ;
 
     private LocalDateTime creationDate ;
+
+    private Boolean requestDiagnostic ;
 }
