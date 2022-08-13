@@ -17,7 +17,7 @@ export class SmsService {
   }
 
   sendMultiSms(sms): Observable<any> {
-    return this.http.post<any>(this.URL + 'multi' , sms);
+    return this.http.post<any>(this.URL + '/multi' , sms);
   }
 
   getUsage(): Observable<any> {

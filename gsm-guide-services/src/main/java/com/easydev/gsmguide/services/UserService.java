@@ -10,13 +10,14 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    public List<AppUser> getAll() ;
-    public ResponseEntity<?> register(AppUser client) throws IOException;
-    public AppUser update(AppUser appUser);
-    public void delete(Long id) ;
-    public ResponseEntity<?> login(AuthenticationRequest request) ;
-    public AppUser getById(Long id) ;
-    public List<AppUser> getAllByRole(Role role);
+    List<AppUser> getAll() ;
+    ResponseEntity<?> register(AppUser client) throws IOException;
+    AppUser update(AppUser appUser);
+    void delete(Long id) ;
+    ResponseEntity<?> login(AuthenticationRequest request) ;
+    AppUser getById(Long id) ;
+    List<AppUser> getAllByRole(Role role);
     AppUser updateImage(MultipartFile image , AppUser appUser);
     ResponseEntity<?> addClient(AppUser appUser) throws IOException;
+    ResponseEntity<?> addRepairer(AppUser appUser);
 }

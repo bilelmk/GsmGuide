@@ -21,7 +21,11 @@ export class UserService {
     return this.http.get<any>(this.URL + '/role/' + role);
   }
 
-  add(client): Observable<any> {
+  addClient(client): Observable<any> {
     return this.http.post<any>(this.URL + '/client', client);
+  }
+
+  addRepairer(repairer: any) {
+    return this.http.post<any>(this.URL + '/repairer', repairer);
   }
 }

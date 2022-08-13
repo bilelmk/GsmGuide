@@ -1,5 +1,6 @@
 package com.easydev.gsmguide.controllers;
 
+import com.easydev.gsmguide.dtos.sms.SendMultiSmsDto;
 import com.easydev.gsmguide.dtos.sms.SendSmsDto;
 import com.easydev.gsmguide.dtos.sms.UsageDto;
 import com.easydev.gsmguide.services.SmsService;
@@ -23,8 +24,8 @@ public class SmsController {
     }
 
     @PostMapping("multi")
-    public Object sendMultiSms(@RequestBody SendSmsDto smsDto) throws IOException {
-        return smsService.sendSms(smsDto);
+    public Object sendMultiSms(@RequestBody SendMultiSmsDto smsDto) throws IOException {
+        return smsService.sendMultiSms(smsDto);
     }
 
     @GetMapping("usage")

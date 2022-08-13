@@ -35,7 +35,7 @@ public class SmsServiceImpl implements SmsService {
         OutboundSMSMessageRequest outboundSMSMessageRequest = new OutboundSMSMessageRequest(
                 "tel:+216" + smsDto.getNumber() ,
                 "tel:+216" + 50109769 ,
-                "CocoTunisia" ,
+                "Guide GSM" ,
                 outboundSMSTextMessage
         );
         SendSmsRequest smsRequest = new SendSmsRequest(outboundSMSMessageRequest) ;
@@ -44,6 +44,32 @@ public class SmsServiceImpl implements SmsService {
 
         return  restTemplate.exchange("https://api.orange.com/smsmessaging/v1/outbound/tel:+21650109769/requests" , HttpMethod.POST, httpEntity, Object.class);
 
+    }
+
+    @Override
+    public Object sendMultiSms(SendMultiSmsDto smsDto) throws IOException {
+        TokenDto token = this.getToken() ;
+
+        // headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token.getAccess_token());
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        for(NumberDto number: smsDto.getNumbers()) {
+            OutboundSMSTextMessage outboundSMSTextMessage = new OutboundSMSTextMessage(smsDto.getMessage()) ;
+            OutboundSMSMessageRequest outboundSMSMessageRequest = new OutboundSMSMessageRequest(
+                    "tel:+216" + number.getNumber() ,
+                    "tel:+216" + 50109769 ,
+                    "Guide GSM" ,
+                    outboundSMSTextMessage
+            );
+            SendSmsRequest smsRequest = new SendSmsRequest(outboundSMSMessageRequest) ;
+            HttpEntity<SendSmsRequest> httpEntity = new HttpEntity<>(smsRequest , headers);
+            restTemplate.exchange("https://api.orange.com/smsmessaging/v1/outbound/tel:+21650109769/requests" , HttpMethod.POST, httpEntity, Object.class);
+        }
+
+        return true ;
     }
 
     public UsageDto getUsage() throws IOException {

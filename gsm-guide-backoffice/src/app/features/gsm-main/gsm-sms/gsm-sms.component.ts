@@ -67,15 +67,13 @@ export class GsmSmsComponent implements OnInit {
   sendMulti(){
     this.spinnerService.activate();
     let smss = {
-      number: this.form.value.numbers[0].number,
+      numbers: this.form.value.numbers,
       message: this.form.value.content
     }
-    console.log(smss)
-    this.smsService.sendSms(smss).subscribe(
+    this.smsService.sendMultiSms(smss).subscribe(
       res => {
         this.spinnerService.deactivate();
-        console.log(res)
-        // this.getUsage()
+        this.getUsage()
       },
       err => {
         this.spinnerService.deactivate();

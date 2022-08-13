@@ -85,6 +85,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResponseEntity<?> addRepairer(AppUser appUser) {
+        AppUser clientByUsername = userRepository.findByUsernameIgnoreCase(appUser.getUsername()).orElse(null) ;
+        AppUser clientByPhone = userRepository.findByPhone(appUser.getPhone()).orElse(null) ;
+        if (clientByUsername != null) {
+            return new ResponseEntity<>("username exist", HttpStatus.NOT_FOUND);
+        }
+        if (clientByPhone != null) {
+            return new ResponseEntity<>("phone exist", HttpStatus.NOT_FOUND);
+        }
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        appUser.setValid(true);
+        appUser.setConfirmed(true);
+        appUser.setRole(Role.REPAIRER);
+        AppUser newRepairer = userRepository.save(appUser);
+        return new ResponseEntity<>(newRepairer, HttpStatus.OK) ;
+    }
+
+    @Override
     public ResponseEntity<?> register(AppUser toAddClient) throws IOException {
         AppUser clientByUsername = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
         AppUser clientByPhone = userRepository.findByPhone(toAddClient.getPhone()).orElse(null) ;

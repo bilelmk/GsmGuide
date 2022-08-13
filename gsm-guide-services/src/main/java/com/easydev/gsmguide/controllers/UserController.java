@@ -41,6 +41,11 @@ public class UserController {
         return userService.addClient(appUser) ;
     }
 
+    @PostMapping("repairer")
+    public ResponseEntity<?> addRepairer(@RequestBody AppUser appUser) {
+        return userService.addRepairer(appUser) ;
+    }
+
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         return userService.login(request) ;

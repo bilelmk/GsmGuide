@@ -34,7 +34,7 @@ export class GsmClientsModalComponent {
 
   add() {
     this.spinnerService.activate();
-    this.userService.add(this.form.value).subscribe(
+    this.userService.addClient(this.form.value).subscribe(
       (res) => {
         Helpers.addToArray(res , this.data.array)
         this.snackbarService.openSnackBar('Client ajouté avec succès', 'success');

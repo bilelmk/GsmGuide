@@ -36,11 +36,7 @@ export class GsmRepairersModalComponent implements OnInit {
 
   add() {
     this.spinnerService.activate();
-    const repairer = {
-      ...this.form.value ,
-      role: 'REPAIRER'
-    }
-    this.userService.register(repairer).subscribe(
+    this.userService.addRepairer(this.form.value).subscribe(
       (res) => {
         Helpers.addToArray(res , this.data.array)
         this.snackbarService.openSnackBar('Réparateur ajouté avec succès', 'success');
