@@ -16,7 +16,7 @@ import { GsmRequestsAsignReparatorComponent } from "./gsm-requests-asign-reparat
 export class GsmRequestsComponent implements OnInit {
 
   public dataSource: Request[];
-  displayedColumns = ['mark', 'model' , 'article', 'part' , 'price', 'repairer' , 'client', 'state' , 'date' , 'buttons' ];
+  displayedColumns = ['mark', 'model' , 'article', 'part' , 'price', 'repairer' , 'client', 'state' , 'date' , 'requestDiagnostic' , 'buttons' ];
   requests : Request[] = [] ;
   repairers: User[]
 
@@ -103,9 +103,41 @@ export class GsmRequestsComponent implements OnInit {
     this.getRecords()
   }
 
-  // search(key){
-  //   this.offset = 0 ;
-  //   this.key = key.value
-  //   this.getRecords()
-  // }
+  getSateColor(state: any) {
+    if (state === 'IN_PROGRESS' || state === 'WAITING_FOR_PART') {
+      return 'state-info' ;
+    }
+    else if (state === 'REPARED') {
+      return 'state-success' ;
+    }
+    else if (state === 'PART_UNAVAILABLE' || state === 'NON_REPARABLE') {
+      return 'state-danger' ;
+    }
+    else {
+      return '' ;
+    }
+  }
+
+  getSateText(state: any) {
+    if (state === 'IN_PROGRESS') {
+      return 'En cours' ;
+    }
+    else if (state === 'WAITING_FOR_PART') {
+      return 'En attente de piéce' ;
+    }
+    else if (state === 'REPARED' ) {
+      return 'Réparé' ;
+    }
+
+    else if (state === 'PART_UNAVAILABLE' ) {
+      return 'Piéce introuvable' ;
+    }
+
+    else if (state === 'NON_REPARABLE') {
+      return 'Non réparable' ;
+    }
+    else {
+      return '' ;
+    }
+  }
 }

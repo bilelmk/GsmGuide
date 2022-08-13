@@ -1,0 +1,22 @@
+@import "../variables" ;
+
+.state-info {
+  border-radius: 10px;
+  padding: 5px  10px;
+  color: $white !important;
+  background-color: $info;
+}
+
+.state-success {
+  border-radius: 10px;
+  padding: 5px  10px;
+  color: $white !important;
+  background-color: $success;
+}
+
+.state-danger {
+  border-radius: 10px;
+  padding: 5px  10px;
+  color: $white !important;
+  background-color: $danger;
+}

@@ -104,16 +104,22 @@
       <ng-container matColumnDef="state" >
         <mat-header-cell *matHeaderCellDef >Etat de demande</mat-header-cell>
         <mat-cell *matCellDef="let request" >
-          <p class="cell-text"  > {{request.state}} </p>
+          <p class="cell-text" [ngClass]="getSateColor(request.state)" > {{getSateText(request.state)}} </p>
         </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="requestDiagnostic" >
+        <mat-header-cell *matHeaderCellDef >Diagnostique</mat-header-cell>
+        <mat-cell *matCellDef="let request" >
+          <p class="cell-text" [ngClass]="request.requestDiagnostic ? 'badge-green' : 'badge-red'" > {{request.requestDiagnostic}} </p>
+        </mat-cell>
+      </ng-container>
 
       <ng-container matColumnDef="buttons">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell class="cell-text" *matCellDef="let request">
           <div class="cell-btn" (click)="openRequestAsignModal(request)">
-            <mat-icon>flaky</mat-icon>
+            <mat-icon>build</mat-icon>
           </div>
 <!--          <div class="cell-btn" (click)="openDetailsDialog(freelancer)" >-->
 <!--            <mat-icon>visibility</mat-icon>-->
