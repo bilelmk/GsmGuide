@@ -55,6 +55,8 @@ export class GsmLoginPage implements OnInit {
             this.toastService.show('Mot de passe incorrect' , 'danger');
           } else if (error.error === 'blocked') {
             this.toastService.show('Votre compte est bloqué' , 'danger');
+          } else if (error.error === 'phone not confirmed') {
+              this.toastService.show('Votre numéro du téléphone n\'est pas confirmé' , 'danger');
           } else {
             this.toastService.show('Erreur du serveur' , 'danger');
           }

@@ -120,24 +120,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AppUser update(AppUser appUser) {
-        AppUser toUpdateAppUser = userRepository.findById(appUser.getId()).orElseThrow(IllegalArgumentException::new) ;
-        toUpdateAppUser.setFirstname(appUser.getFirstname());
-        toUpdateAppUser.setLastname(appUser.getLastname());
-        toUpdateAppUser.setPhone(appUser.getPhone());
-        return userRepository.save(toUpdateAppUser) ;
-    }
-
-    @Override
-    public void delete(Long id) {}
-
-    @Override
     public ResponseEntity<?> login(AuthenticationRequest request) {
         AppUser client = this.userRepository.findByUsernameIgnoreCase(request.getUsername()).orElse(null);
         if (client != null) {
             if (this.passwordEncoder.matches(request.getPassword(), client.getPassword())) {
-                 if (!client.isValid() ) {
+                if (!client.isValid() ) {
                     return new ResponseEntity<>("blocked", HttpStatus.UNAUTHORIZED);
+                }
+                if (!client.isConfirmed() ) {
+                    return new ResponseEntity<>("phone not confirmed", HttpStatus.UNAUTHORIZED);
                 }
                 String token = this.jwtConfig.generateToken(client.getId() , client.getUsername());
                 return ResponseEntity.ok(new AuthenticationResponse(token , client.getId() , client.getRole().toString()));
@@ -148,6 +139,18 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>("wrong username", HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public AppUser update(AppUser appUser) {
+        AppUser toUpdateAppUser = userRepository.findById(appUser.getId()).orElseThrow(IllegalArgumentException::new) ;
+        toUpdateAppUser.setFirstname(appUser.getFirstname());
+        toUpdateAppUser.setLastname(appUser.getLastname());
+        toUpdateAppUser.setPhone(appUser.getPhone());
+        return userRepository.save(toUpdateAppUser) ;
+    }
+
+    @Override
+    public void delete(Long id) {}
 
     @Override
     public AppUser updateImage(MultipartFile image , AppUser appUser) {
