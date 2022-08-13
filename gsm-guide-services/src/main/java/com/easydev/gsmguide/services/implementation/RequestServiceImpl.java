@@ -70,13 +70,20 @@ public class RequestServiceImpl implements RequestService {
         Mark mark = this.markRepository.findById(request.getMarkId()).orElseThrow(IllegalArgumentException::new);
         Model model = this.modelRepository.findById(request.getModelId()).orElseThrow(IllegalArgumentException::new);
         Article article = this.articleRepository.findById(request.getArticleId()).orElseThrow(IllegalArgumentException::new);
-        Part part = this.partRepository.findById(request.getPartId()).orElseThrow(IllegalArgumentException::new);
-        Price price = this.priceRepository.findById(request.getPriceId()).orElseThrow(IllegalArgumentException::new);
 
-        return requestRepository.save(new Request(null ,request.getDate() , mark.getName() , model.getName() , article.getName() , part.getName() ,
-                price.getPrice(), request.getLocation() , request.getImei() , request.getDetails() , null, request.getClient()  , State.IN_PROGRESS ,
-                LocalDateTime.now(), request.isRequestDiagnostic()));
-
+        if(request.getPartId() != null && request.getPriceId() != null) {
+            Part part = this.partRepository.findById(request.getPartId()).orElseThrow(IllegalArgumentException::new);
+            Price price = this.priceRepository.findById(request.getPriceId()).orElseThrow(IllegalArgumentException::new);
+            return requestRepository.save(new Request(null ,request.getDate() , mark.getName() , model.getName() , article.getName() , part.getName() ,
+                    price.getPrice(), request.getLocation() , request.getImei() , request.getDetails() , null, request.getClient()  , State.IN_PROGRESS ,
+                    LocalDateTime.now(), request.isRequestDiagnostic()));
+            
+        }
+        else {
+            return requestRepository.save(new Request(null ,request.getDate() , mark.getName() , model.getName() , article.getName() , null,
+                    null, request.getLocation() , request.getImei() , request.getDetails() , null, request.getClient()  , State.IN_PROGRESS ,
+                    LocalDateTime.now(), request.isRequestDiagnostic()));
+        }
     }
 
     @Override

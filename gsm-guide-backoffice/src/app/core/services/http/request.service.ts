@@ -19,4 +19,8 @@ export class RequestService {
   update(request): Observable<Request> {
     return this.http.put<Request>(this.URL , request);
   }
+
+  add(request): Observable<any> {
+    return this.http.post<any>(this.URL , request);
+  }
 }

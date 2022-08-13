@@ -24,4 +24,8 @@ export class PriceService {
   delete(id): Observable<any> {
     return this.http.delete<any>(this.URL + '/' + id);
   }
+
+  getAllByArticleAndPart(articleId, partId): Observable<any> {
+    return this.http.get<any>(this.URL + '/' + articleId + '/' + partId);
+  }
 }

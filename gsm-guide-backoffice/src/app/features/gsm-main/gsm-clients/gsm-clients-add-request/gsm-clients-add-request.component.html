@@ -1,0 +1,111 @@
+<div class="dialog-container">
+
+  <p class="dialog-title" >Ajouter une demande de réparation</p>
+
+  <form [formGroup]="form" class="row justify-content-center align-items-center p-4 pt-3">
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Marque</mat-label>
+        <mat-select formControlName="markId" (selectionChange)="onMarkSelect()">
+          <mat-option *ngFor="let mark of marks" [value]="mark.markId" >{{mark.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="!form.hasError('required')">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Modèle</mat-label>
+        <mat-select formControlName="modelId" (selectionChange)="onModelSelect()">
+          <mat-option *ngFor="let model of models" [value]="model.modelId" >{{model.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="!form.hasError('required')">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Article</mat-label>
+        <mat-select formControlName="articleId" (selectionChange)="onArticleSelect()">
+          <mat-option *ngFor="let article of articles" [value]="article.articleId" >{{article.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="!form.hasError('required')">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      Je connais pas la pièce en panne et je demande un diagnostic
+      <mat-slide-toggle
+        (input)="onDiagnosticSelect()"
+        formControlName="requestDiagnostic"
+        class="pl-3"
+        color="primary"
+        [checked]="false">
+      </mat-slide-toggle>
+    </div>
+
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Piéce</mat-label>
+        <mat-select formControlName="partId" (selectionChange)="onPartSelect()">
+          <mat-option *ngFor="let part of parts" [value]="part.id">{{part.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Prix</mat-label>
+        <mat-select formControlName="priceId">
+          <mat-option *ngFor="let price of prices" [value]="price.id">{{price?.quality + " - " + price?.price + " Dt" }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 mt-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Date</mat-label>
+        <input  formControlName="date" matInput type="date" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 mt-1">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Imei</mat-label>
+        <input  formControlName="imei" matInput type="text" >
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Boutique</mat-label>
+        <mat-select formControlName="location">
+          <mat-option *ngFor="let location of locations" [value]="location.address">{{location.address}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Détails de la panne</mat-label>
+        <textarea  formControlName="details" matInput type="text" ></textarea>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-12 mt-1" >
+      <button class="submit-btn full-width" (click)="add()" [disabled]="!form.valid" >
+        Ajouter
+      </button>
+    </div>
+  </form>
+
+</div>

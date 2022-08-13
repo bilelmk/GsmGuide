@@ -12,11 +12,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class RequestDto {
     private LocalDate date ;
-    private long modelId ;
-    private long markId ;
-    private long articleId ;
-    private long partId ;
-    private long priceId ;
+    private Long modelId ;
+    private Long markId ;
+    private Long articleId ;
+    private Long partId ;
+    private Long priceId ;
     private AppUser client ;
     private String location ;
     private String imei ;

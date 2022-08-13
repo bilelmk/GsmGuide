@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { GsmClientsAddRequestComponent } from "./gsm-clients-add-request/gsm-clients-add-request.component";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 const routes: Routes = [
   {
@@ -24,6 +26,7 @@ const routes: Routes = [
   declarations: [
     GsmClientsComponent,
     GsmClientsModalComponent,
+    GsmClientsAddRequestComponent
   ],
   imports: [
     CommonModule,
@@ -37,9 +40,11 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   entryComponents: [
-    GsmClientsModalComponent
+    GsmClientsModalComponent,
+    GsmClientsAddRequestComponent
   ]
 })
 export class GsmClientsModule { }

@@ -5,7 +5,6 @@ import { RequestService } from "../../../core/services/http/request.service";
 import { UserService } from "../../../core/services/http/user.service";
 import { forkJoin } from "rxjs";
 import { User } from "../../../core/models/user";
-import { GsmRequestsModalComponent } from "./gsm-requests-modal/gsm-requests-modal.component";
 import { MatDialog } from "@angular/material/dialog";
 import { GsmRequestsAsignReparatorComponent } from "./gsm-requests-asign-reparator/gsm-requests-asign-reparator.component";
 
@@ -45,7 +44,7 @@ export class GsmRequestsComponent implements OnInit {
     this.loading = true ;
     forkJoin([
       this.requestService.getAll(searchRequest) ,
-      this.userService.getAllByRole('REPAIRER')
+      this.userService.getAllByRole('REPAIRER') ,
     ]).subscribe(
       (res :any) => {
         this.loading = false ;
@@ -65,14 +64,6 @@ export class GsmRequestsComponent implements OnInit {
 
   openRequestAsignModal(request){
     const dialogRef = this.dialog.open( GsmRequestsAsignReparatorComponent, {
-      panelClass: 'custom-dialog-container' ,
-      width: '600px' ,
-      data : { item : request , array: this.repairers }
-    });
-  }
-
-  openRequestModal(request){
-    const dialogRef = this.dialog.open( GsmRequestsModalComponent, {
       panelClass: 'custom-dialog-container' ,
       width: '600px' ,
       data : { item : request , array: this.repairers }

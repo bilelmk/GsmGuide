@@ -6,6 +6,7 @@ import { UserService } from "../../../core/services/http/user.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { GsmClientsModalComponent } from "./gsm-clients-modal/gsm-clients-modal.component";
 import { MatDialog } from "@angular/material/dialog";
+import { GsmClientsAddRequestComponent } from "./gsm-clients-add-request/gsm-clients-add-request.component";
 
 @Component({
   selector: 'app-gsm-clients',
@@ -15,7 +16,7 @@ import { MatDialog } from "@angular/material/dialog";
 export class GsmClientsComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<User>();
-  displayedColumns = ['firstname', 'lastname' , 'username', 'phone' ];
+  displayedColumns = ['firstname', 'lastname' , 'username', 'phone' , 'actions' ];
   clients : User[] = [] ;
 
   error = false ;
@@ -60,7 +61,6 @@ export class GsmClientsComponent implements OnInit {
     this.dataSource.data = toFilterList;
   }
 
-
   openModal(isEditMode: boolean, item) {
     const dialogRef = this.dialog.open( GsmClientsModalComponent, {
       panelClass: 'custom-dialog-container' ,
@@ -72,5 +72,13 @@ export class GsmClientsComponent implements OnInit {
         this.dataSource.data = this.clients;
       }
     );
+  }
+
+  openAddRequestModal(client){
+    const dialogRef = this.dialog.open( GsmClientsAddRequestComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { item : client }
+    });
   }
 }
