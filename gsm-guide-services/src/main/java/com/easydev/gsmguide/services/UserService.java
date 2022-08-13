@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserService {
     public List<AppUser> getAll() ;
-    public ResponseEntity<?> register(AppUser client) ;
+    public ResponseEntity<?> register(AppUser client) throws IOException;
     public AppUser update(AppUser appUser);
     public void delete(Long id) ;
     public ResponseEntity<?> login(AuthenticationRequest request) ;

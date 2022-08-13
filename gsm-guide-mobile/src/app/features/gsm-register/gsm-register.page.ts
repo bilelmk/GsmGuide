@@ -37,17 +37,15 @@ export class GsmRegisterPage implements OnInit {
     const request: RegisterRequest = { ...this.form.value , role : 'CLIENT' };
     this.userService.register(request).subscribe(
         res => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/verify-phone-code']);
           this.toastService.show('Votre compte à été créé avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
         }, error => {
           this.spinnerService.deactivate() ;
           if (error.error === 'username exist') {
             this.toastService.show('Ce nom d\'utilisateur existe déjà' , 'danger');
-            // } else if (error.error.message === 'wrong password') {
-            //   this.toastService.show('Mot de passe incorrect' ,'danger');
-            // } else if (error.error.message === 'phone not verified') {
-            //   this.toastService.show('Numéro de téléphone n\'est pas verifié' ,'danger');
+          } else if (error.error === 'phone exist') {
+            this.toastService.show('Ce numéro du téléphone existe déjà' , 'danger');
           } else {
             this.toastService.show('Erreur du serveur' , 'danger');
           }

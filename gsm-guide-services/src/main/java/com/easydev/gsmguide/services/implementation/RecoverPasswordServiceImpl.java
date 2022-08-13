@@ -40,8 +40,6 @@ public class RecoverPasswordServiceImpl implements RecoverPasswordService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-
     @Override
     public ResponseEntity<?> sendRecoverPasswordSms(String username) throws IOException {
         AppUser account = accountRepository.findByUsernameIgnoreCase(username).orElse(null);

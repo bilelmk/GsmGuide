@@ -31,7 +31,12 @@ const routes: Routes = [
   {
     path: 'send-passowrd-code',
     loadChildren: () => import('./features/gsm-send-passowrd-code/gsm-send-passowrd-code.module').then(m => m.GsmSendPassowrdCodePageModule)
+  },
+  {
+    path: 'verify-phone-code',
+    loadChildren: () => import('./features/gsm-verify-phone-code/gsm-verify-phone-code.module').then(m => m.GsmVerifyPhoneCodePageModule)
   }
+
 ];
 
 @NgModule({

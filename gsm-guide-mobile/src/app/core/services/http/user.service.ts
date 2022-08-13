@@ -27,7 +27,7 @@ export class UserService {
     return this.http.post<any>(this.URL + '/login', request);
   }
 
-  verifyPassowrdCode(code: string) {
+  verifyPassowrdCode(code) {
     return this.http.post<any>(environment.url + 'api/verify-reset-password-code', code);
   }
 
@@ -37,6 +37,10 @@ export class UserService {
 
   resetPassword(request: { password: any; code: string }) {
     return this.http.post<any>(environment.url + 'api/reset-password', request);
+  }
+
+  verifyConfirmCode(code) {
+    return this.http.post<any>(environment.url + 'api/verify-confirm-code', code);
   }
 
   getById(id: number): Observable<any> {
@@ -63,6 +67,4 @@ export class UserService {
       this.logout();
     }, duration * 1000 );
   }
-
-
 }

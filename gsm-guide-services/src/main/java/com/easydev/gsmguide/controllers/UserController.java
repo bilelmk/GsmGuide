@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody AppUser appUser) {
+    public ResponseEntity<?> register(@RequestBody AppUser appUser) throws IOException {
         return userService.register(appUser) ;
     }
 

@@ -1,14 +1,13 @@
 package com.easydev.gsmguide.repositories;
 
-import com.easydev.gsmguide.models.RecoverPassword;
+import com.easydev.gsmguide.models.ConfirmPhone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Repository
-public interface RecoverPasswordRepository extends JpaRepository<RecoverPassword, Long> {
+public interface ConfirmPhoneRepository extends JpaRepository<ConfirmPhone, Long> {
     boolean existsByCodeAndExpiresAtGreaterThanAndUsed(String token , LocalDateTime now, boolean b);
-    Optional<RecoverPassword> findByCodeAndUsed(String token, boolean b);
+    ConfirmPhone findByCode(String code);
 }

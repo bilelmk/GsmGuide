@@ -7,6 +7,9 @@ import com.easydev.gsmguide.dtos.AuthenticationResponse;
 import com.easydev.gsmguide.dtos.sms.SendSmsDto;
 import com.easydev.gsmguide.enums.Role;
 import com.easydev.gsmguide.models.AppUser;
+import com.easydev.gsmguide.models.ConfirmPhone;
+import com.easydev.gsmguide.models.RecoverPassword;
+import com.easydev.gsmguide.repositories.ConfirmPhoneRepository;
 import com.easydev.gsmguide.repositories.UserRepository;
 import com.easydev.gsmguide.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
@@ -28,17 +32,20 @@ public class UserServiceImpl implements UserService {
     private final Random random = new Random();
     private final UploadConfig uploadService;
     private final SmsServiceImpl smsService;
+    private final ConfirmPhoneRepository confirmPhoneRepository;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
                            JwtConfig jwtConfig,
                            UploadConfig uploadService,
-                           SmsServiceImpl smsService) {
+                           SmsServiceImpl smsService,
+                           ConfirmPhoneRepository confirmPhoneRepository) {
         this.userRepository = userRepository ;
         this.passwordEncoder = passwordEncoder ;
         this.jwtConfig = jwtConfig;
         this.uploadService = uploadService ;
         this.smsService = smsService ;
+        this.confirmPhoneRepository = confirmPhoneRepository;
     }
 
     @Override
@@ -78,16 +85,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> register(AppUser toAddClient) {
-        AppUser client = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
-        if (client != null) {
+    public ResponseEntity<?> register(AppUser toAddClient) throws IOException {
+        AppUser clientByUsername = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
+        AppUser clientByPhone = userRepository.findByPhone(toAddClient.getPhone()).orElse(null) ;
+        String code = Integer.toString(100000 + random.nextInt(899999) + 1);
+        if (clientByPhone != null) {
+            return new ResponseEntity<>("phone exist", HttpStatus.NOT_FOUND);
+        }
+        if (clientByUsername != null) {
             return new ResponseEntity<>("username exist", HttpStatus.NOT_FOUND);
         }
+
+        // add user
         toAddClient.setPassword(passwordEncoder.encode(toAddClient.getPassword()));
         toAddClient.setValid(true);
-//        String code = Integer.toString(100000 + random.nextInt(899999) + 1);
-//        this.mailingService.sendMail(new EmailDto(client.getEmail(), code));
+        toAddClient.setConfirmed(false);
         AppUser newClient = userRepository.save(toAddClient);
+
+        // add confirm code
+        ConfirmPhone confirmPhone = new ConfirmPhone();
+        confirmPhone.setAccount(newClient);
+        confirmPhone.setCode(code);
+        confirmPhone.setCreatedAt(LocalDateTime.now());
+        confirmPhone.setExpiresAt(LocalDateTime.now().plusHours(24));
+        confirmPhoneRepository.save(confirmPhone);
+
+        // send sms
+        SendSmsDto sendSmsDto = new SendSmsDto();
+        sendSmsDto.setNumber(toAddClient.getPhone());
+        sendSmsDto.setMessage(code);
+        smsService.sendSms(sendSmsDto);
+
         return new ResponseEntity<>(newClient, HttpStatus.OK) ;
     }
 
