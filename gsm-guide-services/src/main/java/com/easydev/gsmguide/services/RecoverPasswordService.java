@@ -9,6 +9,6 @@ import java.io.IOException;
 public interface RecoverPasswordService {
     ResponseEntity<?> sendRecoverPasswordSms(String username) throws IOException;
     @Transactional
-    boolean changePassword(ResetPasswordRequest request);
-    boolean verifyResetPasswordCode(String code);
+    ResponseEntity<?> changePassword(ResetPasswordRequest request);
+    ResponseEntity<?> verifyResetPasswordCode(String code);
 }

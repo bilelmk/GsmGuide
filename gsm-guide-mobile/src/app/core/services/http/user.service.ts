@@ -27,12 +27,16 @@ export class UserService {
     return this.http.post<any>(this.URL + '/login', request);
   }
 
-  verifyPassowrdCode(username: string) {
-    return this.http.post<any>(environment.url + 'api/forget-password', username);
+  verifyPassowrdCode(code: string) {
+    return this.http.post<any>(environment.url + 'api/verify-reset-password-code', code);
   }
 
   sendPassowrdCode(username) {
     return this.http.post<any>(environment.url + 'api/forget-password', username);
+  }
+
+  resetPassword(request: { password: any; code: string }) {
+    return this.http.post<any>(environment.url + 'api/reset-password', request);
   }
 
   getById(id: number): Observable<any> {
@@ -51,7 +55,7 @@ export class UserService {
     sessionStorage.clear();
     this.token.next(null) ;
     this.role.next(null ) ;
-    this.router.navigate(['/gsm-main']);
+    this.router.navigate(['/main']);
   }
 
   setAuthTimer(duration: number) {
@@ -59,4 +63,6 @@ export class UserService {
       this.logout();
     }, duration * 1000 );
   }
+
+
 }

@@ -29,13 +29,17 @@ export class GsmVerifyPasswordCodePage {
     this.spinnerService.activate() ;
     this.userService.verifyPassowrdCode(this.form.value).subscribe(
         res => {
-          this.router.navigate(['/cb-reset-password/' , res.clientId]);
+          this.router.navigate(['/reset-password/' , this.form.value.code]);
           this.toastService.show('Code vérifié avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
         }, error => {
           console.log(error);
+          if (error.error === 'code incorrect') {
+              this.toastService.show('Votre code est incorrect ou épuisé' , 'danger');
+          } else {
+              this.toastService.show('Erreur du serveur' , 'danger');
+          }
           this.spinnerService.deactivate() ;
-          this.toastService.show('Erreur du serveur' , 'danger');
         });
   }
 }

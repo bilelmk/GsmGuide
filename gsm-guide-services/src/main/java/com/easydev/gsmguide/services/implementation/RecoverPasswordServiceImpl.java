@@ -65,22 +65,26 @@ public class RecoverPasswordServiceImpl implements RecoverPasswordService {
 
     @Override
     @Transactional
-    public boolean changePassword(ResetPasswordRequest request) {
+    public ResponseEntity<?> changePassword(ResetPasswordRequest request) {
 
         RecoverPassword recoverPassword = recoverPasswordRepository.findByCodeAndUsed(request.getCode(), false).orElse(null);
         if (recoverPassword == null) {
-            return false;
+            return new ResponseEntity<>("code incorrect", HttpStatus.NOT_FOUND);
         }
         AppUser account = recoverPassword.getAccount();
         recoverPassword.setUsed(true);
         account.setPassword(passwordEncoder.encode(request.getPassword()));
         recoverPasswordRepository.save(recoverPassword);
         accountRepository.save(account);
-        return true;
+        return new ResponseEntity<>(true, HttpStatus.OK) ;
     }
 
     @Override
-    public boolean verifyResetPasswordCode(String code) {
-        return recoverPasswordRepository.existsByCodeAndExpiresAtGreaterThanAndUsed(code, LocalDateTime.now(), false);
+    public ResponseEntity<?> verifyResetPasswordCode(String code) {
+        boolean isCodeExist = recoverPasswordRepository.existsByCodeAndExpiresAtGreaterThanAndUsed(code, LocalDateTime.now(), false);
+        if(!isCodeExist) {
+            return new ResponseEntity<>("code incorrect", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(true, HttpStatus.OK) ;
     }
 }

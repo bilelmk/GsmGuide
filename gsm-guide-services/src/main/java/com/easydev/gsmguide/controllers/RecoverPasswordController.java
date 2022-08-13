@@ -1,6 +1,7 @@
 package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.ResetPasswordRequest;
+import com.easydev.gsmguide.dtos.security.CodeDto;
 import com.easydev.gsmguide.dtos.security.UsernameDto;
 import com.easydev.gsmguide.services.RecoverPasswordService;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,13 @@ public class RecoverPasswordController {
         return recoverPasswordService.sendRecoverPasswordSms(usernameDto.getUsername());
     }
 
-    @GetMapping("verify-reset-password-code/{code}")
-    public boolean verifyResetPasswordCode(@PathVariable String code) {
-        return recoverPasswordService.verifyResetPasswordCode(code);
+    @PostMapping("verify-reset-password-code")
+    public ResponseEntity<?> verifyResetPasswordCode(@RequestBody CodeDto codeDto) {
+        return recoverPasswordService.verifyResetPasswordCode(codeDto.getCode());
     }
 
     @PostMapping("reset-password")
-    public boolean resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
         return recoverPasswordService.changePassword(resetPasswordRequest);
     }
 }

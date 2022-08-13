@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./features/gsm-register/gsm-register.module').then(m => m.GsmRegisterPageModule)
   },
   {
-    path: 'reset-password/:id',
+    path: 'reset-password/:code',
     loadChildren: () => import('./features/gsm-reset-password/gsm-reset-password.module').then(m => m.GsmResetPasswordPageModule)
   },
   {
