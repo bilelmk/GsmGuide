@@ -10,7 +10,7 @@ import java.io.IOException;
 
 
 @RestController
-@RequestMapping("api/private/")
+@RequestMapping("api/")
 public class RecoverPasswordController {
 
     @Autowired
