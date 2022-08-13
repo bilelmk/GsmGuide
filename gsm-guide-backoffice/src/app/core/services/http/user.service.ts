@@ -20,4 +20,8 @@ export class UserService {
   getAllByRole(role: string): Observable<any> {
     return this.http.get<any>(this.URL + '/role/' + role);
   }
+
+  add(client): Observable<any> {
+    return this.http.post<any>(this.URL + '/client', client);
+  }
 }

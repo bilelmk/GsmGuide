@@ -20,7 +20,9 @@ public class AppUser {
     private Long id;
     private String firstname ;
     private String lastname;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String phone;
     private String password ;
     private boolean isValid ;

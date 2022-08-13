@@ -12,6 +12,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import {SharedModule} from "../../../shared/shared.module";
+import {
+  GsmRequestsAsignReparatorComponent
+} from "./gsm-requests-asign-reparator/gsm-requests-asign-reparator.component";
 
 const routes: Routes = [
   {
@@ -23,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     GsmRequestsComponent,
-    GsmRequestsModalComponent
+    GsmRequestsModalComponent,
+    GsmRequestsAsignReparatorComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,10 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
+  ],
+  entryComponents: [
+    GsmRequestsAsignReparatorComponent
   ]
 })
 export class GsmRequestsModule { }

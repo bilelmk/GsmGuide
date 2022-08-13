@@ -4,6 +4,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { SpinnerService } from "../../../core/services/in-app/spinner.service";
 import { UserService } from "../../../core/services/http/user.service";
 import { MatTableDataSource } from "@angular/material/table";
+import { GsmClientsModalComponent } from "./gsm-clients-modal/gsm-clients-modal.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-gsm-clients',
@@ -24,7 +26,8 @@ export class GsmClientsComponent implements OnInit {
   }
 
   constructor(private spinnerService: SpinnerService ,
-              private userService: UserService) { }
+              private userService: UserService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loading = true ;
@@ -58,4 +61,16 @@ export class GsmClientsComponent implements OnInit {
   }
 
 
+  openModal(isEditMode: boolean, item) {
+    const dialogRef = this.dialog.open( GsmClientsModalComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { array : this.clients , item , isEditMode}
+    });
+    dialogRef.afterClosed().subscribe(
+      res => {
+        this.dataSource.data = this.clients;
+      }
+    );
+  }
 }

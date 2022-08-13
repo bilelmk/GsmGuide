@@ -61,7 +61,7 @@ public class SmsServiceImpl implements SmsService {
 
     }
 
-    public TokenDto getToken() throws IOException {
+    private TokenDto getToken() throws IOException {
         // headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Basic cHozZkVDYTI4TVRNWUEwbXdhTUxjM0pMZ1VzRDRFQXg6bDhKZEZlNVd3QkJhSE1jbg==");

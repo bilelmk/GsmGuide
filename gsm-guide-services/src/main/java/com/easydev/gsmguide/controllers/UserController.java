@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -35,6 +36,11 @@ public class UserController {
         return userService.register(appUser) ;
     }
 
+    @PostMapping("client")
+    public ResponseEntity<?> addClient(@RequestBody AppUser appUser) throws IOException {
+        return userService.addClient(appUser) ;
+    }
+
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
         return userService.login(request) ;
@@ -51,7 +57,7 @@ public class UserController {
     }
 
     @PutMapping("image")
-    public AppUser update(@RequestPart("image") MultipartFile image,
+    public AppUser updateImage(@RequestPart("image") MultipartFile image,
                           @RequestPart("user") AppUser appUser) {
         return userService.updateImage(image , appUser) ;
     }

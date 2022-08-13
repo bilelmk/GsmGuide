@@ -6,6 +6,7 @@ import com.easydev.gsmguide.models.AppUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -17,4 +18,5 @@ public interface UserService {
     public AppUser getById(Long id) ;
     public List<AppUser> getAllByRole(Role role);
     AppUser updateImage(MultipartFile image , AppUser appUser);
+    ResponseEntity<?> addClient(AppUser appUser) throws IOException;
 }

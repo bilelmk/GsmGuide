@@ -68,12 +68,12 @@ export class GsmMainComponent implements OnInit {
       name : "Sms Service" ,
       icon : "sms",
     },
-    {
-      type: "route",
-      route : "statistics" ,
-      name : "Statistiques" ,
-      icon : "bar_chart",
-    },
+    // {
+    //   type: "route",
+    //   route : "statistics" ,
+    //   name : "Statistiques" ,
+    //   icon : "bar_chart",
+    // },
     {
       type: "button",
       handler : this.logout.bind(this) ,

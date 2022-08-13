@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { SpinnerService } from "../../../../core/services/in-app/spinner.service";
 import { SnackbarService } from "../../../../core/services/in-app/snackbar.service";
@@ -11,7 +11,7 @@ import { Helpers } from "../../../../shared/helpers/helpers";
   templateUrl: './gsm-admins-modal.component.html',
   styleUrls: ['./gsm-admins-modal.component.scss']
 })
-export class GsmAdminsModalComponent implements OnInit {
+export class GsmAdminsModalComponent {
 
   form: FormGroup;
 
@@ -28,9 +28,6 @@ export class GsmAdminsModalComponent implements OnInit {
         confirm: new FormControl("", Validators.required),
         username: new FormControl("", Validators.required),
       });
-  }
-
-  ngOnInit() {
   }
 
   add() {

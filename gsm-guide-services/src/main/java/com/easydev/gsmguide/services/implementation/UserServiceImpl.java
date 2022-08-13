@@ -4,6 +4,7 @@ import com.easydev.gsmguide.config.JwtConfig;
 import com.easydev.gsmguide.config.UploadConfig;
 import com.easydev.gsmguide.dtos.AuthenticationRequest;
 import com.easydev.gsmguide.dtos.AuthenticationResponse;
+import com.easydev.gsmguide.dtos.sms.SendSmsDto;
 import com.easydev.gsmguide.enums.Role;
 import com.easydev.gsmguide.models.AppUser;
 import com.easydev.gsmguide.repositories.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -25,20 +27,54 @@ public class UserServiceImpl implements UserService {
     private final JwtConfig jwtConfig;
     private final Random random = new Random();
     private final UploadConfig uploadService;
+    private final SmsServiceImpl smsService;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
                            JwtConfig jwtConfig,
-                           UploadConfig uploadService) {
+                           UploadConfig uploadService,
+                           SmsServiceImpl smsService) {
         this.userRepository = userRepository ;
         this.passwordEncoder = passwordEncoder ;
         this.jwtConfig = jwtConfig;
         this.uploadService = uploadService ;
+        this.smsService = smsService ;
     }
 
     @Override
     public List<AppUser> getAll() {
         return null;
+    }
+
+    @Override
+    public AppUser getById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<AppUser> getAllByRole(Role role) {
+        return userRepository.findAllByRole(role);
+    }
+
+    @Override
+    public ResponseEntity<?> addClient(AppUser toAddClient) throws IOException {
+        AppUser clientByUsername = userRepository.findByUsernameIgnoreCase(toAddClient.getUsername()).orElse(null) ;
+        AppUser clientByPhone = userRepository.findByPhone(toAddClient.getPhone()).orElse(null) ;
+        String password = Integer.toString(100000 + random.nextInt(899999) + 1);
+        if (clientByUsername != null) {
+            return new ResponseEntity<>("username exist", HttpStatus.NOT_FOUND);
+        }
+        if (clientByPhone != null) {
+            return new ResponseEntity<>("phone exist", HttpStatus.NOT_FOUND);
+        }
+        this.smsService.sendSms(new SendSmsDto(toAddClient.getPhone() , "Nom d'utilisateur : " + toAddClient.getUsername() + "  -  Mot de passe : " + password)) ;
+
+        toAddClient.setPassword(passwordEncoder.encode(password));
+        toAddClient.setValid(true);
+        toAddClient.setConfirmed(true);
+        toAddClient.setRole(Role.CLIENT);
+        AppUser newClient = userRepository.save(toAddClient);
+        return new ResponseEntity<>(newClient, HttpStatus.OK) ;
     }
 
     @Override
@@ -83,16 +119,6 @@ public class UserServiceImpl implements UserService {
         } else {
             return new ResponseEntity<>("wrong username", HttpStatus.NOT_FOUND);
         }
-    }
-
-    @Override
-    public AppUser getById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<AppUser> getAllByRole(Role role) {
-        return userRepository.findAllByRole(role);
     }
 
     @Override
