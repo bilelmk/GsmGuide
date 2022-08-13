@@ -38,6 +38,12 @@
           search
         </i>
       </button>
+
+      <button class="square-btn ml-2"  (click)="openRequestModal(null)">
+        <i class="material-icons icon-blue" >
+          add
+        </i>
+      </button>
     </div>
   </div>
 
@@ -112,7 +118,7 @@
       <ng-container matColumnDef="buttons">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell class="cell-text" *matCellDef="let request">
-          <div class="cell-btn" (click)="openRequestModal(request)">
+          <div class="cell-btn" (click)="openRequestAsignModal(request)">
             <mat-icon>flaky</mat-icon>
           </div>
 <!--          <div class="cell-btn" (click)="openDetailsDialog(freelancer)" >-->

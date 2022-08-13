@@ -5,10 +5,9 @@ import { RequestService } from "../../../core/services/http/request.service";
 import { UserService } from "../../../core/services/http/user.service";
 import { forkJoin } from "rxjs";
 import { User } from "../../../core/models/user";
-import {GsmModelModalComponent} from "../gsm-marks/gsm-model-modal/gsm-model-modal.component";
-import {GsmRequestsModalComponent} from "./gsm-requests-modal/gsm-requests-modal.component";
-import {MatDialog} from "@angular/material/dialog";
-import {MatSelect} from "@angular/material/select";
+import { GsmRequestsModalComponent } from "./gsm-requests-modal/gsm-requests-modal.component";
+import { MatDialog } from "@angular/material/dialog";
+import { GsmRequestsAsignReparatorComponent } from "./gsm-requests-asign-reparator/gsm-requests-asign-reparator.component";
 
 @Component({
   selector: 'app-gsm-requests',
@@ -64,13 +63,20 @@ export class GsmRequestsComponent implements OnInit {
     )
   }
 
+  openRequestAsignModal(request){
+    const dialogRef = this.dialog.open( GsmRequestsAsignReparatorComponent, {
+      panelClass: 'custom-dialog-container' ,
+      width: '600px' ,
+      data : { item : request , array: this.repairers }
+    });
+  }
+
   openRequestModal(request){
     const dialogRef = this.dialog.open( GsmRequestsModalComponent, {
       panelClass: 'custom-dialog-container' ,
       width: '600px' ,
       data : { item : request , array: this.repairers }
     });
-    // dialogRef.afterClosed().subscribe(res => {this.getAll()});
   }
 
   getRecords(date: string = null, repairerId: number= null, state: string= null, requestDiagnostic: string= null){

@@ -9,12 +9,11 @@ import com.easydev.gsmguide.repositories.RecoverPasswordRepository;
 import com.easydev.gsmguide.repositories.UserRepository;
 import com.easydev.gsmguide.services.RecoverPasswordService;
 import com.easydev.gsmguide.services.SmsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 
 import java.io.IOException;
@@ -25,38 +24,42 @@ import java.util.*;
 @Service
 public class RecoverPasswordServiceImpl implements RecoverPasswordService {
 
-    @Autowired
-    private UserRepository accountRepository;
-    @Autowired
-    private RecoverPasswordRepository recoverPasswordRepository;
-    @Autowired
-    private SmsService smsService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final Random random = new Random();
+    private final UserRepository accountRepository;
+    private final RecoverPasswordRepository recoverPasswordRepository;
+    private final SmsService smsService;
+    private final PasswordEncoder passwordEncoder;
+
+    RecoverPasswordServiceImpl(  UserRepository accountRepository,
+                                 RecoverPasswordRepository recoverPasswordRepository,
+                                 SmsService smsService,
+                                 PasswordEncoder passwordEncoder){
+        this.accountRepository = accountRepository;
+        this.recoverPasswordRepository = recoverPasswordRepository;
+        this.smsService = smsService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
 
     @Override
-    public boolean sendRecoverPasswordSms(String username) throws IOException {
+    public ResponseEntity<?> sendRecoverPasswordSms(String username) throws IOException {
         AppUser account = accountRepository.findByUsernameIgnoreCase(username).orElse(null);
         if (account == null) {
-            return false;
+            return new ResponseEntity<>("client not found", HttpStatus.NOT_FOUND);
         }
-
-        String verificationCode = generatingRandomAlphanumericString();
-
+        String code = Integer.toString(100000 + random.nextInt(899999) + 1);
         SendSmsDto sendSmsDto = new SendSmsDto();
         sendSmsDto.setNumber(account.getPhone());
-        sendSmsDto.setMessage(verificationCode);
-
+        sendSmsDto.setMessage(code);
         smsService.sendSms(sendSmsDto);
-
         RecoverPassword recoverPassword = new RecoverPassword();
         recoverPassword.setAccount(account);
-        recoverPassword.setCode(verificationCode);
+        recoverPassword.setCode(code);
         recoverPassword.setCreatedAt(LocalDateTime.now());
         recoverPassword.setExpiresAt(LocalDateTime.now().plusHours(24));
         recoverPasswordRepository.save(recoverPassword);
-
-        return true;
+        return new ResponseEntity<>(true, HttpStatus.OK) ;
     }
 
 
@@ -79,19 +82,5 @@ public class RecoverPasswordServiceImpl implements RecoverPasswordService {
     @Override
     public boolean verifyResetPasswordCode(String code) {
         return recoverPasswordRepository.existsByCodeAndExpiresAtGreaterThanAndUsed(code, LocalDateTime.now(), false);
-    }
-
-
-    public String generatingRandomAlphanumericString() {
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 4;
-        Random random = new Random();
-
-        return   random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
     }
 }

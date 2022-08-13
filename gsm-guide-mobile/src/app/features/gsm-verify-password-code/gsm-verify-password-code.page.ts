@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../core/services/http/authentication.service';
-import {SpinnerService} from '../../core/services/in-app/spinner.service';
-import {ToastService} from '../../core/services/in-app/toast.service';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SpinnerService } from '../../core/services/in-app/spinner.service';
+import { ToastService } from '../../core/services/in-app/toast.service';
+import { UserService } from '../../core/services/http/user.service';
 
 @Component({
   selector: 'app-gsm-verify-password-code',
   templateUrl: './gsm-verify-password-code.page.html',
   styleUrls: ['./gsm-verify-password-code.page.scss'],
 })
-export class GsmVerifyPasswordCodePage implements OnInit {
+export class GsmVerifyPasswordCodePage {
 
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder ,
               private router: Router ,
-              private authenticationService: AuthenticationService ,
+              private userService: UserService ,
               private spinnerService: SpinnerService ,
               private toastService: ToastService
   ) {
@@ -25,26 +25,17 @@ export class GsmVerifyPasswordCodePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   onVerifyCode() {
     this.spinnerService.activate() ;
-    this.authenticationService.verifyPassowrdCode(this.form.value).subscribe(
+    this.userService.verifyPassowrdCode(this.form.value).subscribe(
         res => {
           this.router.navigate(['/cb-reset-password/' , res.clientId]);
-          this.toastService.show('Code vérifié avec succès' ,'success') ;
+          this.toastService.show('Code vérifié avec succès' , 'success') ;
           this.spinnerService.deactivate() ;
         }, error => {
           console.log(error);
           this.spinnerService.deactivate() ;
-          if (error.error.message === 'code not found') {
-            this.toastService.show('Le code est incorrect' ,'danger');
-          } else if (error.error.message === 'code is expired') {
-            this.toastService.show('Le code est expiré' ,'danger');
-          } else {
-            this.toastService.show('Erreur du serveur' ,'danger');
-          }
+          this.toastService.show('Erreur du serveur' , 'danger');
         });
   }
 }

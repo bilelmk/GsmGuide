@@ -27,6 +27,14 @@ export class UserService {
     return this.http.post<any>(this.URL + '/login', request);
   }
 
+  verifyPassowrdCode(username: string) {
+    return this.http.post<any>(environment.url + 'api/forget-password', username);
+  }
+
+  sendPassowrdCode(username) {
+    return this.http.post<any>(environment.url + 'api/forget-password', username);
+  }
+
   getById(id: number): Observable<any> {
     return this.http.get<any>(this.URL + '/' + id);
   }

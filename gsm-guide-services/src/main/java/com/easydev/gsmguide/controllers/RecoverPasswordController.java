@@ -1,8 +1,9 @@
 package com.easydev.gsmguide.controllers;
 
 import com.easydev.gsmguide.dtos.ResetPasswordRequest;
+import com.easydev.gsmguide.dtos.security.UsernameDto;
 import com.easydev.gsmguide.services.RecoverPasswordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,12 +14,15 @@ import java.io.IOException;
 @RequestMapping("api/")
 public class RecoverPasswordController {
 
-    @Autowired
-    private RecoverPasswordService recoverPasswordService;
+    private final RecoverPasswordService recoverPasswordService;
+
+    RecoverPasswordController(RecoverPasswordService recoverPasswordService) {
+        this.recoverPasswordService = recoverPasswordService ;
+    }
 
     @PostMapping("forget-password")
-    public boolean forgetPassword(@RequestBody String username) throws IOException {
-        return recoverPasswordService.sendRecoverPasswordSms(username);
+    public ResponseEntity<?> forgetPassword(@RequestBody UsernameDto usernameDto) throws IOException {
+        return recoverPasswordService.sendRecoverPasswordSms(usernameDto.getUsername());
     }
 
     @GetMapping("verify-reset-password-code/{code}")

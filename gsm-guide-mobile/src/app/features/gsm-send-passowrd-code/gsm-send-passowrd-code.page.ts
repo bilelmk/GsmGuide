@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../core/services/http/authentication.service';
-import {SpinnerService} from '../../core/services/in-app/spinner.service';
-import {ToastService} from '../../core/services/in-app/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SpinnerService } from '../../core/services/in-app/spinner.service';
+import { ToastService } from '../../core/services/in-app/toast.service';
+import { UserService } from '../../core/services/http/user.service';
 
 @Component({
   selector: 'app-gsm-send-passowrd-code',
@@ -16,12 +16,12 @@ export class GsmSendPassowrdCodePage implements OnInit {
 
   constructor(private formBuilder: FormBuilder ,
               private router: Router ,
-              private authenticationService: AuthenticationService ,
+              private userService: UserService ,
               private spinnerService: SpinnerService ,
               private toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
-      phone   : ['', [Validators.required]],
+      username   : ['', [Validators.required]],
     });
   }
 
@@ -30,21 +30,19 @@ export class GsmSendPassowrdCodePage implements OnInit {
 
   send() {
     this.spinnerService.activate();
-    this.authenticationService.sendPassowrdCode(this.form.value).subscribe(
+    this.userService.sendPassowrdCode(this.form.value).subscribe(
         res => {
-          this.router.navigate(['cb-verify-password-code']);
-          this.toastService.show('Code envoyé avec succès' ,'success') ;
+          this.router.navigate(['verify-password-code']);
+          this.toastService.show('Code envoyé avec succès' , 'success') ;
           this.spinnerService.deactivate();
         },
         error => {
           console.log(error);
           this.spinnerService.deactivate() ;
-          if (error.error.message === 'client not found') {
-            this.toastService.show('Votre numéro du téléphone incorrect' ,'danger');
-          } else if (error.error.message === 'sms not sent') {
-            this.toastService.show('SMS n\'est pas envoyé' ,'danger');
+          if (error.error === 'client not found') {
+            this.toastService.show('Votre nom d\'utilisateur incorrect' , 'danger');
           } else {
-            this.toastService.show('Erreur du serveur' ,'danger');
+            this.toastService.show('Erreur du serveur' , 'danger');
           }
         }
     );
