@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
                     return new ResponseEntity<>("phone not confirmed", HttpStatus.UNAUTHORIZED);
                 }
                 String token = this.jwtConfig.generateToken(client.getId() , client.getUsername());
-                return ResponseEntity.ok(new AuthenticationResponse(token , client.getId() , client.getRole().toString()));
+                return ResponseEntity.ok(new AuthenticationResponse(token , client.getId() , client.getRole().toString() , 36000));
             } else {
                 return new ResponseEntity<>("wrong password", HttpStatus.NOT_FOUND);
             }

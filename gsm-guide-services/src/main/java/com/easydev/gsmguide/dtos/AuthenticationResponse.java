@@ -13,4 +13,5 @@ public class AuthenticationResponse implements Serializable {
     private String token;
     private Long id ;
     private String role ;
+    private int expiresIn ;
 }

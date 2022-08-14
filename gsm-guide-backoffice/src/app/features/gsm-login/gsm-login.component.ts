@@ -42,25 +42,20 @@ export class GsmLoginComponent implements OnInit {
     }
     this.adminsService.login(authRequest).subscribe(
       res => {
-        console.log(res)
         // save data in browser
         sessionStorage.setItem('token' , res.token) ;
-        // sessionStorage.setItem('admin' , JSON.stringify({firstname : res.admin.firstname , lastname : res.admin.lastname }));
         sessionStorage.setItem('id' , res.id) ;
+        sessionStorage.setItem('expiresIn' , res.expiresIn) ;
+        this.adminsService.setAuthTimer(res.expiresIn) ;
         this.spinnerService.deactivate() ;
         this.snackbarService.openSnackBar("Connecté avec succès" , 'success')
         this.router.navigate(['/main'])
       },
       error => {
-        console.log(error.error)
         this.spinnerService.deactivate()
         if(error.error == "wrong password") {
           this.snackbarService.openSnackBar("Mot de passe incorrect" , 'fail')
-        }
-        // if(error.error == "account deactivated") {
-        //   this.snackbarService.openSnackBar("Votre compte a été bloqué, vous pouvez contacter l'administration", 'fail')
-        // }
-        if(error.error == "wrong username") {
+        } else if(error.error == "wrong username") {
           this.snackbarService.openSnackBar("Nom d'utilisateur incorrect", 'fail')
         } else {
           this.snackbarService.openSnackBar("Erreur serveur", 'fail')

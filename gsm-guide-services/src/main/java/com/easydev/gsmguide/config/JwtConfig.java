@@ -40,7 +40,6 @@ public class JwtConfig {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", id);
         claims.put("username", username);
-//        claims.put("group", user.getGroupId());
         return createToken(claims, username);
     }
 

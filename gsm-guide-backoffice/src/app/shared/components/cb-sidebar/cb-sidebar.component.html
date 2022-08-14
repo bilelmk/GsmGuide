@@ -8,10 +8,19 @@
       </div>
 
       <mat-list role="list">
-        <mat-list-item *ngFor="let route of routes"  routerLink="{{route.route}}" [routerLinkActive]="route.route ? 'active' : ''" >
-          <span class="material-icons">{{route.icon}}</span>
-          {{route.name}}
-        </mat-list-item>
+        <ng-container *ngFor="let route of routes">
+          <mat-list-item *ngIf="route.type == 'route'"  routerLink="{{route.route}}" [routerLinkActive]="route.route ? 'active' : ''" >
+            <span class="material-icons">{{route.icon}}</span>
+            {{route.name}}
+          </mat-list-item>
+
+          <mat-list-item *ngIf="route.type == 'button'" (click)="route.handler()" >
+            <span class="material-icons">{{route.icon}}</span>
+            {{route.name}}
+          </mat-list-item>
+
+        </ng-container>
+
       </mat-list>
     </div>
 

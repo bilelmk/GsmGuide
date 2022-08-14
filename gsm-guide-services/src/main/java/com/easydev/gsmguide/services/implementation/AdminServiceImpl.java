@@ -52,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
         if (admin != null) {
             if (this.passwordEncoder.matches(request.getPassword(), admin.getPassword())) {
                 String token = this.jwtConfig.generateToken(admin.getId() , admin.getUsername());
-                return ResponseEntity.ok(new AuthenticationResponse(token , admin.getId() , null));
+                return ResponseEntity.ok(new AuthenticationResponse(token , admin.getId() , null , 36000));
             } else {
                 return new ResponseEntity<>("wrong password", HttpStatus.NOT_FOUND);
             }
