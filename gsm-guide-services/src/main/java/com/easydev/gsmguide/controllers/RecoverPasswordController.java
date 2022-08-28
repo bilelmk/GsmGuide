@@ -12,6 +12,7 @@ import java.io.IOException;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/")
 public class RecoverPasswordController {
 

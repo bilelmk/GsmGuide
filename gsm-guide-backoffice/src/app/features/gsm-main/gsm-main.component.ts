@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../core/services/http/user.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gsm-main',
@@ -83,13 +84,14 @@ export class GsmMainComponent implements OnInit {
     },
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   logout(){
-    this.userService.logout()
+    sessionStorage.clear() ;
+    this.router.navigate(['/']);
   }
 
 }

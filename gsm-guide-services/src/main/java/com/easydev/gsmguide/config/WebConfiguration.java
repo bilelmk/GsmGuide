@@ -14,11 +14,5 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/static/").addResourceLocations("file:src/main/resources/static/");
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST" , "PUT" , "DELETE" );
-    }
 
 }
