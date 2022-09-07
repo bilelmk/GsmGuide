@@ -17,7 +17,7 @@
   <div class="row mt-5"  *ngIf="actualities?.length > 0">
     <div class="col-12 col-sm-6 col-md-4 no-padding" *ngFor="let actuality of actualities">
       <div class="row justify-content-center align-items-center">
-        <img  class="img-fluid col-6" [src]=" actuality?.image ? URL + actuality.image : './../../../../assets/image/default-profile.png' " alt="image"  >
+        <img  class="img-fluid col-6" [src]=" actuality?.image ? URL + actuality.image : './../../../../assets/image/default-profile.png' " alt="image" >
         <div class="col-6">
           <p>{{actuality.content}}</p>
           <p class="text-center"><span class="order">{{actuality.displayOrder}}</span></p>

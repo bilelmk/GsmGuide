@@ -11,7 +11,7 @@ import { RequestService } from '../../../core/services/http/request.service';
   templateUrl: './gsm-main-reparation-requests.page.html',
   styleUrls: ['./gsm-main-reparation-requests.page.scss'],
 })
-export class GsmMainReparationRequestsPage implements OnInit {
+export class GsmMainReparationRequestsPage implements OnInit  {
 
   marks ;
   parts ;
@@ -38,6 +38,17 @@ export class GsmMainReparationRequestsPage implements OnInit {
   onToggleMenu(name: string) {
     this.menu.open(name);
   }
+
+  // ngAfterViewInit() {
+  //   console.log(this.card)
+  //   const gesture = this.gestureCtrl.create({
+  //     gestureName: 'double click',
+  //     el: this.card.nativeElement,
+  //     threshold: 0,
+  //     onStart: () => { this.openDetails(); }
+  //   });
+  //   gesture.enable();
+  // }
 
   ngOnInit() {
     this.spinnerService.activate() ;
@@ -83,7 +94,12 @@ export class GsmMainReparationRequestsPage implements OnInit {
   }
 
   openDetails() {
-
+    // if (Math.abs(now() - this.lastOnStart) <= this.DOUBLE_CLICK_THRESHOLD) {
+    //   console.log('yes')
+    //   this.lastOnStart = 0;
+    // } else {
+    //   this.lastOnStart = now();
+    // }
   }
 
   async openStatus(request) {
@@ -163,4 +179,28 @@ export class GsmMainReparationRequestsPage implements OnInit {
       return '' ;
     }
   }
+
+  getSateText(state: any) {
+    if (state === 'IN_PROGRESS') {
+      return 'En cours' ;
+    }
+    else if (state === 'WAITING_FOR_PART') {
+      return 'En attente de piéce' ;
+    }
+    else if (state === 'REPARED' ) {
+      return 'Réparé' ;
+    }
+
+    else if (state === 'PART_UNAVAILABLE' ) {
+      return 'Piéce introuvable' ;
+    }
+
+    else if (state === 'NON_REPARABLE') {
+      return 'Non réparable' ;
+    }
+    else {
+      return '' ;
+    }
+  }
+
 }

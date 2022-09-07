@@ -127,6 +127,14 @@
         font-size: 20px;
         color: var(--ion-color-primary);
     }
+
+    ion-item {
+        --background: transparent !important ;
+        --padding-end: 0 ;
+        --padding-start: 0;
+        font-size: 14px !important;
+        --border-color: transparent !important ;
+    }
 }
 
 .form-card-dark {

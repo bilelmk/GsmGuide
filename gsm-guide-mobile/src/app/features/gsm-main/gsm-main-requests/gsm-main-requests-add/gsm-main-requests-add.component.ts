@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SpinnerService } from '../../../../core/services/in-app/spinner.service';
 import { ToastService } from '../../../../core/services/in-app/toast.service';
-import {AlertController, ModalController} from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { PriceService } from '../../../../core/services/http/price.service';
 import { GsmMainRequestsRdvComponent } from '../gsm-main-requests-rdv/gsm-main-requests-rdv.component';
 
@@ -15,6 +15,11 @@ export class GsmMainRequestsAddComponent implements OnInit {
   @Input() marks: any;
   @Input() parts: any;
   @Input() locations: any;
+
+  // @ViewChild('partInput') partInput: ElementRef ;
+  // @ViewChild('priceInput') priceInput: ElementRef ;
+
+  isDiangnosticExist = false ;
 
   models  = [];
   articles = [];
@@ -66,6 +71,8 @@ export class GsmMainRequestsAddComponent implements OnInit {
     this.modelName = null ;
     this.articleId = null ;
     this.articleName = null ;
+    this.priceId = null ;
+    this.priceName = null ;
   }
 
   onModelSelect() {
@@ -78,6 +85,8 @@ export class GsmMainRequestsAddComponent implements OnInit {
     }
     this.articleId = null ;
     this.articleName = null ;
+    this.priceId = null ;
+    this.priceName = null ;
   }
 
   async showModelAlert() {
@@ -98,6 +107,20 @@ export class GsmMainRequestsAddComponent implements OnInit {
       if (article.articleId == this.articleId) {
         this.articleName = article.name ;
       }
+    }
+    this.priceId = null ;
+    this.priceName = null ;
+    if (this.articleId && this.partId) {
+      this.spinnerService.activate() ;
+      this.priceService.getAllByArticleAndPart(this.articleId , this.partId).subscribe(
+          res => {
+            this.spinnerService.deactivate() ;
+            this.prices = res ;
+          },
+          error => {
+            this.spinnerService.deactivate() ;
+          }
+      );
     }
   }
 
@@ -120,17 +143,14 @@ export class GsmMainRequestsAddComponent implements OnInit {
         this.partName = part.name ;
       }
     }
-
-    if (this.articleId == null ) {
-      console.log('select article');
-    }
-    // tslint:disable-next-line:triple-equals
-    if (this.articleId && this.partId && this.partId != -1) {
+    this.priceName = null ;
+    this.priceId = null ;
+    if (this.articleId && this.partId) {
       this.spinnerService.activate() ;
       this.priceService.getAllByArticleAndPart(this.articleId , this.partId).subscribe(
           res => {
-            this.spinnerService.deactivate() ;
             this.prices = res ;
+            this.spinnerService.deactivate() ;
           },
           error => {
             this.spinnerService.deactivate() ;
@@ -148,6 +168,10 @@ export class GsmMainRequestsAddComponent implements OnInit {
     }
   }
 
+  onDiagnosticSelect(event) {
+    this.isDiangnosticExist = event.detail.checked === true;
+  }
+
   async next() {
     const request = {
       modelId: this.modelId ,
@@ -158,6 +182,7 @@ export class GsmMainRequestsAddComponent implements OnInit {
       client: { id: sessionStorage.getItem('id') } ,
       details: this.details,
       imei: this.imei,
+      requestDiagnostic: this.isDiangnosticExist,
 
       modelName: this.modelName ,
       markName: this.markName ,
@@ -178,7 +203,8 @@ export class GsmMainRequestsAddComponent implements OnInit {
   }
 
   isAllVariablesExists() {
-    return (this.articleId && this.modelId && this.markId && this.partId && this.priceId) ;
+    if (this.isDiangnosticExist) { return (this.articleId && this.modelId && this.markId) ; }
+    else { return (this.articleId && this.modelId && this.markId && this.partId && this.priceId) ; }
   }
 }
 

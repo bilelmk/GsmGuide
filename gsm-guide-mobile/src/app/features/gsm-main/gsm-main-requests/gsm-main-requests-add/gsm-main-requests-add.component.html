@@ -60,8 +60,15 @@
       </ion-col>
 
       <ion-col size="12" class="form-card">
+        <ion-item>
+          <ion-label class="form-card-label">Je demande un diagnostics</ion-label>
+          <ion-toggle (ionChange)="onDiagnosticSelect($event)" color="secondary"></ion-toggle>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="form-card" *ngIf="!isDiangnosticExist">
         <p class="form-card-label">Pièce a réparer</p>
-        <input onfocus="blur();" [value]="partName" (click)="PartRef.open()" placeholder="choisir la pièce a réparer" class="form-card-input"  type="text"/>
+        <input  onfocus="blur();" [value]="partName" (click)="PartRef.open()" placeholder="choisir la pièce a réparer" class="form-card-input"  type="text"/>
         <ion-item class="input">
           <ion-label>Sélectionner une piéce</ion-label>
           <ion-select [(ngModel)]="partId"  #PartRef (ionChange)="onPartSelect()">
@@ -70,9 +77,9 @@
         </ion-item>
       </ion-col>
 
-      <ion-col size="12" class="form-card">
+      <ion-col size="12" class="form-card"  *ngIf="!isDiangnosticExist">
         <p class="form-card-label">Prix</p>
-        <input onfocus="blur();" [value]="priceName"  (click)="PriceRef.open()" placeholder="choisir le prix de piéce" class="form-card-input"  type="text"/>
+        <input  onfocus="blur();" [value]="priceName"  (click)="PriceRef.open()" placeholder="choisir le prix de piéce" class="form-card-input"  type="text"/>
         <ion-item class="input">
           <ion-label>Sélectionner une piéce</ion-label>
             <ion-select [(ngModel)]="priceId" #PriceRef (ionChange)="onPriceSelect()">

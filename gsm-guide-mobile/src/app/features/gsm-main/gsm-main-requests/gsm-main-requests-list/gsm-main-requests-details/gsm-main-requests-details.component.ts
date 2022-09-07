@@ -20,7 +20,6 @@ export class GsmMainRequestsDetailsComponent implements OnInit {
               private toastService: ToastService) { }
 
   ngOnInit() {
-    console.log(this.request)
     this.value = JSON.stringify({text: 'qsàçqsdçà)qsd)àq;)àçsqdà)çq@@@@@@@@)àçqsàçdqsàd)', id: this.request.id});
   }
 

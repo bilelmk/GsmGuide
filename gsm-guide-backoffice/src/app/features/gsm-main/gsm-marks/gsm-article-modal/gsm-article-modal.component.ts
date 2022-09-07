@@ -41,6 +41,7 @@ export class GsmArticleModalComponent implements OnInit {
         modelId: this.data.id
       }
     }
+    console.log(article)
     this.spinnerService.activate();
     this.articleService.add(article).subscribe(
       (res) => {
@@ -51,6 +52,7 @@ export class GsmArticleModalComponent implements OnInit {
       err => {
         this.snackbarService.openSnackBar('Erreur lors de l\'ajout', 'fail');
         this.spinnerService.deactivate();
+        console.log(err)
       }
     );
   }

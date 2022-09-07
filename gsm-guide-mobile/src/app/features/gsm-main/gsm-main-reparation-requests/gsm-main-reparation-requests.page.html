@@ -17,15 +17,19 @@
 <ion-content class="ion-padding">
 
   <p class="page-title">Méttre à jour</p>
-  <p class="page-title">votre liste de demandes !</p>
+  <p class="page-title" #card>votre liste de demandes !</p>
 
   <ion-row>
-    <ion-col *ngFor="let request of requests" size="12" class="form-card" (click)="openStatus(request)">
+    <ion-col *ngFor="let request of requests" size="12" class="form-card" (click)="openStatus(request)" >
       <ion-row>
         <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
-        <ion-col size="6"><p class="form-card-label" [ngClass]="getSateColor(request.state)">{{ request.state.toString() | translate}}</p></ion-col>
+        <ion-col size="6">
+          <p class="form-card-label" >
+            <span [ngClass]="getSateColor(request.state)">{{ getSateText(request.state)}}</span>
+          </p>
+        </ion-col>
       </ion-row>
-      <p class="form-card-text">{{ "Adresse de récupération :" + request.location}}</p>
+      <p class="form-card-text">{{ "Adresse de récupération : " + request.location}}</p>
     </ion-col>
   </ion-row>
 

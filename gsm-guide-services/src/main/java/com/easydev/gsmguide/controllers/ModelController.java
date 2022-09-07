@@ -4,9 +4,6 @@ import com.easydev.gsmguide.models.Model;
 import com.easydev.gsmguide.services.ModelService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
 @RestController
 @RequestMapping("api/models")
 public class ModelController {
@@ -32,3 +29,4 @@ public class ModelController {
         modelService.delete(id);
     }
 }
+

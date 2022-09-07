@@ -20,14 +20,6 @@
   <p class="page-title">demande</p>
 
   <ion-row class="ion-justify-content-center">
-<!--    <ion-col class="ion-text-center" size="12" size-md="7">-->
-<!--      <ngx-qrcode-->
-<!--              [elementType]="'url'"-->
-<!--              [value]="value"-->
-<!--              cssClass="aclass"-->
-<!--              errorCorrectionLevel="L">-->
-<!--      </ngx-qrcode>-->
-<!--    </ion-col>-->
     <ion-row class="ion-padding-top">
         <ion-col size="12">
             <p class="m-0 recap-text"><span class="recap-title">Date:  </span>{{ request.date | date}}</p>
@@ -54,14 +46,35 @@
         </ion-col>
 
         <ion-col size="12">
-            <p class="m-0 recap-text"><span class="recap-title">Panne:  </span>{{ request.partName}}</p>
-        </ion-col>
-
-        <ion-col size="12">
             <p class="m-0"><span class="recap-title">Détails de la panne:  </span></p>
             <p class="m-0 recap-text">{{request.details}}</p>
         </ion-col>
 
+        <ion-col size="12">
+            <ion-row>
+                <ion-col size="12">
+                    <p class="m-0"><span class="recap-title">Prix et main d’oeuvre : </span></p>
+                </ion-col>
+                <ion-col size="6">
+                    <p class="m-0">Diagnostique</p>
+                </ion-col>
+                <ion-col size="6">
+                    <p class="m-0">0 DT</p>
+                </ion-col>
+
+                <ion-col size="12" *ngIf="request?.requestDiagnostic">
+                    <p class="ion-text-center state-danger">Le prix exact va être déterminé après le diagnostic !</p>
+                </ion-col>
+
+                <ion-col size="6" *ngIf="request?.price && request?.part ">
+                    <p class="m-0">{{request.part}}</p>
+                </ion-col>
+                <ion-col size="6" *ngIf="request?.price && request?.part ">
+                    <p class="m-0">{{request.price + " DT"}}</p>
+                </ion-col>
+
+            </ion-row>
+        </ion-col>
     </ion-row>
 
   </ion-row>

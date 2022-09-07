@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../core/services/http/user.service";
+import {AdminsService} from "../../core/services/http/admins.service";
 
 @Component({
   selector: 'app-gsm-main',
@@ -83,13 +84,13 @@ export class GsmMainComponent implements OnInit {
     },
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private adminService: AdminsService) { }
 
   ngOnInit(): void {
   }
 
   logout(){
-    this.userService.logout()
+    this.adminService.logout()
   }
 
 }
