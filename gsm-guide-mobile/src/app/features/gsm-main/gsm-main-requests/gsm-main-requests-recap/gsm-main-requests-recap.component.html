@@ -66,11 +66,11 @@
                     <p class="ion-text-center state-danger">Le prix exact va être déterminé après le diagnostic !</p>
                 </ion-col>
 
-                <ion-col size="6" *ngIf="request?.price && request?.part ">
-                    <p class="m-0">{{request.part}}</p>
+                <ion-col size="6" *ngIf="request?.priceId && request?.partId ">
+                    <p class="m-0">{{request.partNale}}</p>
                 </ion-col>
-                <ion-col size="6" *ngIf="request?.price && request?.part ">
-                    <p class="m-0">{{request.price + " DT"}}</p>
+                <ion-col size="6" *ngIf="request?.priceId && request?.partId ">
+                    <p class="m-0">{{request.priceName}}</p>
                 </ion-col>
 
             </ion-row>

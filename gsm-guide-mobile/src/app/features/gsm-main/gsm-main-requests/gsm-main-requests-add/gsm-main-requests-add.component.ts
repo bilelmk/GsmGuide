@@ -191,15 +191,18 @@ export class GsmMainRequestsAddComponent implements OnInit {
       priceName: this.priceName ,
     };
 
-    const modal = await this.modalController.create({
+    this.modalController.create({
       component: GsmMainRequestsRdvComponent ,
       componentProps: {
         request ,
         locations: this.locations
       }
-    }) ;
-    modal.onWillDismiss().then(res => { this.close(); });
-    return await modal.present();
+    }).then(modal => {
+      modal.present() ;
+      modal.onDidDismiss().then(
+          res => { setTimeout(() => this.modalController.dismiss() , 100); }
+      );
+    });
   }
 
   isAllVariablesExists() {

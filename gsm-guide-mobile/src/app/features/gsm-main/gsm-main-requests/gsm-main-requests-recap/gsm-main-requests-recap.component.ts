@@ -13,6 +13,7 @@ export class GsmMainRequestsRecapComponent {
   constructor(private modalController: ModalController) { }
 
   close() {
+    console.log(this.request)
     this.modalController.dismiss();
   }
 

@@ -46,14 +46,14 @@
         </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="buttons">
-        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-        <mat-cell class="cell-text" *matCellDef="let client">
-          <div class="cell-btn" (click)="delete(client)">
-            <mat-icon>delete</mat-icon>
-          </div>
-        </mat-cell>
-      </ng-container>
+<!--      <ng-container matColumnDef="buttons">-->
+<!--        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>-->
+<!--        <mat-cell class="cell-text" *matCellDef="let client">-->
+<!--          <div class="cell-btn" (click)="delete(client)">-->
+<!--            <mat-icon>delete</mat-icon>-->
+<!--          </div>-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
 
       <mat-header-row class="text-center" *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row class="contact" *matRowDef="let type; columns: displayedColumns;" ></mat-row>

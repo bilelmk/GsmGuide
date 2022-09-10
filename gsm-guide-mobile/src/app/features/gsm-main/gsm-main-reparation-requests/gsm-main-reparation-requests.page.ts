@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService} from '../../../core/services/http/user.service';
 import { AlertController, MenuController, ModalController } from '@ionic/angular';
 import { SpinnerService } from '../../../core/services/in-app/spinner.service';
 import { MarkService } from '../../../core/services/http/mark.service';
 import { PartService } from '../../../core/services/http/part.service';
 import { RequestService } from '../../../core/services/http/request.service';
+import {
+  GsmMainRequestsDetailsComponent
+} from '../gsm-main-requests/gsm-main-requests-list/gsm-main-requests-details/gsm-main-requests-details.component';
 
 @Component({
   selector: 'app-gsm-main-reparation-requests',
   templateUrl: './gsm-main-reparation-requests.page.html',
   styleUrls: ['./gsm-main-reparation-requests.page.scss'],
 })
-export class GsmMainReparationRequestsPage implements OnInit  {
+export class GsmMainReparationRequestsPage {
 
   marks ;
   parts ;
@@ -50,7 +53,7 @@ export class GsmMainReparationRequestsPage implements OnInit  {
   //   gesture.enable();
   // }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.spinnerService.activate() ;
     const searchRequest = {
       offset: this.offset ,
@@ -201,6 +204,17 @@ export class GsmMainReparationRequestsPage implements OnInit  {
     else {
       return '' ;
     }
+  }
+
+  openDetailsModal(request) {
+    this.modalController.create({
+      component: GsmMainRequestsDetailsComponent ,
+      componentProps: {
+        request,
+      }
+    }).then(modal => {
+      modal.present() ;
+    });
   }
 
 }

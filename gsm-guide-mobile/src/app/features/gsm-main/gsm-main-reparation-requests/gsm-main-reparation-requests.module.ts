@@ -6,6 +6,7 @@ import { GsmMainReparationRequestsPageRoutingModule } from './gsm-main-reparatio
 import { GsmMainReparationRequestsPage } from './gsm-main-reparation-requests.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
+import { GsmMainRequestsDetailsComponent } from './gsm-main-requests-details/gsm-main-requests-details.component';
 
 @NgModule({
     imports: [
@@ -16,6 +17,9 @@ import { SharedModule } from '../../../shared/shared.module';
         TranslateModule,
         SharedModule
     ],
-  declarations: [GsmMainReparationRequestsPage]
+  declarations: [
+      GsmMainReparationRequestsPage,
+      GsmMainRequestsDetailsComponent
+  ]
 })
 export class GsmMainReparationRequestsPageModule {}

@@ -15,7 +15,7 @@ import { GsmRepairersModalComponent } from "./gsm-repairers-modal/gsm-repairers-
 export class GsmRepairersComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<User>();
-  displayedColumns = ['firstname', 'lastname' , 'username', 'phone' , 'buttons' ];
+  displayedColumns = ['firstname', 'lastname' , 'username', 'phone' ];
   repairers : User[] = [] ;
 
   error = false ;

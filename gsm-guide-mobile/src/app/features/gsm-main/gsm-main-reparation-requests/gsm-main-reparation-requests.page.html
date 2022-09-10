@@ -16,30 +16,40 @@
 
 <ion-content class="ion-padding">
 
-  <p class="page-title">Méttre à jour</p>
-  <p class="page-title" #card>votre liste de demandes !</p>
+  <p class="page-title" *ngIf="!loading && requests?.length > 0">Méttre à jour</p>
+  <p class="page-title" *ngIf="!loading && requests?.length > 0">votre liste de demandes !</p>
 
-  <ion-row>
-    <ion-col *ngFor="let request of requests" size="12" class="form-card" (click)="openStatus(request)" >
-      <ion-row>
-        <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
-        <ion-col size="6">
-          <p class="form-card-label" >
-            <span [ngClass]="getSateColor(request.state)">{{ getSateText(request.state)}}</span>
-          </p>
-        </ion-col>
-      </ion-row>
-      <p class="form-card-text">{{ "Adresse de récupération : " + request.location}}</p>
-    </ion-col>
-  </ion-row>
+  <div *ngIf="!loading && requests?.length > 0">
+    <ion-row>
+      <ion-col *ngFor="let request of requests" size="12" class="form-card" >
+        <ion-row>
+          <ion-col size="6"><p class="form-card-label">Date: {{ request.date | date}}</p></ion-col>
+          <ion-col size="6">
+            <p class="form-card-label" >
+              <span [ngClass]="getSateColor(request.state)">{{ getSateText(request.state)}}</span>
+            </p>
+          </ion-col>
+        </ion-row>
+        <p class="form-card-text">{{ "Adresse de récupération : " + request.location}}</p>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button (click)="openStatus(request)" class="mini-btn-primary full-width">Changer le status</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button (click)="openDetailsModal(request)" class="mini-btn-secondary full-width">Voir les détails</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 
 
-<!--  <app-cb-errors [exist]="requests?.length == 0" [message]="'Aucune réservation trouvée'" [icon]="'calendar-outline'"></app-cb-errors>-->
-<!--  <app-cb-errors [exist]="error" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-cb-errors>-->
+  <app-errors [exist]="requests?.length == 0 && !error && !loading" [message]="'Aucune demande trouvée'" [icon]="'calendar-outline'"></app-errors>
+  <app-errors [exist]="error && !loading" [message]="'Une erreur est survenue essayer plus tard'" [icon]="'bug-outline'"></app-errors>
 
 </ion-content>

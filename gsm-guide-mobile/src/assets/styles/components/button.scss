@@ -40,3 +40,24 @@
   font-family: "Poppins-Medium" !important;
 
 }
+
+
+.mini-btn-primary {
+  --border-radius: 20px;
+  --box-shadow: none ;
+  height: 30px ;
+  font-size: 12px !important;
+  font-weight: normal;
+  font-family: "Poppins-Regular" !important;
+}
+
+.mini-btn-secondary {
+  --border-radius: 20px;
+  --box-shadow: none ;
+  height: 30px ;
+  font-size: 12px !important;
+  font-weight: normal;
+  font-family: "Poppins-Regular" !important;
+  --background: var(--ion-color-secondary);
+  color: var(--ion-color-light);
+}
