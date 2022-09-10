@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/actualities")
 public class ActualityController {
 

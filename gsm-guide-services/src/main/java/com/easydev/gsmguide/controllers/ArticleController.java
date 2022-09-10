@@ -5,6 +5,7 @@ import com.easydev.gsmguide.services.ArticleService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/articles")
 public class ArticleController {
 

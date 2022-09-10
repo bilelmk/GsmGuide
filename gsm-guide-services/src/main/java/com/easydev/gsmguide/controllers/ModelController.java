@@ -5,6 +5,7 @@ import com.easydev.gsmguide.services.ModelService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/models")
 public class ModelController {
 
