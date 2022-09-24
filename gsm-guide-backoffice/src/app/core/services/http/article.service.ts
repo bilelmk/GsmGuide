@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ArticleService {
 
-  URL = environment.url + "api/articles" ;
+  URL = environment.url + "/articles" ;
 
   constructor(private http: HttpClient) { }
 

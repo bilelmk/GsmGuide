@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class SmsService {
 
-  URL = environment.url + "api/sms" ;
+  URL = environment.url + "/sms" ;
 
   constructor(private http: HttpClient) { }
 

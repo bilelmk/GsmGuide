@@ -9,7 +9,7 @@ import { Actuality } from "../../models/actuality";
 })
 export class ActualityService {
 
-  URL = environment.url + "api/actualities" ;
+  URL = environment.url + "/actualities" ;
 
   constructor(private http: HttpClient) { }
 

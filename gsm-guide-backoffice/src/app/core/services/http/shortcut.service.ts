@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class ShortcutService {
 
-  URL = environment.url + "api/shortcuts" ;
+  URL = environment.url + "/shortcuts" ;
 
   constructor(private http: HttpClient) { }
 

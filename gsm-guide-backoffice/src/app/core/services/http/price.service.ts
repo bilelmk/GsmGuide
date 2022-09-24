@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class PriceService {
 
-  URL = environment.url + "api/prices";
+  URL = environment.url + "/prices";
 
   constructor(private http: HttpClient) {
   }

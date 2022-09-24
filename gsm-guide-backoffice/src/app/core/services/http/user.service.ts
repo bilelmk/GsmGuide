@@ -9,7 +9,7 @@ import { RegisterRequest } from "../../dtos/register-request";
 })
 export class UserService {
 
-  URL = environment.url + "api/users" ;
+  URL = environment.url + "/users" ;
 
   constructor(private http: HttpClient) {}
 

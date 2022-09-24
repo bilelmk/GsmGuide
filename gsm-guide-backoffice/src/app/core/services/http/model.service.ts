@@ -8,7 +8,7 @@ import { environment } from "../../../../environments/environment";
 })
 export class ModelService {
 
-  URL = environment.url + "api/models" ;
+  URL = environment.url + "/models" ;
 
   constructor(private http: HttpClient) { }
 

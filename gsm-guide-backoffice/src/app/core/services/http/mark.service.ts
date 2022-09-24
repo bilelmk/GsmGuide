@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class MarkService {
 
-  URL = environment.url + "api/marks" ;
+  URL = environment.url + "/marks" ;
 
   constructor(private http: HttpClient) { }
 

@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 })
 export class AdminsService {
 
-  URL = environment.url + "api/admins" ;
+  URL = environment.url + "/admins" ;
   private tokenTimer: any ;
 
   constructor(private http: HttpClient,

@@ -22,7 +22,7 @@ export class GsmLocationModalComponent implements OnInit {
 
   options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }) ,
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }) ,
     ],
     zoom: 9,
     center: latLng(36.731937, 10.242248)
